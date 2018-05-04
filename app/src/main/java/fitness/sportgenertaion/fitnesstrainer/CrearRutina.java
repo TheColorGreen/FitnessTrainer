@@ -53,6 +53,7 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
         spGrupoMuscular=findViewById(R.id.spMusculo);
         bguardar=findViewById(R.id.bGuargar);
         rvListaEjercicios=findViewById(R.id.rvListaEjercicios);
+        //
 
     }
 
