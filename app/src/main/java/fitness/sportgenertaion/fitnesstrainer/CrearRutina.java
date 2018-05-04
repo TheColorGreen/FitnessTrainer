@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 public class CrearRutina extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-/////55555259821592596
+/////55555erfgak
     Spinner spGrupoMuscular;
     Spinner spNivel;
     Spinner spDia;
