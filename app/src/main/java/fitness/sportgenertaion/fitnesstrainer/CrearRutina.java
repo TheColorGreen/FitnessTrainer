@@ -54,6 +54,7 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
         bguardar=findViewById(R.id.bGuargar);
         rvListaEjercicios=findViewById(R.id.rvListaEjercicios);
         //
+        //holas tts
 
     }
 
