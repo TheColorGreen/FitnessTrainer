@@ -26,16 +26,16 @@
     <string name="navigation_drawer_close">Cerrado </string>
     <string-array name="musculos">
 
-    <item>Espalda y Biceps</item>
+        <item>Espalda y Biceps</item>
 
-    <item>Pecho y Triceps</item>
+        <item>Pecho y Triceps</item>
 
-    <item>Abdominales</item>
+        <item>Abdominales</item>
 
-    <item>Piernas</item>
+        <item>Piernas</item>
 
 
-</string-array>
+    </string-array>
     <string-array name="dificultad">
 
         <item>Principiante</item>
@@ -57,6 +57,6 @@
         <item>Domingo</item>
 
 
-
     </string-array>
+    <string name="title_activity_ver_ejercicio">VerEjercicio</string>
 </resources>

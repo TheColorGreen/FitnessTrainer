@@ -1,4 +1,4 @@
-package fitness.sportgenertaion.fitnesstrainer;
+package fitness.sportgenertaion.fitnesstrainer.Classes;
 
 import android.support.annotation.NonNull;
 import android.view.MenuItem;

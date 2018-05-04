@@ -17,13 +17,26 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-public class CrearRutina extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
+import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
+
+public class CrearRutina extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,ValueEventListener, ChildEventListener {
     ///7777dfg
     Spinner spGrupoMuscular;
     Spinner spNivel;
     Spinner spDia;
    Button bguardar;
    RecyclerView rvListaEjercicios;
+    List<Ejercicio> llistaEjercicios = new ArrayList<Ejercicio>();
+    EjercicioAdapter ejercicioAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,5 +140,35 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+    }
+
+    @Override
+    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+    }
+
+    @Override
+    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+    }
+
+    @Override
+    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+    }
+
+    @Override
+    public void onDataChange(DataSnapshot dataSnapshot) {
+
+    }
+
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+
     }
 }

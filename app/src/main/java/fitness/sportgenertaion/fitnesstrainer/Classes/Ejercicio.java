@@ -1,4 +1,4 @@
-package fitness.sportgenertaion.fitnesstrainer;
+package fitness.sportgenertaion.fitnesstrainer.Classes;
 
 /**
  * Created by Carlos on 25/04/2018.
