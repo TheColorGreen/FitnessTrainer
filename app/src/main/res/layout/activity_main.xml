@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <android.support.constraint.ConstraintLayout tools:context=".MainActivity" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical">
+
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/b_rutina" android:id="@+id/bRutina"/>
+
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/b_crea_rutina" android:id="@+id/bCreaRutina"/>
+
+        <Button
+            android:id="@+id/bCrearRutinaAleatoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/b_crear_rutina_random" />
+
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/b_historial" android:id="@+id/bHistorialRutina"/>
+
+</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

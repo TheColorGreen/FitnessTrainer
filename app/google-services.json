@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "97323652855",
+    "firebase_url": "https://fitnesstrainer-8f376.firebaseio.com",
+    "project_id": "fitnesstrainer-8f376",
+    "storage_bucket": "fitnesstrainer-8f376.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97323652855:android:e2eb91e6fb0ac3c6",
+        "android_client_info": {
+          "package_name": "fitness.sportgeneration.fitnesstrainer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97323652855-orf3o0ludvhsmj5smm2broki6gfm4t5p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fitness.sportgeneration.fitnesstrainer",
+            "certificate_hash": "91d8c5f14faaadb67a340d8d445f71cfa4339739"
+          }
+        },
+        {
+          "client_id": "97323652855-qk2jb9fjqqbrnu8cl7df6am6790j81kr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2kHPXrt1HRWEVjb210Jwv2mQ9yyOMhgo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97323652855-qk2jb9fjqqbrnu8cl7df6am6790j81kr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97323652855:android:80a99d8a498c6b29",
+        "android_client_info": {
+          "package_name": "fitness.sportgenertaion.fitnesstrainer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97323652855-dck8ph4ht2c57hnt4bmi43ob5l0erf62.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fitness.sportgenertaion.fitnesstrainer",
+            "certificate_hash": "a7007586c0e6b02c49fe4a933a2c90b0a8f3bab4"
+          }
+        },
+        {
+          "client_id": "97323652855-qk2jb9fjqqbrnu8cl7df6am6790j81kr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2kHPXrt1HRWEVjb210Jwv2mQ9yyOMhgo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97323652855-qk2jb9fjqqbrnu8cl7df6am6790j81kr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

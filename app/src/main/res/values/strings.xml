@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Fitness trainer</string>
+    <string name="b_rutina">Rutina</string>
+    <string name="b_crea_rutina">Crear Rutina</string>
+    <string name="b_historial">Historial</string>
+    <string name="b_facil">Fácil</string>
+    <string name="b_moderado">Moderado</string>
+    <string name="b_desafiante">Desafiante</string>
+    <string name="b_guardar">Guardar</string>
+    <string name="b_organiza">Organizar</string>
+    <string name="b_organizarejercicios">Organizar</string>
+    <string name="tv_dia">Dia</string>
+    <string name="tv_sport">Sport</string>
+    <string name="tv_exercici">Ejercicio</string>
+    <string name="b_guardar2">Guardar</string>
+    <string name="b_crear_rutina">Crear rutina</string>
+    <string name="b_crear_rutina_personalizada">Crear rutina personalizada</string>
+    <string name="tv_descripcion">Descripcion</string>
+    <string name="tv_nivel">Nivel</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_crear_rutina">Crear Rutina</string>
+
+    <string name="b_crear_rutina_random">Crear Rutina Aleatoria </string>
+    <string name="navigation_drawer_open">Abierto </string>
+    <string name="navigation_drawer_close">Cerrado </string>
+
+</resources>
