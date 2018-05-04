@@ -13,11 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
 public class CrearRutina extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    ///7777
+    ///7777dfg
     Spinner spGrupoMuscular;
     Spinner spNivel;
     Spinner spDia;
@@ -54,7 +55,19 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
         spGrupoMuscular=findViewById(R.id.spMusculo);
         bguardar=findViewById(R.id.bGuargar);
         rvListaEjercicios=findViewById(R.id.rvListaEjercicios);
-        //
+
+        //Hago que en los spinners salgan los arrays
+        ArrayAdapter<CharSequence> adapterMusculos = ArrayAdapter.createFromResource(this,R.array.musculos, android.R.layout.simple_spinner_item);
+        adapterMusculos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spGrupoMuscular.setAdapter(adapterMusculos);
+
+        ArrayAdapter<CharSequence> adapterDias = ArrayAdapter.createFromResource(this,R.array.dia, android.R.layout.simple_spinner_item);
+        adapterMusculos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spDia.setAdapter(adapterMusculos);
+
+        ArrayAdapter<CharSequence> adapterNivel = ArrayAdapter.createFromResource(this,R.array.dificultad, android.R.layout.simple_spinner_item);
+        adapterMusculos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spNivel.setAdapter(adapterMusculos);
         //holas tts
 
     }

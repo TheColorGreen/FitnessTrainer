@@ -24,5 +24,39 @@
     <string name="b_crear_rutina_random">Crear Rutina Aleatoria </string>
     <string name="navigation_drawer_open">Abierto </string>
     <string name="navigation_drawer_close">Cerrado </string>
+    <string-array name="musculos">
 
+    <item>Espalda y Biceps</item>
+
+    <item>Pecho y Triceps</item>
+
+    <item>Abdominales</item>
+
+    <item>Piernas</item>
+
+
+</string-array>
+    <string-array name="dificultad">
+
+        <item>Principiante</item>
+
+        <item>Entusiasta</item>
+
+        <item>Experto</item>
+
+
+    </string-array>
+    <string-array name="dia">
+
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sabado</item>
+        <item>Domingo</item>
+
+
+
+    </string-array>
 </resources>
