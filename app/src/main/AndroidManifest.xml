@@ -23,7 +23,7 @@
         <activity
             android:name=".VerEjercicio"
             android:label="@string/title_activity_ver_ejercicio"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +35,8 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
 
 public class CrearRutina extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ValueEventListener, ChildEventListener {
     ///7777dfg
+    String nivel="1";
+    String grupoMuscular="1";
     Spinner spGrupoMuscular;
     Spinner spNivel;
     Spinner spDia;
@@ -88,40 +91,56 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
         spNivel.setAdapter(adapterNivel);
 
         //Hago referencia a la base de datos
-        DatabaseReference dbEjercicios = FirebaseDatabase.getInstance().getReference().child("Ejercicios");
-        dbEjercicios.addChildEventListener(this);
-        dbEjercicios.addValueEventListener(this);
-        ejercicioAdapter = new EjercicioAdapter(this, llistaEjercicios);
-        rvEjercicios.setHasFixedSize(true);
-        rvEjercicios.setLayoutManager(new LinearLayoutManager(this)); // també es pot posar "getApplicationContext()"
+        DatabaseReference dbPrediccio = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("Ejercicios");
+        dbPrediccio.addValueEventListener(this);
+        dbPrediccio.addChildEventListener(this);
 
-        rvEjercicios.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        ejercicioAdapter= new EjercicioAdapter(this, llistaEjercicios);
+        rvEjercicios = findViewById(R.id.rvEjercicios);
+        rvEjercicios.setLayoutManager(new LinearLayoutManager(this));
+        //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
+        rvEjercicios.addItemDecoration(new DividerItemDecoration(this,
+                LinearLayoutManager.VERTICAL));
+        //rvPrediccions.setAdapter(prediccioAdapter);
+
+        //Hago una conversion
+
+        if(spNivel.getSelectedItem().toString().equals("Principiante")){
+            this.nivel="1";
+        }
+        else if(spNivel.getSelectedItem().toString().equals("Entusiasta")){
+            this.nivel="2";
+        }
+        else{
+            this.nivel="3";
+        }
 
     }
 
+
+
+    //Metodes de la interficie ValueEvetListener
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
 
+       /* Prediccion pred= dataSnapshot.getValue(Prediccion.class);
+        tvCel.setText(pred.getCel());
+        tvTemperatura.setText(pred.getTemperatura() + "ºC");
+       tvHumitat.setText(pred.getHumitat() + "%");
+       */
         llistaEjercicios.removeAll(llistaEjercicios);
-        // Recorrem tots els elements del DataSnapshot i els mostrem
-
         for (DataSnapshot element : dataSnapshot.getChildren()) {
-            Ejercicio ejercicio = new Ejercicio(
-                    element.getKey().toString(),
-                    element.child("descripcion").getValue().toString(),
-                    element.child("foto").getValue().toString(),
-                    Integer.valueOf(element.child("dificultad").getValue().toString()),
-                    Integer.valueOf(element.child("musculos").getValue().toString()));
-            llistaEjercicios.add(ejercicio);
-        }
-        // Si ho volguéssim fer amb subElements:
-        //        for (DataSnapshot element : dataSnapshot.getChildren()) {
-        //            for (DataSnapshot subElement : element.getChildren()) {
-//        llistaPrediccio.add(new Prediccio("data", "cel", 22, 4.5));
+            if(element.child("dificultad").getValue().toString().equals(this.nivel)) {
+            Ejercicio ejercicio = new Ejercicio(element.getKey().toString(),element.child("descripcion").getValue().toString(),element.child("foto").getValue().toString(),Integer.valueOf(element.child("dificultad").getValue().toString()),Integer.valueOf(element.child("musculos").getValue().toString()));
 
-        // Per si hi ha canvis, que es refresqui l'adaptador
-        ejercicioAdapter.notifyDataSetChanged();
-        rvEjercicios.scrollToPosition(llistaEjercicios.size() - 1);
+    llistaEjercicios.add(ejercicio);
+}
+        }
+        rvEjercicios.setAdapter(ejercicioAdapter);
+        rvEjercicios.scrollToPosition(llistaEjercicios.size()-1);
+
     }
 
     @Override
