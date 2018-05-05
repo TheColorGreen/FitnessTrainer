@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +38,7 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
     Spinner spNivel;
     Spinner spDia;
     Button bguardar;
-    private RecyclerView rvListaEjercicios;
+    private RecyclerView rvEjercicios;
     private List<Ejercicio> llistaEjercicios = new ArrayList<Ejercicio>();
     private EjercicioAdapter ejercicioAdapter;
 
@@ -73,7 +72,7 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
         spNivel = findViewById(R.id.spNivel);
         spGrupoMuscular = findViewById(R.id.spMusculo);
         bguardar = findViewById(R.id.bGuargar);
-        rvListaEjercicios = findViewById(R.id.rvListaEjercicios);
+        rvEjercicios = findViewById(R.id.rvEjercicios);
 
         //Hago que en los spinners salgan los arrays
         ArrayAdapter<CharSequence> adapterMusculos = ArrayAdapter.createFromResource(this, R.array.musculos, android.R.layout.simple_spinner_item);
@@ -92,11 +91,12 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
         DatabaseReference dbEjercicios = FirebaseDatabase.getInstance().getReference().child("Ejercicios");
         dbEjercicios.addChildEventListener(this);
         dbEjercicios.addValueEventListener(this);
-        rvListaEjercicios.setHasFixedSize(true);
-        rvListaEjercicios.setLayoutManager(new LinearLayoutManager(this)); // també es pot posar "getApplicationContext()"
-
-        rvListaEjercicios.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         ejercicioAdapter = new EjercicioAdapter(this, llistaEjercicios);
+        rvEjercicios.setHasFixedSize(true);
+        rvEjercicios.setLayoutManager(new LinearLayoutManager(this)); // també es pot posar "getApplicationContext()"
+
+        rvEjercicios.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+
     }
 
     @Override
@@ -104,7 +104,7 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
 
         llistaEjercicios.removeAll(llistaEjercicios);
         // Recorrem tots els elements del DataSnapshot i els mostrem
-        Toast.makeText(CrearRutina.this, "Hi ha " + dataSnapshot.getChildrenCount() + " dates a la llista", Toast.LENGTH_SHORT).show();
+
         for (DataSnapshot element : dataSnapshot.getChildren()) {
             Ejercicio ejercicio = new Ejercicio(
                     element.getKey().toString(),
@@ -121,7 +121,7 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
 
         // Per si hi ha canvis, que es refresqui l'adaptador
         ejercicioAdapter.notifyDataSetChanged();
-        rvListaEjercicios.scrollToPosition(llistaEjercicios.size() - 1);
+        rvEjercicios.scrollToPosition(llistaEjercicios.size() - 1);
     }
 
     @Override
