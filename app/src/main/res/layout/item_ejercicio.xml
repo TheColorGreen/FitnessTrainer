@@ -15,16 +15,15 @@
 
         <TextView
             android:id="@+id/tv_nom"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="49dp"
             android:layout_weight="1" />
 
-        <ImageButton
-            android:id="@+id/bt_anyadir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/btn_star" />
+        <CheckBox
+            android:id="@+id/cPoner"
+            android:layout_width="7dp"
+            android:layout_height="43dp"
+            android:layout_weight="1" />
 
     </LinearLayout>
 </RelativeLayout>

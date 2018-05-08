@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -33,10 +34,11 @@ import java.util.List;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
 
-public class CrearRutina extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ValueEventListener, ChildEventListener {
+public class CrearRutina extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener, ValueEventListener, ChildEventListener {
     ///7777dfg
-    String nivel="1";
-    String grupoMuscular="1";
+    DatabaseReference dbPrediccio;
+    String nivel = "1";
+    String grupoMuscular = "1";
     Spinner spGrupoMuscular;
     Spinner spNivel;
     Spinner spDia;
@@ -91,34 +93,30 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
         spNivel.setAdapter(adapterNivel);
 
         //Hago referencia a la base de datos
-        DatabaseReference dbPrediccio = FirebaseDatabase.getInstance()
+        dbPrediccio = FirebaseDatabase.getInstance()
                 .getReference()
                 .child("Ejercicios");
         dbPrediccio.addValueEventListener(this);
         dbPrediccio.addChildEventListener(this);
 
-        ejercicioAdapter= new EjercicioAdapter(this, llistaEjercicios);
+        ejercicioAdapter = new EjercicioAdapter(this, llistaEjercicios);
         rvEjercicios = findViewById(R.id.rvEjercicios);
+
         rvEjercicios.setLayoutManager(new LinearLayoutManager(this));
         //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
         rvEjercicios.addItemDecoration(new DividerItemDecoration(this,
                 LinearLayoutManager.VERTICAL));
         //rvPrediccions.setAdapter(prediccioAdapter);
 
+
+        //hago el listenner del spinner
+        spGrupoMuscular.setOnItemSelectedListener(this);
+        spNivel.setOnItemSelectedListener(this);
+
         //Hago una conversion
 
-        if(spNivel.getSelectedItem().toString().equals("Principiante")){
-            this.nivel="1";
-        }
-        else if(spNivel.getSelectedItem().toString().equals("Entusiasta")){
-            this.nivel="2";
-        }
-        else{
-            this.nivel="3";
-        }
 
     }
-
 
 
     //Metodes de la interficie ValueEvetListener
@@ -132,14 +130,15 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
        */
         llistaEjercicios.removeAll(llistaEjercicios);
         for (DataSnapshot element : dataSnapshot.getChildren()) {
-            if(element.child("dificultad").getValue().toString().equals(this.nivel)) {
-            Ejercicio ejercicio = new Ejercicio(element.getKey().toString(),element.child("descripcion").getValue().toString(),element.child("foto").getValue().toString(),Integer.valueOf(element.child("dificultad").getValue().toString()),Integer.valueOf(element.child("musculos").getValue().toString()));
+            if ((element.child("dificultad").getValue().toString().equals(this.nivel) && (element.child("musculos").getValue().toString().equals(this.grupoMuscular))) || (this.nivel.equals("5") && this.grupoMuscular.equals("5")) || (this.grupoMuscular.equals("5") && element.child("dificultad").getValue().toString().equals(this.nivel)) || this.nivel.equals("5") && element.child("musculos").getValue().toString().equals(this.grupoMuscular)) {
 
-    llistaEjercicios.add(ejercicio);
-}
+                Ejercicio ejercicio = new Ejercicio(element.getKey().toString(), element.child("descripcion").getValue().toString(), element.child("foto").getValue().toString(), Integer.valueOf(element.child("dificultad").getValue().toString()), Integer.valueOf(element.child("musculos").getValue().toString()));
+
+                llistaEjercicios.add(ejercicio);
+            }
         }
         rvEjercicios.setAdapter(ejercicioAdapter);
-        rvEjercicios.scrollToPosition(llistaEjercicios.size()-1);
+        rvEjercicios.scrollToPosition(llistaEjercicios.size() - 1);
 
     }
 
@@ -223,6 +222,43 @@ public class CrearRutina extends AppCompatActivity implements NavigationView.OnN
 
     @Override
     public void onCancelled(DatabaseError databaseError) {
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (spNivel.getSelectedItem().toString().equals("Todos")) {
+            this.nivel = "5";
+        } else if (spNivel.getSelectedItem().toString().equals("Principiante")) {
+            this.nivel = "1";
+        } else if (spNivel.getSelectedItem().toString().equals("Entusiasta")) {
+            this.nivel = "2";
+        } else {
+            this.nivel = "3";
+        }
+        if (spGrupoMuscular.getSelectedItem().toString().equals("Todos")) {
+            this.grupoMuscular = "5";
+        } else if (spGrupoMuscular.getSelectedItem().toString().equals("Espalda y Biceps")) {
+            this.grupoMuscular = "1";
+        } else if (spGrupoMuscular.getSelectedItem().toString().equals("Pecho y Triceps")) {
+            this.grupoMuscular = "2";
+        } else if (spGrupoMuscular.getSelectedItem().toString().equals("Abdominales")) {
+            this.grupoMuscular = "3";
+        } else {
+            this.grupoMuscular = "4";
+        }
+
+
+        dbPrediccio.addValueEventListener(this);
+        dbPrediccio.addChildEventListener(this);
+
+
+        Toast.makeText(this, "holis", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }
