@@ -24,6 +24,10 @@
             android:name=".VerEjercicio"
             android:label="@string/title_activity_ver_ejercicio"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Dias"
+            android:label="@string/title_activity_dias"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
