@@ -87,6 +87,7 @@
             android:id="@+id/bGuargar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="Siguiente"
             android:text="@string/b_guardar2" />
 
     </LinearLayout>

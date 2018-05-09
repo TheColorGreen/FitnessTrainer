@@ -113,7 +113,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
 
                     if (ejercicio.isSelected()) {
 
-                        CrearRutina.RutinaTemporal();
+                        CrearRutina.RutinaTemporal(dia,ejercicio.getNombre());
                     } else {
                         dbRutinaProvisional2 = FirebaseDatabase.getInstance()
                                 .getReference()
