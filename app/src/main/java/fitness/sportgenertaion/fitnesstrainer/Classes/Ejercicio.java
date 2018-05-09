@@ -10,7 +10,7 @@ public class Ejercicio {
     private String descripcion;
     private String foto;
     private int dificultad;
-
+private boolean selected=false;
     private int musculos;
 
     public Ejercicio(String nombre, String descripcion, String foto, int dificultad, int musculos) {
@@ -25,7 +25,12 @@ public class Ejercicio {
 
     // Constructor per desar les dades (sense la data)
 
-
+public boolean isSelected(){
+       return selected;
+}
+public void setSelected(boolean selected){
+    this.selected=selected;
+}
     public String getDescripcion() {
         return this.descripcion;
     }
@@ -55,4 +60,5 @@ public class Ejercicio {
                 ", dificultad=" + getDificultad() +
                 '}';
     }
+
 }

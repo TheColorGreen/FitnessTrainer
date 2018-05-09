@@ -13,6 +13,10 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -26,11 +30,15 @@ import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
 public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener {
     public List<Ejercicio> llistaEjercicios;
     Context context;
+    String dia;
+    DatabaseReference dbRutinaRpovisional;
+    DatabaseReference dbRutinaProvisional2;
 
-    public EjercicioAdapter(Context context, List<Ejercicio> llistaEjercicios) {
+    public EjercicioAdapter(Context context, List<Ejercicio> llistaEjercicios,String dia) {
 
         this.llistaEjercicios = llistaEjercicios;
         this.context = context;
+        this.dia=dia;
     }
 
     @Override
@@ -47,7 +55,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
         public ViewHolder(View itemView) {
             super(itemView);
             tvEjercicio = itemView.findViewById(R.id.tv_nom);
-
+            cAnyadir=itemView.findViewById(R.id.cPoner);
 
             itemView.setOnClickListener(this);
         }
@@ -76,22 +84,47 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
     // Mètode de la classe RecyclerView (que és abstracta)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        dbRutinaRpovisional = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("RutinaPrueba");
+
+        final Ejercicio ejercicio = llistaEjercicios.get(position);
         Ejercicio item = llistaEjercicios.get(position);
         holder.tvEjercicio.setText(item.getNombre());
 
         //in some cases, it will prevent unwanted situations
-        holder.cAnyadir.setOnCheckedChangeListener(null);
+       // holder.cAnyadir.setOnCheckedChangeListener(null);
 
         //if true, your checkbox will be selected, else unselected
-        holder.cAnyadir.setChecked(objIncome.isSelected());
+
+        holder.cAnyadir.setChecked(ejercicio.isSelected());
+
+
+        if(dbRutinaRpovisional.child("/"+dia+"/"+ejercicio.getNombre())!=null||!(dbRutinaRpovisional.child("/"+dia+"/"+ejercicio.getNombre()).equals(""))){
+            holder.cAnyadir.setClickable(true);
+        }
 
         holder.cAnyadir.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //set your object's last status
-                objIncome.setSelected(isChecked);
+
+                ejercicio.setSelected(isChecked);
+
+                if (ejercicio.isSelected()){
+
+                    dbRutinaRpovisional.child("/"+dia+"/"+ejercicio.getNombre()).setValue(true);
+                }
+                else{
+                    dbRutinaProvisional2 = FirebaseDatabase.getInstance()
+                            .getReference()
+                            .child("RutinaPrueba"+"/"+dia+"/"+ejercicio.getNombre());
+                    dbRutinaProvisional2.removeValue();
+                }
             }
         });
+
+
     }
 
     // Mètode de la classe RecyclerView (que és abstracta)
