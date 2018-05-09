@@ -3,6 +3,7 @@ package fitness.sportgenertaion.fitnesstrainer.Classes;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.NfcAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,8 +34,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
     public List<Ejercicio> llistaEjercicios;
     Context context;
     String dia;
-    DatabaseReference dbRutinaRpovisional;
-    DatabaseReference dbRutinaProvisional2;
+
 
     public EjercicioAdapter(Context context, List<Ejercicio> llistaEjercicios, String dia) {
 
@@ -86,11 +86,6 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
     // Mètode de la classe RecyclerView (que és abstracta)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        dbRutinaRpovisional = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("RutinaPrueba");
-
-
         final Ejercicio ejercicio = llistaEjercicios.get(position);
         Ejercicio item = llistaEjercicios.get(position);
         holder.tvEjercicio.setText(item.getNombre());
@@ -115,10 +110,8 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
 
                         CrearRutina.RutinaTemporal(dia,ejercicio.getNombre());
                     } else {
-                        dbRutinaProvisional2 = FirebaseDatabase.getInstance()
-                                .getReference()
-                                .child("RutinaPrueba" + "/" + dia + "/" + ejercicio.getNombre());
-                        dbRutinaProvisional2.removeValue();
+
+                        CrearRutina.BorrarRutinaTemporal(dia,ejercicio.getNombre());
                     }
                 }
             });
