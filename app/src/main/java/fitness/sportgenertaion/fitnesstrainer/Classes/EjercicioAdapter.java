@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+import fitness.sportgenertaion.fitnesstrainer.CrearRutina;
 import fitness.sportgenertaion.fitnesstrainer.R;
 import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
 
@@ -101,9 +102,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
 
         holder.cAnyadir.setChecked(ejercicio.isSelected());
 
-        if (ejercicio.isSelected()==true) {
-            holder.cAnyadir.setChecked(true);
-        }
+
 
             holder.cAnyadir.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -114,7 +113,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
 
                     if (ejercicio.isSelected()) {
 
-                        dbRutinaRpovisional.child("/" + dia + "/" + ejercicio.getNombre()).setValue(true);
+                        CrearRutina.RutinaTemporal();
                     } else {
                         dbRutinaProvisional2 = FirebaseDatabase.getInstance()
                                 .getReference()

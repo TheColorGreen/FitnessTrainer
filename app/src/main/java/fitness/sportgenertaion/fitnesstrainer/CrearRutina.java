@@ -1,5 +1,6 @@
 package fitness.sportgenertaion.fitnesstrainer;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -32,17 +33,26 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import fitness.sportgenertaion.fitnesstrainer.Classes.AnyadirRutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
 
 public class CrearRutina extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener, ValueEventListener, ChildEventListener {
     ///7777dfg
+    static ArrayList<String> lunes = new ArrayList<String>();
+    static ArrayList<String> martes = new ArrayList<String>();
+    static ArrayList<String> miercoles = new ArrayList<String>();
+    static ArrayList<String> jueves = new ArrayList<String>();
+    static ArrayList<String> viernes = new ArrayList<String>();
+    static ArrayList<String> sabado = new ArrayList<String>();
+    static ArrayList<String> domingo = new ArrayList<String>();
+    int numeroDia = 1;
+    String[] dia = getResources().getStringArray(R.array.dia);
     DatabaseReference dbPrediccio;
     String nivel = "5";
     String grupoMuscular = "5";
     Spinner spGrupoMuscular;
     Spinner spNivel;
-    Spinner spDia;
     Button bguardar;
     private RecyclerView rvEjercicios;
     private List<Ejercicio> llistaEjercicios = new ArrayList<Ejercicio>();
@@ -75,8 +85,7 @@ public class CrearRutina extends AppCompatActivity implements AdapterView.OnItem
 
         //Inicialitzem les variables
 
-
-        spDia = findViewById(R.id.spDia);
+        bguardar=findViewById(R.id.bGuargar);
         spNivel = findViewById(R.id.spNivel);
         spGrupoMuscular = findViewById(R.id.spMusculo);
         bguardar = findViewById(R.id.bGuargar);
@@ -87,9 +96,6 @@ public class CrearRutina extends AppCompatActivity implements AdapterView.OnItem
         adapterMusculos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spGrupoMuscular.setAdapter(adapterMusculos);
 
-        ArrayAdapter<CharSequence> adapterDias = ArrayAdapter.createFromResource(this, R.array.dia, android.R.layout.simple_spinner_item);
-        adapterMusculos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spDia.setAdapter(adapterDias);
 
         ArrayAdapter<CharSequence> adapterNivel = ArrayAdapter.createFromResource(this, R.array.dificultad, android.R.layout.simple_spinner_item);
         adapterMusculos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -110,13 +116,13 @@ public class CrearRutina extends AppCompatActivity implements AdapterView.OnItem
         rvEjercicios.addItemDecoration(new DividerItemDecoration(this,
                 LinearLayoutManager.VERTICAL));
         //rvPrediccions.setAdapter(prediccioAdapter);
-        ejercicioAdapter = new EjercicioAdapter(this, llistaEjercicios, spDia.getSelectedItem().toString());
+        ejercicioAdapter = new EjercicioAdapter(this, llistaEjercicios, dia[numeroDia]);
 
 
         //hago el listenner del spinner
         spGrupoMuscular.setOnItemSelectedListener(this);
         spNivel.setOnItemSelectedListener(this);
-        spDia.setOnItemSelectedListener(this);
+
 
         //Hago una conversion
 
@@ -234,37 +240,72 @@ public class CrearRutina extends AppCompatActivity implements AdapterView.OnItem
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
 
+        if (spNivel.getSelectedItem().toString().equals("Todos")) {
+            this.nivel = "5";
+        } else if (spNivel.getSelectedItem().toString().equals("Principiante")) {
+            this.nivel = "1";
+        } else if (spNivel.getSelectedItem().toString().equals("Entusiasta")) {
+            this.nivel = "2";
+        } else {
+            this.nivel = "3";
+        }
 
-            if (spNivel.getSelectedItem().toString().equals("Todos")) {
-                this.nivel = "5";
-            } else if (spNivel.getSelectedItem().toString().equals("Principiante")) {
-                this.nivel = "1";
-            } else if (spNivel.getSelectedItem().toString().equals("Entusiasta")) {
-                this.nivel = "2";
-            } else {
-                this.nivel = "3";
-            }
-
-            if (spGrupoMuscular.getSelectedItem().toString().equals("Todos")) {
-                this.grupoMuscular = "5";
-            } else if (spGrupoMuscular.getSelectedItem().toString().equals("Espalda y Biceps")) {
-                this.grupoMuscular = "1";
-            } else if (spGrupoMuscular.getSelectedItem().toString().equals("Pecho y Triceps")) {
-                this.grupoMuscular = "2";
-            } else if (spGrupoMuscular.getSelectedItem().toString().equals("Abdominales")) {
-                this.grupoMuscular = "3";
-            } else {
-                this.grupoMuscular = "4";
-            }
-
+        if (spGrupoMuscular.getSelectedItem().toString().equals("Todos")) {
+            this.grupoMuscular = "5";
+        } else if (spGrupoMuscular.getSelectedItem().toString().equals("Espalda y Biceps")) {
+            this.grupoMuscular = "1";
+        } else if (spGrupoMuscular.getSelectedItem().toString().equals("Pecho y Triceps")) {
+            this.grupoMuscular = "2";
+        } else if (spGrupoMuscular.getSelectedItem().toString().equals("Abdominales")) {
+            this.grupoMuscular = "3";
+        } else {
+            this.grupoMuscular = "4";
+        }
 
 
 
-            ejercicioAdapter = new EjercicioAdapter(this, llistaEjercicios, spDia.getSelectedItem().toString());
 
         dbPrediccio.addValueEventListener(this);
         dbPrediccio.addChildEventListener(this);
 
+
+    }
+
+    public void Siguiente(View view) {
+        if (numeroDia < 6) {
+            numeroDia++;
+            ejercicioAdapter = new EjercicioAdapter(this, llistaEjercicios, dia[numeroDia]);
+            dbPrediccio.addValueEventListener(this);
+            dbPrediccio.addChildEventListener(this);
+        }
+        else if(numeroDia==6){
+            bguardar.setText(getResources().getString(R.string.b_guardar3));
+
+        }
+        else{
+            for(int x=0;x<lunes.size();x++) {
+                 AnyadirRutina lunes2 =new AnyadirRutina(dia[0],lunes.get(x));
+            }
+            for(int x=0;x<martes.size();x++) {
+                AnyadirRutina martes2 =new AnyadirRutina(dia[1],martes.get(x));
+            }
+            for(int x=0;x<miercoles.size();x++) {
+                AnyadirRutina miercoles2 =new AnyadirRutina(dia[2],miercoles.get(x));
+            }
+            for(int x=0;x<jueves.size();x++) {
+                AnyadirRutina jueves2 =new AnyadirRutina(dia[3],jueves.get(x));
+            }
+            for(int x=0;x<lunes.size();x++) {
+                AnyadirRutina viernes2 =new AnyadirRutina(dia[4],viernes.get(x));
+            }
+            for(int x=0;x<lunes.size();x++) {
+                AnyadirRutina sabado2 =new AnyadirRutina(dia[5],sabado.get(x));
+            }
+            for(int x=0;x<lunes.size();x++) {
+                AnyadirRutina domingo2 =new AnyadirRutina(dia[6],domingo.get(x));
+            }
+
+        }
 
 
     }
@@ -272,5 +313,29 @@ public class CrearRutina extends AppCompatActivity implements AdapterView.OnItem
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public static void RutinaTemporal(String dia, String ejercicio){
+        if (dia.equals("Lunes")) {
+            lunes.add(ejercicio);
+        }
+        else if(dia.equals("Martes")){
+            martes.add(ejercicio);
+        }
+        else if(dia.equals("Miercoles")){
+            miercoles.add(ejercicio);
+        }
+        else if(dia.equals("Jueves")){
+           jueves.add(ejercicio);
+        }
+        else if(dia.equals("Viernes")){
+            viernes.add(ejercicio);
+        }
+        else if(dia.equals("Sabado")){
+            sabado.add(ejercicio);
+        }
+        else if(dia.equals("Domingo")){
+           domingo.add(ejercicio);
+        }
     }
 }
