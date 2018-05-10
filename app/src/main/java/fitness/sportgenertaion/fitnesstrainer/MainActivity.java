@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         };
+
         btCrearRutina = findViewById(R.id.bCreaRutina);
         btHistorial = findViewById(R.id.bHistorialRutina);
         btMiRutina = findViewById(R.id.bRutina);
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v == btCrearRutina) {
             intent = new Intent(this, CrearRutina.class);
+            intent.putExtra( "idUsuario",mAuth.getCurrentUser().getUid());
             startActivity(intent);
         }
         if (v == btRutinaAleatoria) {

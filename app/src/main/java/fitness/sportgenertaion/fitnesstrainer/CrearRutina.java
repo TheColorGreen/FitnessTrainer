@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -29,9 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import fitness.sportgenertaion.fitnesstrainer.Classes.AnyadirRutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
+import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
 public class CrearRutina extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener, ValueEventListener, ChildEventListener {
     ///7777dfg
@@ -54,6 +55,8 @@ public class CrearRutina extends AppCompatActivity implements AdapterView.OnItem
     private RecyclerView rvEjercicios;
     private List<Ejercicio> llistaEjercicios = new ArrayList<Ejercicio>();
     private EjercicioAdapter ejercicioAdapter;
+
+    String idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,11 @@ public class CrearRutina extends AppCompatActivity implements AdapterView.OnItem
         bguardar = findViewById(R.id.bGuargar);
         rvEjercicios = findViewById(R.id.rvEjercicios);
         tvDia.setText(dia[numeroDia]);
+        Bundle parametros = this.getIntent().getExtras();
+        if(parametros !=null){
+            idUsuario=parametros.getString("idUsuario");
+
+        }
         //Hago que en los spinners salgan los arrays
         ArrayAdapter<CharSequence> adapterMusculos = ArrayAdapter.createFromResource(this, R.array.musculos, android.R.layout.simple_spinner_item);
         adapterMusculos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -272,33 +280,28 @@ public class CrearRutina extends AppCompatActivity implements AdapterView.OnItem
             numeroDia++;
 
         } else {
+            Toast.makeText(this,"hola",Toast.LENGTH_LONG);
+            Toast.makeText(this,idUsuario,Toast.LENGTH_LONG);
             for (int x = 0; x < lunes.size(); x++) {
-                AnyadirRutina lunes2 = new AnyadirRutina(dia[0], lunes.get(x));
-                lunes2.anyadir();
+               RutinaAcciones.anyadir(dia[0],lunes.get(x),idUsuario);
             }
             for (int x = 0; x < martes.size(); x++) {
-                AnyadirRutina martes2 = new AnyadirRutina(dia[1], martes.get(x));
-                martes2.anyadir();
+                RutinaAcciones.anyadir(dia[1],martes.get(x),idUsuario);
             }
             for (int x = 0; x < miercoles.size(); x++) {
-                AnyadirRutina miercoles2 = new AnyadirRutina(dia[2], miercoles.get(x));
-                miercoles2.anyadir();
+                RutinaAcciones.anyadir(dia[2],miercoles.get(x),idUsuario);
             }
             for (int x = 0; x < jueves.size(); x++) {
-                AnyadirRutina jueves2 = new AnyadirRutina(dia[3], jueves.get(x));
-                jueves2.anyadir();
+                RutinaAcciones.anyadir(dia[3],jueves.get(x),idUsuario);
             }
-            for (int x = 0; x < lunes.size(); x++) {
-                AnyadirRutina viernes2 = new AnyadirRutina(dia[4], viernes.get(x));
-                viernes2.anyadir();
+            for (int x = 0; x < viernes.size(); x++) {
+                RutinaAcciones.anyadir(dia[4],viernes.get(x),idUsuario);
             }
-            for (int x = 0; x < lunes.size(); x++) {
-                AnyadirRutina sabado2 = new AnyadirRutina(dia[5], sabado.get(x));
-                sabado2.anyadir();
+            for (int x = 0; x < sabado.size(); x++) {
+                RutinaAcciones.anyadir(dia[5],sabado.get(x),idUsuario);
             }
-            for (int x = 0; x < lunes.size(); x++) {
-                AnyadirRutina domingo2 = new AnyadirRutina(dia[6], domingo.get(x));
-                domingo2.anyadir();
+            for (int x = 0; x < domingo.size(); x++) {
+                RutinaAcciones.anyadir(dia[6],domingo.get(x),idUsuario);
             }
 
         }
@@ -376,7 +379,7 @@ public class CrearRutina extends AppCompatActivity implements AdapterView.OnItem
             }
 
         }
-        else if (dia.equals("Viernes")) {
+        else if (dia.equals("Domingo")) {
             for (int x = 0; x < domingo.size(); x++) {
                 if (domingo.get(x) == ejercicio) {
                     domingo.remove(x);
