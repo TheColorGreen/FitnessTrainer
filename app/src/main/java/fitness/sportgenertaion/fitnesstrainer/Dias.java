@@ -46,7 +46,7 @@ public class Dias extends AppCompatActivity {
 
     }
 
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -68,7 +68,7 @@ public class Dias extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -99,7 +99,23 @@ public class Dias extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_dias, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            ///Cada fragment hara cosas distintas aqui
+            if(getArguments().getInt(ARG_SECTION_NUMBER)==1){
+                textView.setText("Lunes");
+            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==2){
+                textView.setText("Marte");
+            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==3){
+                textView.setText("Miercoles");
+            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==4){
+                textView.setText("Jueves");
+            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==5){
+                textView.setText("Viernes");
+            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==6){
+                textView.setText("Sabado");
+            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==7){
+                textView.setText("Doming");
+            }
             return rootView;
         }
     }
