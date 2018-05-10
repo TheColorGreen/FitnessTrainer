@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,37 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
-
-public class Dias extends AppCompatActivity  implements ValueEventListener, ChildEventListener {
+public class Dias extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private TabLayout tabLayout;
     private ViewPager mViewPager;
-    private RecyclerView rvEjercicios;
-    private List<Ejercicio> llistaEjercicios = new ArrayList<Ejercicio>();
-    static DatabaseReference dbRutina;
-    static String idUsuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//Pruebas
-
-
-        ///
-
-        Bundle parametros = this.getIntent().getExtras();
-        idUsuario=parametros.getString("idUsuario");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dias);
 
@@ -68,12 +44,6 @@ public class Dias extends AppCompatActivity  implements ValueEventListener, Chil
             }
         });
 
-        dbRutina = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("users/" + idUsuario + "/Rutina" + "/" + "Lunes");
-
-        dbRutina.addValueEventListener(this);
-        dbRutina.addChildEventListener(this);
     }
 
 
@@ -97,39 +67,6 @@ public class Dias extends AppCompatActivity  implements ValueEventListener, Chil
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-    }
-
-    @Override
-    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-    }
-
-    @Override
-    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-    }
-
-    @Override
-    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-    }
-
-    @Override
-    public void onDataChange(DataSnapshot dataSnapshot) {
-
-        for (DataSnapshot element : dataSnapshot.getChildren()) {
-
-        }
-    }
-
-    @Override
-    public void onCancelled(DatabaseError databaseError) {
-
     }
 
     /**
@@ -163,10 +100,7 @@ public class Dias extends AppCompatActivity  implements ValueEventListener, Chil
             View rootView = inflater.inflate(R.layout.fragment_dias, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-
             return rootView;
-
-
         }
     }
 
