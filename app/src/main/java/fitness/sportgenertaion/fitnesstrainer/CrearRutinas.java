@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -66,7 +67,7 @@ public class CrearRutinas extends AppCompatActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment implements ValueEventListener, ChildEventListener {
+    public static class PlaceholderFragment extends Fragment implements ValueEventListener, ChildEventListener,AdapterView.OnItemSelectedListener {
 
         static ArrayList<String> lunes = new ArrayList<String>();
         static ArrayList<String> martes = new ArrayList<String>();
@@ -182,6 +183,16 @@ public class CrearRutinas extends AppCompatActivity {
 
         @Override
         public void onCancelled(DatabaseError databaseError) {
+
+        }
+
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
 
         }
     }
