@@ -34,13 +34,15 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
     public List<Rutina> llistaRutina;
     Context context;
     String dia;
+    String idUsuario;
 
 
-    public RutinaAdapter(Context context, List<Rutina> llistaRutina, String dia) {
+    public RutinaAdapter(Context context, List<Rutina> llistaRutina, String dia,String idUsuario) {
 
         this.llistaRutina = llistaRutina;
         this.context = context;
         this.dia = dia;
+        this.idUsuario=idUsuario;
     }
 
     @Override
@@ -90,12 +92,15 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
         Rutina item = llistaRutina.get(position);
         holder.tvEjercicio.setText(item.getEjercicio());
 
+
+
         //in some cases, it will prevent unwanted situations
-        // holder.cAnyadir.setOnCheckedChangeListener(null);
+         holder.cAnyadir.setOnCheckedChangeListener(null);
 
         //if true, your checkbox will be selected, else unselected
-
-        holder.cAnyadir.setChecked(rutina.isSelected());
+       if(rutina.getEcho()==true) {
+           holder.cAnyadir.setChecked(true);
+       }
 
 
 
@@ -108,10 +113,10 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
 
                 if (rutina.isSelected()) {
 
-                    CrearRutina.RutinaTemporal(dia,rutina.getEjercicio());
+                    RutinaAcciones.PonerCheck(dia,rutina.getEjercicio(),idUsuario);
                 } else {
 
-                    CrearRutina.BorrarRutinaTemporal(dia,rutina.getEjercicio());
+                   RutinaAcciones.anyadir(dia,rutina.getEjercicio(),idUsuario);
                 }
             }
         });

@@ -28,7 +28,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
     String dia;
 
 
-    public EjercicioAdapter(Context context, List<Rutina> llistaEjercicios, String dia) {
+    public EjercicioAdapter(Context context, List<Ejercicio> llistaEjercicios, String dia) {
 
         this.llistaEjercicios = llistaEjercicios;
         this.context = context;

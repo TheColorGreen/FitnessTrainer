@@ -156,7 +156,7 @@ public class Dias extends AppCompatActivity {
             //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
             rvEjercicios.addItemDecoration(new DividerItemDecoration(getContext(),
                     LinearLayoutManager.VERTICAL));
-            rutinaAdapter = new EjercicioAdapter(getContext(), llistaRutina, dia);
+            rutinaAdapter = new RutinaAdapter(getContext(), llistaRutina, dia,idUsuario);
             DatabaseReference rutina = FirebaseDatabase.getInstance()
                     .getReference()
                     .child("users"+"/"+idUsuario+"/Rutina/"+dia);
@@ -170,7 +170,7 @@ public class Dias extends AppCompatActivity {
             llistaRutina.removeAll(llistaRutina);
             for (DataSnapshot element : dataSnapshot.getChildren()) {
 
-                    Rutina rutina = new Rutina(false,element.getKey().toString());
+                    Rutina rutina = new Rutina(Boolean.parseBoolean(element.getValue().toString()),element.getKey().toString());
 
                     llistaRutina.add(rutina);
 

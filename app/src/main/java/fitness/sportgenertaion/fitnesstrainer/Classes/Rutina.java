@@ -6,10 +6,10 @@ package fitness.sportgenertaion.fitnesstrainer.Classes;
 
 public class Rutina {
 
-    boolean echo;
-
+    private boolean selected =false;
+boolean echo;
     String ejercicio;
-    private boolean selected=false;
+
 
     public Rutina(boolean echo, String ejercicio) {
         this.echo = echo;
