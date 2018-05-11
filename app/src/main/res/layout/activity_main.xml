@@ -3,31 +3,42 @@
     <android.support.constraint.ConstraintLayout tools:context=".MainActivity" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical">
-
-        <Button
-            android:id="@+id/bCrearRutina"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="bCrearRutina" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="33dp">
 
-        <Button
-            android:id="@+id/bHistorialRutina"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="bHistorialRutina" />
 
-        <Button
-            android:id="@+id/bRutina"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="bRutina" />
+            <Button
+                android:id="@+id/bRutina"
+                android:layout_width="match_parent"
+                android:layout_height="122dp"
+                android:background="@drawable/rutina"
+                android:text="@string/b_rutina" />
 
-        <Button
-            android:id="@+id/bCrearRutinaAleatoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="bCrearRutinaAleatoria" />
+            <Button
+                android:id="@+id/bCreaRutina"
+                android:layout_width="match_parent"
+                android:layout_height="121dp"
+                android:background="@drawable/crearrutina"
+                android:text="@string/b_crea_rutina" />
+
+            <Button
+                android:id="@+id/bCrearRutinaAleatoria"
+                android:layout_width="match_parent"
+                android:layout_height="141dp"
+                android:background="@drawable/rutinaaleatoria"
+                android:text="@string/b_crear_rutina_random"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/bHistorialRutina"
+                android:layout_width="match_parent"
+                android:layout_height="142dp"
+                android:background="@drawable/historial"
+                android:text="@string/b_historial" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
