@@ -6,8 +6,8 @@ package fitness.sportgenertaion.fitnesstrainer.Classes;
 
 public class Rutina {
 
-    boolean echo;
-
+    private boolean selected =false;
+boolean echo;
     String ejercicio;
 
 
@@ -23,7 +23,12 @@ public class Rutina {
     public String getEjercicio() {
         return ejercicio;
     }
-
+    public boolean isSelected(){
+        return selected;
+    }
+    public void setSelected(boolean selected){
+        this.selected=selected;
+    }
 
     @Override
     public String toString() {

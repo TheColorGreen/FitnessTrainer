@@ -28,7 +28,7 @@
             android:name=".Dias"
             android:label="@string/title_activity_dias"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Pruebesita"></activity>
+
     </application>
 
 </manifest>

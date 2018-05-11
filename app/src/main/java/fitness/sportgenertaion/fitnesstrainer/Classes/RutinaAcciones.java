@@ -28,4 +28,10 @@ public  class RutinaAcciones {
                 .child("users/" + idUsuario + "/Rutina" + "/" + dia + "/" + ejercicio);
         dbRutina.removeValue();
     }
+    public static void PonerCheck(String dia, String ejercicio, String idUsuario){
+        DatabaseReference dbRutina = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("users/" + idUsuario + "/Rutina");
+        dbRutina.child("/" + dia + "/" + ejercicio).setValue(true);
+    }
 }
