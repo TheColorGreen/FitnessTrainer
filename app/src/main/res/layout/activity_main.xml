@@ -5,18 +5,30 @@
 
     <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical">
 
-    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/b_rutina" android:id="@+id/bRutina"/>
-
-    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/b_crea_rutina" android:id="@+id/bCreaRutina"/>
-
-        <Button
-            android:id="@+id/bCrearRutinaAleatoria"
+        <ImageView
+            android:id="@+id/imageView10"
+            android:text="@string/b_crear_rutina_random"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/b_crear_rutina_random" />
+            android:layout_height="129dp"
+            app:srcCompat="@drawable/rutina" />
 
-    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/b_historial" android:id="@+id/bHistorialRutina"/>
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            app:srcCompat="@drawable/crearrutina" />
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="match_parent"
+            android:layout_height="129dp"
+            app:srcCompat="@drawable/rutinaaleatoria" />
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="match_parent"
+            android:layout_height="126dp"
+            app:srcCompat="@drawable/historial" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
