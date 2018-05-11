@@ -37,6 +37,8 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 public class CrearRutina extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener, ValueEventListener, ChildEventListener {
     ///7777dfg
     TextView tvDia;
+
+
     static ArrayList<String> lunes = new ArrayList<String>();
     static ArrayList<String> martes = new ArrayList<String>();
     static ArrayList<String> miercoles = new ArrayList<String>();

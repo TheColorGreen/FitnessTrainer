@@ -28,7 +28,10 @@
             android:name=".Dias"
             android:label="@string/title_activity_dias"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity
+            android:name=".CrearRutinas"
+            android:label="@string/title_activity_crear_rutinas"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
