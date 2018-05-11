@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import fitness.sportgenertaion.fitnesstrainer.CrearRutina;
+import fitness.sportgenertaion.fitnesstrainer.CrearRutinas;
 import fitness.sportgenertaion.fitnesstrainer.R;
 import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
 
@@ -100,10 +101,10 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
 
                     if (ejercicio.isSelected()) {
 
-                        CrearRutina.RutinaTemporal(dia,ejercicio.getNombre());
+                        CrearRutinas.RutinaTemporal(dia,ejercicio.getNombre());
                     } else {
 
-                        CrearRutina.BorrarRutinaTemporal(dia,ejercicio.getNombre());
+                        CrearRutinas.BorrarRutinaTemporal(dia,ejercicio.getNombre());
                     }
                 }
             });

@@ -5,30 +5,29 @@
 
     <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView10"
-            android:text="@string/b_crear_rutina_random"
+        <Button
+            android:id="@+id/bCrearRutina"
             android:layout_width="match_parent"
-            android:layout_height="129dp"
-            app:srcCompat="@drawable/rutina" />
+            android:layout_height="wrap_content"
+            android:text="bCrearRutina" />
 
-        <ImageView
-            android:id="@+id/imageView11"
+        <Button
+            android:id="@+id/bHistorialRutina"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
-            app:srcCompat="@drawable/crearrutina" />
+            android:layout_height="wrap_content"
+            android:text="bHistorialRutina" />
 
-        <ImageView
-            android:id="@+id/imageView12"
+        <Button
+            android:id="@+id/bRutina"
             android:layout_width="match_parent"
-            android:layout_height="129dp"
-            app:srcCompat="@drawable/rutinaaleatoria" />
+            android:layout_height="wrap_content"
+            android:text="bRutina" />
 
-        <ImageView
-            android:id="@+id/imageView13"
+        <Button
+            android:id="@+id/bCrearRutinaAleatoria"
             android:layout_width="match_parent"
-            android:layout_height="126dp"
-            app:srcCompat="@drawable/historial" />
+            android:layout_height="wrap_content"
+            android:text="bCrearRutinaAleatoria" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
