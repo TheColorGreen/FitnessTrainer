@@ -9,7 +9,7 @@ public class Rutina {
     boolean echo;
 
     String ejercicio;
-
+    private boolean selected=false;
 
     public Rutina(boolean echo, String ejercicio) {
         this.echo = echo;
@@ -23,7 +23,12 @@ public class Rutina {
     public String getEjercicio() {
         return ejercicio;
     }
-
+    public boolean isSelected(){
+        return selected;
+    }
+    public void setSelected(boolean selected){
+        this.selected=selected;
+    }
 
     @Override
     public String toString() {

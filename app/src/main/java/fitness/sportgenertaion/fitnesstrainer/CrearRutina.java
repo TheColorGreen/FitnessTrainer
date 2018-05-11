@@ -106,9 +106,6 @@ public class CrearRutina extends AppCompatActivity implements AdapterView.OnItem
         dbPrediccio.addValueEventListener(this);
         dbPrediccio.addChildEventListener(this);
 
-
-        rvEjercicios = findViewById(R.id.rvEjercicios);
-
         rvEjercicios.setLayoutManager(new LinearLayoutManager(this));
         //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
         rvEjercicios.addItemDecoration(new DividerItemDecoration(this,

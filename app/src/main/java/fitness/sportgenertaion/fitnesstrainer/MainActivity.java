@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v == btMiRutina) {
             intent = new Intent(this, Dias.class);
+            intent.putExtra( "idUsuario",mAuth.getCurrentUser().getUid());
             startActivity(intent);
 
         }
