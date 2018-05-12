@@ -1,6 +1,7 @@
 package fitness.sportgenertaion.fitnesstrainer;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btMiRutina;
     Button btHistorial;
     Dias dias;
+    Typeface typeface;
 
     @Override
     protected void onStart() {
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        typeface = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Regular.ttf");
+        
 
         mAuth = FirebaseAuth.getInstance();
         authListener = new FirebaseAuth.AuthStateListener() {
@@ -48,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
-        btCrearRutina = findViewById(R.id.bCrearRutina);
+        btCrearRutina = findViewById(R.id.bCreaRutina);
         btHistorial = findViewById(R.id.bHistorialRutina);
         btMiRutina = findViewById(R.id.bRutina);
         btRutinaAleatoria = findViewById(R.id.bCrearRutinaAleatoria);
