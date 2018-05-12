@@ -21,14 +21,14 @@
             <Button
                 android:id="@+id/bCreaRutina"
                 android:layout_width="match_parent"
-                android:layout_height="121dp"
+                android:layout_height="130dp"
                 android:background="@drawable/crearrutina"
                 android:text="@string/b_crea_rutina" />
 
             <Button
                 android:id="@+id/bCrearRutinaAleatoria"
                 android:layout_width="match_parent"
-                android:layout_height="141dp"
+                android:layout_height="132dp"
                 android:background="@drawable/rutinaaleatoria"
                 android:text="@string/b_crear_rutina_random"
                 android:textAlignment="center" />
