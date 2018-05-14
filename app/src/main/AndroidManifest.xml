@@ -17,10 +17,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CrearRutina"
-            android:label="@string/title_activity_crear_rutina"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".VerEjercicio"
             android:label="@string/title_activity_ver_ejercicio"
             android:theme="@style/AppTheme.NoActionBar" />

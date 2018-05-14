@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import fitness.sportgenertaion.fitnesstrainer.CrearRutina;
 import fitness.sportgenertaion.fitnesstrainer.CrearRutinas;
 import fitness.sportgenertaion.fitnesstrainer.R;
 import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;

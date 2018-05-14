@@ -78,6 +78,15 @@
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/b_historial"
                 android:textSize="18sp" />
+
         </LinearLayout>
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/flFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
 </android.support.constraint.ConstraintLayout>

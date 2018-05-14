@@ -1,5 +1,6 @@
 package fitness.sportgenertaion.fitnesstrainer;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -40,8 +41,7 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
-public class CrearRutinas extends AppCompatActivity
-{
+public class CrearRutinas extends AppCompatActivity {
     static String idUsuario;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -54,6 +54,7 @@ public class CrearRutinas extends AppCompatActivity
     static ArrayList<String> viernes = new ArrayList<String>();
     static ArrayList<String> sabado = new ArrayList<String>();
     static ArrayList<String> domingo = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,15 +71,15 @@ public class CrearRutinas extends AppCompatActivity
             }
         });
         Bundle parametros = this.getIntent().getExtras();
-        if(parametros !=null){
-            idUsuario=parametros.getString("idUsuario");
+        if (parametros != null) {
+            idUsuario = parametros.getString("idUsuario");
 
         }
 
 
 
-
     }
+
     public static void RutinaTemporal(String dia, String ejercicio) {
         if (dia.equals("Lunes")) {
             lunes.add(ejercicio);
@@ -134,8 +135,7 @@ public class CrearRutinas extends AppCompatActivity
                 }
             }
 
-        }
-        else if (dia.equals("Sabado")) {
+        } else if (dia.equals("Sabado")) {
             for (int x = 0; x < sabado.size(); x++) {
                 if (sabado.get(x) == ejercicio) {
                     sabado.remove(x);
@@ -143,8 +143,7 @@ public class CrearRutinas extends AppCompatActivity
                 }
             }
 
-        }
-        else if (dia.equals("Domingo")) {
+        } else if (dia.equals("Domingo")) {
             for (int x = 0; x < domingo.size(); x++) {
                 if (domingo.get(x) == ejercicio) {
                     domingo.remove(x);
@@ -157,13 +156,10 @@ public class CrearRutinas extends AppCompatActivity
     }
 
 
-
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment implements ValueEventListener, ChildEventListener,AdapterView.OnItemSelectedListener,View.OnClickListener {
-
-
+    public static class PlaceholderFragment extends Fragment implements ValueEventListener, ChildEventListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
 
 
         DatabaseReference dbPrediccio;
@@ -208,7 +204,6 @@ public class CrearRutinas extends AppCompatActivity
             rvEjercicios = rootView.findViewById(R.id.rvEjercicios);
 
 
-
             //Hago que en los spinners salgan los arrays
             ArrayAdapter<CharSequence> adapterMusculos = ArrayAdapter.createFromResource(getContext(), R.array.musculos, android.R.layout.simple_spinner_item);
             adapterMusculos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -230,21 +225,21 @@ public class CrearRutinas extends AppCompatActivity
             //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
             rvEjercicios.addItemDecoration(new DividerItemDecoration(getContext(),
                     LinearLayoutManager.VERTICAL));
-            String dias="Lunes";
-            if(getArguments().getInt(ARG_SECTION_NUMBER)==1){
-                dias="Lunes";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==2){
-                dias="Martes";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==3){
-                dias="Miercoles";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==4){
-                dias="Jueves";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==5){
-                dias="Viernes";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==6){
-                dias="Sabado";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==7){
-                dias="Domingo";
+            String dias = "Lunes";
+            if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+                dias = "Lunes";
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+                dias = "Martes";
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
+                dias = "Miercoles";
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 4) {
+                dias = "Jueves";
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 5) {
+                dias = "Viernes";
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 6) {
+                dias = "Sabado";
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 7) {
+                dias = "Domingo";
             }
             //rvPrediccions.setAdapter(prediccioAdapter);
             ejercicioAdapter = new EjercicioAdapter(getContext(), llistaEjercicios, dias);
@@ -333,27 +328,37 @@ public class CrearRutinas extends AppCompatActivity
 
         @Override
         public void onClick(View view) {
+            RutinaAcciones.eliminarRutina(idUsuario);
             for (int x = 0; x < lunes.size(); x++) {
-                RutinaAcciones.anyadir("Lunes",lunes.get(x),idUsuario);
+                RutinaAcciones.anyadir("Lunes", lunes.get(x), idUsuario);
             }
             for (int x = 0; x < martes.size(); x++) {
-                RutinaAcciones.anyadir("Martes",martes.get(x),idUsuario);
+                RutinaAcciones.anyadir("Martes", martes.get(x), idUsuario);
             }
             for (int x = 0; x < miercoles.size(); x++) {
-                RutinaAcciones.anyadir("Miercoles",miercoles.get(x),idUsuario);
+                RutinaAcciones.anyadir("Miercoles", miercoles.get(x), idUsuario);
             }
             for (int x = 0; x < jueves.size(); x++) {
-                RutinaAcciones.anyadir("Jueves",jueves.get(x),idUsuario);
+                RutinaAcciones.anyadir("Jueves", jueves.get(x), idUsuario);
             }
             for (int x = 0; x < viernes.size(); x++) {
-                RutinaAcciones.anyadir("Viernes",viernes.get(x),idUsuario);
+                RutinaAcciones.anyadir("Viernes", viernes.get(x), idUsuario);
             }
             for (int x = 0; x < sabado.size(); x++) {
-                RutinaAcciones.anyadir("Sabado",sabado.get(x),idUsuario);
+                RutinaAcciones.anyadir("Sabado", sabado.get(x), idUsuario);
             }
             for (int x = 0; x < domingo.size(); x++) {
-                RutinaAcciones.anyadir("Domingo",domingo.get(x),idUsuario);
+                RutinaAcciones.anyadir("Domingo", domingo.get(x), idUsuario);
             }
+            lunes = new ArrayList<String>();
+            martes = new ArrayList<String>();
+            miercoles = new ArrayList<String>();
+            jueves = new ArrayList<String>();
+            viernes = new ArrayList<String>();
+            sabado = new ArrayList<String>();
+            domingo = new ArrayList<String>();
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -379,23 +384,24 @@ public class CrearRutinas extends AppCompatActivity
             // Show 3 total pages.
             return 7;
         }
+
         @Override
         public CharSequence getPageTitle(int position) {
 
-            switch (position){
-                case 0 :
+            switch (position) {
+                case 0:
                     return "Lu";
-                case 1 :
+                case 1:
                     return "Ma";
-                case 2 :
+                case 2:
                     return "Mi";
-                case 3 :
+                case 3:
                     return "Ju";
-                case 4 :
+                case 4:
                     return "Vi";
-                case 5 :
+                case 5:
                     return "Sá";
-                case 6 :
+                case 6:
                     return "Do";
             }
             return null;

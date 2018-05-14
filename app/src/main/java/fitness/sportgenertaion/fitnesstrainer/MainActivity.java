@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +17,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import fitness.sportgenertaion.fitnesstrainer.Fragments.RutinaAleatoria;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authListener;
 
@@ -35,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        typeface = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Regular.ttf");
+        //
+        // typeface = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Regular.ttf");
         
 
         mAuth = FirebaseAuth.getInstance();
@@ -72,15 +79,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == btHistorial) {
 
         }
-        if (v == btCrearRutina) {
+        else if (v == btCrearRutina) {
             intent = new Intent(this, CrearRutinas.class);
             intent.putExtra( "idUsuario",mAuth.getCurrentUser().getUid());
             startActivity(intent);
         }
-        if (v == btRutinaAleatoria) {
+        else if (v == btRutinaAleatoria) {
+
+            RutinaAleatoria fragment = new RutinaAleatoria(mAuth.getCurrentUser().getUid());
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
 
         }
-        if (v == btMiRutina) {
+       else {
             intent = new Intent(this, Dias.class);
             intent.putExtra( "idUsuario",mAuth.getCurrentUser().getUid());
             startActivity(intent);
