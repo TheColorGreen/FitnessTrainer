@@ -1,16 +1,11 @@
 package fitness.sportgenertaion.fitnesstrainer.Fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -41,7 +36,7 @@ public class RutinaAleatoria extends Fragment implements ValueEventListener, Chi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_rutina_aleatoria, container, false);
 
-        TextView textView = (TextView) rootView.findViewById(R.id.prueba);
+        //TextView textView = (TextView) rootView.findViewById(R.id.prueba);
         Toast.makeText(getContext(), "Entra", Toast.LENGTH_SHORT).show();
         dbEjercicios = FirebaseDatabase.getInstance()
                 .getReference()

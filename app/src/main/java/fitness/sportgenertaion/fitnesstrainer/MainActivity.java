@@ -4,10 +4,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import fitness.sportgenertaion.fitnesstrainer.Fragments.HistorialRutina;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.RutinaAleatoria;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -77,7 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent;
         if (v == btHistorial) {
+            HistorialRutina historialRutina = new HistorialRutina();
 
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, historialRutina).commit();
         }
         else if (v == btCrearRutina) {
             intent = new Intent(this, CrearRutinas.class);
