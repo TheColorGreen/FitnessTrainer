@@ -27,11 +27,13 @@
         <activity
             android:name=".CrearRutinas"
             android:label="@string/title_activity_crear_rutinas"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".ModificarRutina"></activity>
     </application>
 
 </manifest>
