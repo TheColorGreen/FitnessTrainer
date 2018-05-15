@@ -10,8 +10,15 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 </FrameLayout>
