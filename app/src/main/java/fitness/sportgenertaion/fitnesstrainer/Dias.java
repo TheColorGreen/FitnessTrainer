@@ -248,19 +248,19 @@ public class Dias extends AppCompatActivity {
 
             switch (position){
                 case 0 :
-                    return "Lu";
+                    return getString(R.string.lunes);
                 case 1 :
-                    return "Ma";
+                    return getString(R.string.martes);
                 case 2 :
-                    return "Mi";
+                    return getString(R.string.miercoles);
                 case 3 :
-                    return "Ju";
+                    return getString(R.string.jueves);
                 case 4 :
-                    return "Vi";
+                    return getString(R.string.viernes);
                 case 5 :
-                    return "Sá";
+                    return getString(R.string.sabado);
                 case 6 :
-                    return "Do";
+                    return getString(R.string.domingo);
             }
             return null;
         }
