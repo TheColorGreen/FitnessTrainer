@@ -58,6 +58,15 @@ public class VerEjercicio extends AppCompatActivity
             ejercicio=parametros.getString("ejercicio");
 
         }
+        FloatingActionButton fbExit= findViewById(R.id.fbExit);
+        fbExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new  Intent(VerEjercicio.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
         //Inicializamos variables
         tvTitulo=findViewById(R.id.tvTitulo);
         tvDescripcion=findViewById(R.id.tvDescripcion);

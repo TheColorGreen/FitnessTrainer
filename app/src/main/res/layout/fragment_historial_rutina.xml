@@ -22,7 +22,7 @@
             android:layout_height="458dp" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fbaAtras"
+            android:id="@+id/fbExit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"

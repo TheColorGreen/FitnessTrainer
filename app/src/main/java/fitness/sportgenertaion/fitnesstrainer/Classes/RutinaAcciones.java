@@ -11,8 +11,8 @@ public  class RutinaAcciones {
     public static void anyadir(String dia, String ejercicio, String idUsuario) {
         DatabaseReference dbRutina = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("users/" + idUsuario + "/Rutina");
-        dbRutina.child("/" + dia + "/" + ejercicio).setValue(false);
+                .child("users/" + idUsuario + "/Rutina"+"/" + dia+"/" + ejercicio );
+        dbRutina.setValue(false);
     }
 
     public static void eliminarRutina(String idUsuario) {

@@ -38,8 +38,8 @@ public class Dias extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private TabLayout tabLayout;
     private ViewPager mViewPager;
-     static String idUsuario;
-     public static String dia;
+    static String idUsuario;
+    public static String dia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,22 +50,11 @@ public class Dias extends AppCompatActivity {
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new  Intent(Dias.this, ModificarRutina.class);
-                intent.putExtra( "idUsuario",idUsuario);
-                intent.putExtra( "dia",dia);
-                startActivity(intent);
-
-            }
-        });
-        FloatingActionButton fbExit= findViewById(R.id.fbExit);
+        FloatingActionButton fbExit = findViewById(R.id.fbExit);
         fbExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new  Intent(Dias.this, MainActivity.class);
+                Intent intent = new Intent(Dias.this, MainActivity.class);
                 startActivity(intent);
 
             }
@@ -85,8 +74,8 @@ public class Dias extends AppCompatActivity {
         });
 
         Bundle parametros = this.getIntent().getExtras();
-        if(parametros !=null){
-            idUsuario=parametros.getString("idUsuario");
+        if (parametros != null) {
+            idUsuario = parametros.getString("idUsuario");
 
         }
 
@@ -117,6 +106,7 @@ public class Dias extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 */
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -126,9 +116,10 @@ public class Dias extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-        RecyclerView rvEjercicios ;
+        RecyclerView rvEjercicios;
         List<Rutina> llistaRutina = new ArrayList<Rutina>();
-       RutinaAdapter rutinaAdapter;
+        RutinaAdapter rutinaAdapter;
+
         public PlaceholderFragment() {
         }
 
@@ -136,7 +127,7 @@ public class Dias extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber,String idUsuario)  {
+        public static PlaceholderFragment newInstance(int sectionNumber, String idUsuario) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -156,49 +147,82 @@ public class Dias extends AppCompatActivity {
             //
 
 
+            String dia2 = "Lunes";
             ///Cada fragment hara cosas distintas aqui
-             dia="Lunes";
-           if(getArguments().getInt(ARG_SECTION_NUMBER)==1){
-                dia="Lunes";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==2){
-               dia="Martes";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==3){
-               dia="Miercoles";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==4){
-               dia="Jueves";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==5){
-               dia="Viernes";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==6){
-               dia="Sabado";
-            }else if(getArguments().getInt(ARG_SECTION_NUMBER)==7){
-               dia="Domingo";
+
+            if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+                dia = "Lunes";
+
+
+
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+                dia = "Martes";
+                dia2 = "Martes";
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
+                dia = "Miercoles";
+
+
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 4) {
+                dia = "Jueves";
+
+
+
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 5) {
+                dia = "Viernes";
+
+
+
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 6) {
+                dia = "Sabado";
+
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 7) {
+                dia = "Domingo";
+
+
             }
+
+            dia2=dia;
+            FloatingActionButton fab = rootView.findViewById(R.id.fab);
+            final String finalDia = dia2;
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getContext(), ModificarRutina.class);
+                    intent.putExtra("idUsuario", idUsuario);
+                    intent.putExtra("dia", finalDia);
+                    startActivity(intent);
+
+                }
+            });
+
             rvEjercicios.setLayoutManager(new LinearLayoutManager(getContext()));
             //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
             rvEjercicios.addItemDecoration(new DividerItemDecoration(getContext(),
                     LinearLayoutManager.VERTICAL));
-            rutinaAdapter = new RutinaAdapter(getContext(), llistaRutina, dia,idUsuario);
+            rutinaAdapter = new RutinaAdapter(getContext(), llistaRutina, dia, idUsuario);
             DatabaseReference rutina = FirebaseDatabase.getInstance()
                     .getReference()
-                    .child("users"+"/"+idUsuario+"/Rutina/"+dia);
+                    .child("users" + "/" + idUsuario + "/Rutina/" + dia);
             rutina.addValueEventListener(this);
             rutina.addChildEventListener(this);
             return rootView;
         }
+
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
 
             llistaRutina.removeAll(llistaRutina);
             for (DataSnapshot element : dataSnapshot.getChildren()) {
 
-                    Rutina rutina = new Rutina(Boolean.parseBoolean(element.getValue().toString()),element.getKey().toString());
+                Rutina rutina = new Rutina(Boolean.parseBoolean(element.getValue().toString()), element.getKey().toString());
 
-                    llistaRutina.add(rutina);
+                llistaRutina.add(rutina);
 
             }
             rvEjercicios.setAdapter(rutinaAdapter);
             rvEjercicios.scrollToPosition(llistaRutina.size() - 1);
         }
+
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
@@ -220,7 +244,6 @@ public class Dias extends AppCompatActivity {
         }
 
 
-
         @Override
         public void onCancelled(DatabaseError databaseError) {
 
@@ -231,11 +254,7 @@ public class Dias extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter  {
-        private RecyclerView rvEjercicios;
-        private List<Ejercicio> llistaEjercicios = new ArrayList<Ejercicio>();
-        private EjercicioAdapter ejercicioAdapter;
-
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -246,7 +265,8 @@ public class Dias extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1,idUsuario);
+
+            return PlaceholderFragment.newInstance(position + 1, idUsuario);
         }
 
         @Override
@@ -254,29 +274,28 @@ public class Dias extends AppCompatActivity {
             // Show 3 total pages.
             return 7;
         }
+
         @Override
         public CharSequence getPageTitle(int position) {
 
-            switch (position){
-                case 0 :
+            switch (position) {
+                case 0:
                     return getString(R.string.lunes);
-                case 1 :
+                case 1:
                     return getString(R.string.martes);
-                case 2 :
+                case 2:
                     return getString(R.string.miercoles);
-                case 3 :
+                case 3:
                     return getString(R.string.jueves);
-                case 4 :
+                case 4:
                     return getString(R.string.viernes);
-                case 5 :
+                case 5:
                     return getString(R.string.sabado);
-                case 6 :
+                case 6:
                     return getString(R.string.domingo);
             }
             return null;
         }
-
-
 
 
     }

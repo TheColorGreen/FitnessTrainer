@@ -75,6 +75,15 @@ public class CrearRutinas extends AppCompatActivity {
             idUsuario = parametros.getString("idUsuario");
 
         }
+        FloatingActionButton fbExit= findViewById(R.id.fbExit);
+        fbExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new  Intent(CrearRutinas.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
 
 
