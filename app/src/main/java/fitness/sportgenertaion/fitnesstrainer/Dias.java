@@ -39,6 +39,7 @@ public class Dias extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager mViewPager;
      static String idUsuario;
+     public static String dia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,16 @@ public class Dias extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new  Intent(Dias.this, ModificarRutina.class);
                 intent.putExtra( "idUsuario",idUsuario);
+                intent.putExtra( "dia",dia);
+                startActivity(intent);
+
+            }
+        });
+        FloatingActionButton fbExit= findViewById(R.id.fbExit);
+        fbExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new  Intent(Dias.this, MainActivity.class);
                 startActivity(intent);
 
             }
@@ -146,7 +157,7 @@ public class Dias extends AppCompatActivity {
 
 
             ///Cada fragment hara cosas distintas aqui
-            String dia="Lunes";
+             dia="Lunes";
            if(getArguments().getInt(ARG_SECTION_NUMBER)==1){
                 dia="Lunes";
             }else if(getArguments().getInt(ARG_SECTION_NUMBER)==2){

@@ -29,6 +29,17 @@
             android:text="@string/tv_descripcion2"
             android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fbExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="end|bottom"
+            android:layout_marginBottom="17dp"
+            android:layout_marginStart="22dp"
+            app:layout_anchor="@+id/container"
+            app:srcCompat="?android:attr/homeAsUpIndicator" />
 </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
