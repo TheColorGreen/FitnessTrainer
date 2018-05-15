@@ -33,6 +33,7 @@ public class HistorialRutina extends Fragment {
         });
 
         ///calendarView.getDate();
+        ///
 
 
 
