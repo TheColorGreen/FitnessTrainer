@@ -39,6 +39,7 @@ import java.util.List;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
+import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
 public class CrearRutinas extends AppCompatActivity {
@@ -71,10 +72,7 @@ public class CrearRutinas extends AppCompatActivity {
             }
         });
         Bundle parametros = this.getIntent().getExtras();
-        if (parametros != null) {
-            idUsuario = parametros.getString("idUsuario");
-
-        }
+        idUsuario= IdUsuario.getIdUsuario();
         FloatingActionButton fbExit= findViewById(R.id.fbExit);
         fbExit.setOnClickListener(new View.OnClickListener() {
             @Override

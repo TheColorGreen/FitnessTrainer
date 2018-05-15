@@ -30,13 +30,14 @@ import java.util.List;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
+import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Classes.ModificarAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
 public class ModificarRutina extends AppCompatActivity implements ValueEventListener, ChildEventListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
-static String idUsuario;
-static String dia="Lunes";
+    static String idUsuario;
+    static String dia = "Lunes";
     static ArrayList<String> ejercicios = new ArrayList<String>();
     DatabaseReference dbPrediccio;
     String nivel = "5";
@@ -47,21 +48,24 @@ static String dia="Lunes";
     private RecyclerView rvEjercicios;
     private List<Ejercicio> llistaEjercicios = new ArrayList<Ejercicio>();
     private ModificarAdapter modificarAdapter;
+    private List<String> llistaEjerciciosPuestos = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificar_rutina);
-        dia=new String();
+        dia = new String();
         Bundle parametros = this.getIntent().getExtras();
+        idUsuario= IdUsuario.getIdUsuario();
         if (parametros != null) {
-            idUsuario = parametros.getString("idUsuario");
+
             dia = parametros.getString("dia");
+            llistaEjerciciosPuestos = (ArrayList<String>) getIntent().getSerializableExtra("miLista");
         }
-        Toast.makeText(this,dia,Toast.LENGTH_SHORT).show();
-        bguardar =findViewById(R.id.bGuargar);
+
+        bguardar = findViewById(R.id.bGuargar);
         spNivel = findViewById(R.id.spNivel);
-        spGrupoMuscular =findViewById(R.id.spMusculo);
+        spGrupoMuscular = findViewById(R.id.spMusculo);
         bguardar = findViewById(R.id.bGuargar);
         rvEjercicios = findViewById(R.id.rvEjercicios);
 
@@ -95,7 +99,7 @@ static String dia="Lunes";
         //hago el listenner del spinner
         spGrupoMuscular.setOnItemSelectedListener(this);
         spNivel.setOnItemSelectedListener(this);
-        
+
     }
 
 
@@ -124,13 +128,20 @@ static String dia="Lunes";
         llistaEjercicios.removeAll(llistaEjercicios);
         for (DataSnapshot element : dataSnapshot.getChildren()) {
             if ((element.child("dificultad").getValue().toString().equals(this.nivel) && (element.child("musculos").getValue().toString().equals(this.grupoMuscular))) || (this.nivel.equals("5") && this.grupoMuscular.equals("5")) || (this.grupoMuscular.equals("5") && element.child("dificultad").getValue().toString().equals(this.nivel)) || this.nivel.equals("5") && element.child("musculos").getValue().toString().equals(this.grupoMuscular)) {
+                Boolean comprovacion = true;
+                for (int x = 0; x < llistaEjerciciosPuestos.size(); x++) {
+                    if (llistaEjerciciosPuestos.get(x).equals(element.getKey().toString())) {
+                        comprovacion = false;
+                    }
+                }
+                if (comprovacion) {
+                    Ejercicio ejercicio = new Ejercicio(element.getKey().toString(), element.child("descripcion").getValue().toString(), element.child("foto").getValue().toString(), Integer.valueOf(element.child("dificultad").getValue().toString()), Integer.valueOf(element.child("musculos").getValue().toString()));
 
-                Ejercicio ejercicio = new Ejercicio(element.getKey().toString(), element.child("descripcion").getValue().toString(), element.child("foto").getValue().toString(), Integer.valueOf(element.child("dificultad").getValue().toString()), Integer.valueOf(element.child("musculos").getValue().toString()));
-
-                llistaEjercicios.add(ejercicio);
+                    llistaEjercicios.add(ejercicio);
+                }
             }
         }
-        rvEjercicios.setAdapter(modificarAdapter );
+        rvEjercicios.setAdapter(modificarAdapter);
         rvEjercicios.scrollToPosition(llistaEjercicios.size() - 1);
     }
 
@@ -181,15 +192,16 @@ static String dia="Lunes";
 
         ejercicios = new ArrayList<String>();
 
-       Intent intent = new Intent(this, Dias.class);
-        intent.putExtra( "idUsuario",idUsuario);
+        Intent intent = new Intent(this, Dias.class);
+        intent.putExtra("idUsuario", idUsuario);
         startActivity(intent);
     }
-    public static void RutinaTemporal( String ejercicio) {
+
+    public static void RutinaTemporal(String ejercicio) {
         ejercicios.add(ejercicio);
     }
 
-    public static void BorrarRutinaTemporal( String ejercicio) {
+    public static void BorrarRutinaTemporal(String ejercicio) {
 
         for (int x = 0; x < ejercicios.size(); x++) {
             if (ejercicios.get(x) == ejercicio) {

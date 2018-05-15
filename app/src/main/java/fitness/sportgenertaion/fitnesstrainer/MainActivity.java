@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.HistorialRutina;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.RutinaAleatoria;
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         };
-
+IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
         btCrearRutina = findViewById(R.id.bCreaRutina);
         btHistorial = findViewById(R.id.bHistorialRutina);
         btMiRutina = findViewById(R.id.bRutina);
@@ -80,19 +81,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if (v == btCrearRutina) {
             intent = new Intent(this, CrearRutinas.class);
-            intent.putExtra( "idUsuario",mAuth.getCurrentUser().getUid());
             startActivity(intent);
         }
         else if (v == btRutinaAleatoria) {
 
-            RutinaAleatoria fragment = new RutinaAleatoria(mAuth.getCurrentUser().getUid());
+            RutinaAleatoria fragment = new RutinaAleatoria();
 
             getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
 
         }
        else {
             intent = new Intent(this, Dias.class);
-            intent.putExtra( "idUsuario",mAuth.getCurrentUser().getUid());
             startActivity(intent);
 
         }
