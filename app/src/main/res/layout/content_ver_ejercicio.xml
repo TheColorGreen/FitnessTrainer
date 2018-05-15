@@ -9,7 +9,14 @@
 
     <ImageView android:layout_height="165dp" android:layout_width="match_parent" android:layout_marginTop="46dp" android:id="@+id/ivImagen" android:layout_alignParentStart="true" app:srcCompat="@android:color/background_light" android:layout_below="@+id/tvTitulo"/>
 
-    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_marginTop="41dp" android:id="@+id/tvDescripcion" android:layout_alignParentStart="true" android:layout_alignTop="@+id/tvDescripcion2"/>
+        <TextView
+            android:id="@+id/tvDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/tvDescripcion2"
+            android:layout_marginTop="41dp"
+            android:fontFamily="@font/comfortaa" />
 
         <TextView
             android:id="@+id/tvDescripcion2"
@@ -18,6 +25,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/ivImagen"
             android:layout_marginTop="88dp"
+            android:fontFamily="@font/comfortaa"
             android:text="@string/tv_descripcion2"
             android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
 

@@ -28,6 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/comfortaa"
                 android:text="@string/tv_nivel" />
 
             <Spinner
@@ -47,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/comfortaa"
                 android:text="@string/tv_grupo_muscular" />
 
             <Spinner
@@ -82,6 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="270dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="@string/b_guardar3"
                 android:visibility="visible" />
         </LinearLayout>

@@ -27,13 +27,14 @@ public class HistorialRutina extends Fragment {
                     int          year,
                     int          month,
                     int          dayOfMonth ) {
+
                 Toast.makeText(getContext(),
                         ""+dayOfMonth+ " / " + month + " / " + year, Toast.LENGTH_SHORT).show();
+
             }
         });
 
-        ///calendarView.getDate();
-        ///
+
 
 
 
