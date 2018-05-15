@@ -34,4 +34,5 @@ public  class RutinaAcciones {
                 .child("users/" + idUsuario + "/Rutina");
         dbRutina.child("/" + dia + "/" + ejercicio).setValue(true);
     }
+
 }

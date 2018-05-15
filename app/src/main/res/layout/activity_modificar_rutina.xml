@@ -66,9 +66,12 @@
 
         <Button
             android:id="@+id/bGuargar"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/b_guardar3" />
+            android:layout_marginLeft="270dp"
+            android:fontFamily="@font/comfortaa"
+            android:text="@string/b_guardar3"
+            android:visibility="visible" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
