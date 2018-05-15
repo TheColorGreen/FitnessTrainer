@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Random;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
+import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 import fitness.sportgenertaion.fitnesstrainer.CrearRutinas;
@@ -44,16 +45,16 @@ public class RutinaAleatoria extends Fragment implements ValueEventListener, Chi
     public List<String> llistaEjercicios;
     public String[] dias = new String[]{"Lunes", "Martes", "Miercoles", "Jueves","Viernes", "Sabado", "Domingo"};
 
-    @SuppressLint("ValidFragment")
-    public RutinaAleatoria(String idUsuario) {
-        this.idUsuario = idUsuario;
+
+    public RutinaAleatoria() {
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_rutina_aleatoria, container, false);
-
+        idUsuario= IdUsuario.getIdUsuario();
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fbExit);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

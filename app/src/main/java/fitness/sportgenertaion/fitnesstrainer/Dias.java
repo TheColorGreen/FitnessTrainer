@@ -25,11 +25,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
+import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAdapter;
 
@@ -74,10 +76,7 @@ public class Dias extends AppCompatActivity {
         });
 
         Bundle parametros = this.getIntent().getExtras();
-        if (parametros != null) {
-            idUsuario = parametros.getString("idUsuario");
-
-        }
+        idUsuario= IdUsuario.getIdUsuario();
 
     }
 
@@ -119,7 +118,7 @@ public class Dias extends AppCompatActivity {
         RecyclerView rvEjercicios;
         List<Rutina> llistaRutina = new ArrayList<Rutina>();
         RutinaAdapter rutinaAdapter;
-
+        ArrayList<String> llistaEjerciciosPuestos = new ArrayList<String>();
         public PlaceholderFragment() {
         }
 
@@ -154,7 +153,6 @@ public class Dias extends AppCompatActivity {
                 dia = "Lunes";
 
 
-
             } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
                 dia = "Martes";
                 dia2 = "Martes";
@@ -166,10 +164,8 @@ public class Dias extends AppCompatActivity {
                 dia = "Jueves";
 
 
-
             } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 5) {
                 dia = "Viernes";
-
 
 
             } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 6) {
@@ -181,7 +177,7 @@ public class Dias extends AppCompatActivity {
 
             }
 
-            dia2=dia;
+            dia2 = dia;
             FloatingActionButton fab = rootView.findViewById(R.id.fab);
             final String finalDia = dia2;
             fab.setOnClickListener(new View.OnClickListener() {
@@ -190,6 +186,7 @@ public class Dias extends AppCompatActivity {
                     Intent intent = new Intent(getContext(), ModificarRutina.class);
                     intent.putExtra("idUsuario", idUsuario);
                     intent.putExtra("dia", finalDia);
+                    intent.putExtra("miLista", llistaEjerciciosPuestos);
                     startActivity(intent);
 
                 }
@@ -215,7 +212,7 @@ public class Dias extends AppCompatActivity {
             for (DataSnapshot element : dataSnapshot.getChildren()) {
 
                 Rutina rutina = new Rutina(Boolean.parseBoolean(element.getValue().toString()), element.getKey().toString());
-
+                llistaEjerciciosPuestos.add(element.getKey().toString());
                 llistaRutina.add(rutina);
 
             }
