@@ -7,19 +7,10 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,14 +19,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.net.ssl.HttpsURLConnection;
+import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
 public class VerEjercicio extends AppCompatActivity
         implements ValueEventListener, ChildEventListener {
@@ -45,6 +32,8 @@ public class VerEjercicio extends AppCompatActivity
     TextView tvTitulo;
     TextView tvDescripcion;
     ImageView ivImagen;
+    String dia;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +45,7 @@ public class VerEjercicio extends AppCompatActivity
         Bundle parametros = this.getIntent().getExtras();
         if(parametros !=null){
             ejercicio=parametros.getString("ejercicio");
-
+            dia=parametros.getString("dia");
         }
         FloatingActionButton fbExit= findViewById(R.id.fbExit);
         fbExit.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +56,22 @@ public class VerEjercicio extends AppCompatActivity
 
             }
         });
+
+        ///Eliminar el exercici secceionat
+        FloatingActionButton fabEliminar= findViewById(R.id.fabEliminar);
+        fabEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dia!=null&&!dia.equals("")) {
+                    RutinaAcciones.BorrarEjercicios(dia,ejercicio);
+                    Intent intent = new  Intent(VerEjercicio.this, Dias.class);
+                    startActivity(intent);
+
+                }
+
+            }
+        });
+
         //Inicializamos variables
         tvTitulo=findViewById(R.id.tvTitulo);
         tvDescripcion=findViewById(R.id.tvDescripcion);
@@ -89,9 +94,9 @@ public class VerEjercicio extends AppCompatActivity
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
 
-        Toast.makeText(VerEjercicio.this, "entra aqui.",
-                Toast.LENGTH_SHORT).show();
-        tvTitulo.setText(dataSnapshot.getKey());;
+       // Toast.makeText(VerEjercicio.this, "entra aqui.",
+               // Toast.LENGTH_SHORT).show();
+        tvTitulo.setText(dataSnapshot.getKey());
         tvDescripcion.setText(dataSnapshot.child("/descripcion").getValue().toString());
 //Carrear la imatge
         new DownLoadImageTask(ivImagen).execute(dataSnapshot.child("/foto").getValue().toString());

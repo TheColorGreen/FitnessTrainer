@@ -25,7 +25,7 @@
 
             <TextView
                 android:id="@+id/tvNivel"
-                android:layout_width="wrap_content"
+                android:layout_width="112dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/comfortaa"
@@ -62,7 +62,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="415dp"
+            android:layout_height="333dp"
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
@@ -81,9 +81,9 @@
 
             <Button
                 android:id="@+id/bGuargar"
-                android:layout_width="wrap_content"
+                android:layout_width="121dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="270dp"
+                android:layout_marginLeft="200dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/b_guardar3"
                 android:visibility="visible" />

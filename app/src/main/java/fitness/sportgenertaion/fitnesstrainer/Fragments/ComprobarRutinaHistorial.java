@@ -1,8 +1,6 @@
 package fitness.sportgenertaion.fitnesstrainer.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -19,15 +17,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.DateAcciones;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
-import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
-import fitness.sportgenertaion.fitnesstrainer.Dias;
 import fitness.sportgenertaion.fitnesstrainer.MainActivity;
 import fitness.sportgenertaion.fitnesstrainer.R;
 
@@ -75,33 +69,7 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
                 .child("users/" + IdUsuario.getIdUsuario() + "/FechaRutina");
         dbUltimaModificacion.addValueEventListener(this);
         dbUltimaModificacion.addChildEventListener(this);
-        dbUltimaModificacion.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-                Post newPost = dataSnapshot.getValue(Post.class);
-                System.out.println("Author: " + newPost.author);
-                System.out.println("Title: " + newPost.title);
-                System.out.println("Previous Post ID: " + prevChildKey);
-            }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {}
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {}
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-         firebase.database().ref('/users/' + IdUsuario).once('value').then(function(snapshot) {
-            var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-            // ...
-        });
 
         return rootView;
 

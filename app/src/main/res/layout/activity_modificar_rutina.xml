@@ -24,7 +24,7 @@
 
             <TextView
                 android:id="@+id/tvNivel"
-                android:layout_width="wrap_content"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/tv_nivel" />
@@ -66,9 +66,9 @@
 
         <Button
             android:id="@+id/bGuargar"
-            android:layout_width="wrap_content"
+            android:layout_width="113dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="270dp"
+            android:layout_marginLeft="200dp"
             android:fontFamily="@font/comfortaa"
             android:text="@string/b_guardar3"
             android:visibility="visible" />

@@ -62,6 +62,7 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
             Intent intent = new Intent(context, VerEjercicio.class);
 
             intent.putExtra("ejercicio", llistaRutina.get(posicio).getEjercicio());
+            intent.putExtra("dia", dia);
             context.startActivity(intent);
 
         }

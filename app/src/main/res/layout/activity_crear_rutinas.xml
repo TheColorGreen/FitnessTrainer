@@ -49,6 +49,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@+id/container"
         app:layout_anchorGravity="bottom|left"
-        app:srcCompat="?android:attr/homeAsUpIndicator" />
+        app:srcCompat="@drawable/ic_atras" />
 
 </android.support.design.widget.CoordinatorLayout>

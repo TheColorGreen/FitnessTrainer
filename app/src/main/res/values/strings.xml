@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fitness trainer</string>
+    <string name="app_name">Fitness Trainer</string>
     <string name="b_rutina">Rutina</string>
     <string name="b_crea_rutina">Crear Rutina</string>
     <string name="b_historial">Historial</string>
@@ -13,7 +13,7 @@
     <string name="tv_sport">Sport</string>
     <string name="tv_exercici">Ejercicio</string>
     <string name="b_guardar2">Siguiente</string>
-    <string name="b_guardar3">Guarda</string>
+    <string name="b_guardar3">Guardar</string>
     <string name="b_crear_rutina">Crear rutina</string>
     <string name="b_crear_rutina_personalizada">Crear rutina personalizada</string>
     <string name="tv_descripcion">Descripcion</string>
