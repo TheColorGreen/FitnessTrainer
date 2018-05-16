@@ -22,7 +22,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -103,15 +106,27 @@ public class RutinaAleatoria extends Fragment implements ValueEventListener, Chi
             llistaEjercicios.add(element.getKey().toString());
             numeroDeEjercicios++;
         }
-        RutinaAcciones.eliminarRutina(idUsuario);
+        RutinaAcciones.eliminarRutina();
         for (int a = 0; a < 7; a++) {
             ejerciciosDia = r.nextInt(5 - 1 + 1) + 1;
             for (int b = 0; b < ejerciciosDia; b++) {
                 ejercicioRandom = r.nextInt(numeroDeEjercicios - 0 + 1) + 0;
-                RutinaAcciones.anyadir(dias[a],llistaEjercicios.get(ejercicioRandom),idUsuario);
+                RutinaAcciones.anyadir(dias[a],llistaEjercicios.get(ejercicioRandom));
 
             }
         }
+
+
+        Date fechas = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fechas);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+
+        RutinaAcciones.anyadirFecha(day,month,year);
+
        Intent intent = new Intent(getContext(), Dias.class);
         intent.putExtra( "idUsuario",idUsuario);
         startActivity(intent);

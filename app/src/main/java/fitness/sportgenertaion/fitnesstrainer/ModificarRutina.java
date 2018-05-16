@@ -187,7 +187,7 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
     @Override
     public void onClick(View view) {
         for (int x = 0; x < ejercicios.size(); x++) {
-            RutinaAcciones.anyadir(dia, ejercicios.get(x), idUsuario);
+            RutinaAcciones.anyadir(dia, ejercicios.get(x));
         }
 
         ejercicios = new ArrayList<String>();

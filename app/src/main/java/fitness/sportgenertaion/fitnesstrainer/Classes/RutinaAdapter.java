@@ -104,10 +104,10 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
 
                 if (rutina.isSelected()) {
 
-                    RutinaAcciones.PonerCheck(dia,rutina.getEjercicio(),idUsuario);
+                    RutinaAcciones.PonerCheck(dia,rutina.getEjercicio());
                 } else {
 
-                   RutinaAcciones.anyadir(dia,rutina.getEjercicio(),idUsuario);
+                   RutinaAcciones.anyadir(dia,rutina.getEjercicio());
                 }
             }
         });

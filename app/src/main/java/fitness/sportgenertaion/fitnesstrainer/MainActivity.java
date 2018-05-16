@@ -14,10 +14,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
+import fitness.sportgenertaion.fitnesstrainer.Fragments.ComprobarRutinaHistorial;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.HistorialRutina;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.RutinaAleatoria;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authListener;
 
@@ -31,7 +32,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
+        mAuth = FirebaseAuth.getInstance();
         mAuth.addAuthStateListener(authListener);
+
+
     }
 
     @Override
@@ -41,8 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //
         // typeface = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Regular.ttf");
-        
-
         mAuth = FirebaseAuth.getInstance();
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -54,10 +56,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         public void onSuccess(AuthResult authResult) {
                         }
                     });
+                    // IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
                 }
             }
         };
-IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
+        IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
+
+
         btCrearRutina = findViewById(R.id.bCreaRutina);
         btHistorial = findViewById(R.id.bHistorialRutina);
         btMiRutina = findViewById(R.id.bRutina);
@@ -75,22 +80,23 @@ IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
     public void onClick(View v) {
         Intent intent;
         if (v == btHistorial) {
-            HistorialRutina historialRutina = new HistorialRutina();
+        //   HistorialRutina historialRutina = new HistorialRutina();
+         //   getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, historialRutina).commit();
+            ComprobarRutinaHistorial fragment = new ComprobarRutinaHistorial();
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, historialRutina).commit();
-        }
-        else if (v == btCrearRutina) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
+
+
+        } else if (v == btCrearRutina) {
             intent = new Intent(this, CrearRutinas.class);
             startActivity(intent);
-        }
-        else if (v == btRutinaAleatoria) {
+        } else if (v == btRutinaAleatoria) {
 
             RutinaAleatoria fragment = new RutinaAleatoria();
 
             getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
 
-        }
-       else {
+        } else {
             intent = new Intent(this, Dias.class);
             startActivity(intent);
 

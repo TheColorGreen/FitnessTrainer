@@ -14,6 +14,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -82,7 +84,7 @@ public class Dias extends AppCompatActivity {
 
 
 
-/*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -104,7 +106,7 @@ public class Dias extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-*/
+
 
     /**
      * A placeholder fragment containing a simple view.
@@ -140,7 +142,7 @@ public class Dias extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_dias, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+
 
             rvEjercicios = rootView.findViewById(R.id.rvRutina);
             //

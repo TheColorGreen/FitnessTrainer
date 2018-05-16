@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +35,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
@@ -72,17 +76,16 @@ public class CrearRutinas extends AppCompatActivity {
             }
         });
         Bundle parametros = this.getIntent().getExtras();
-        idUsuario= IdUsuario.getIdUsuario();
-        FloatingActionButton fbExit= findViewById(R.id.fbExit);
+        idUsuario = IdUsuario.getIdUsuario();
+        FloatingActionButton fbExit = findViewById(R.id.fbExit);
         fbExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new  Intent(CrearRutinas.this, MainActivity.class);
+                Intent intent = new Intent(CrearRutinas.this, MainActivity.class);
                 startActivity(intent);
 
             }
         });
-
 
 
     }
@@ -335,27 +338,27 @@ public class CrearRutinas extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            RutinaAcciones.eliminarRutina(idUsuario);
+            RutinaAcciones.eliminarRutina();
             for (int x = 0; x < lunes.size(); x++) {
-                RutinaAcciones.anyadir("Lunes", lunes.get(x), idUsuario);
+                RutinaAcciones.anyadir("Lunes", lunes.get(x));
             }
             for (int x = 0; x < martes.size(); x++) {
-                RutinaAcciones.anyadir("Martes", martes.get(x), idUsuario);
+                RutinaAcciones.anyadir("Martes", martes.get(x));
             }
             for (int x = 0; x < miercoles.size(); x++) {
-                RutinaAcciones.anyadir("Miercoles", miercoles.get(x), idUsuario);
+                RutinaAcciones.anyadir("Miercoles", miercoles.get(x));
             }
             for (int x = 0; x < jueves.size(); x++) {
-                RutinaAcciones.anyadir("Jueves", jueves.get(x), idUsuario);
+                RutinaAcciones.anyadir("Jueves", jueves.get(x));
             }
             for (int x = 0; x < viernes.size(); x++) {
-                RutinaAcciones.anyadir("Viernes", viernes.get(x), idUsuario);
+                RutinaAcciones.anyadir("Viernes", viernes.get(x));
             }
             for (int x = 0; x < sabado.size(); x++) {
-                RutinaAcciones.anyadir("Sabado", sabado.get(x), idUsuario);
+                RutinaAcciones.anyadir("Sabado", sabado.get(x));
             }
             for (int x = 0; x < domingo.size(); x++) {
-                RutinaAcciones.anyadir("Domingo", domingo.get(x), idUsuario);
+                RutinaAcciones.anyadir("Domingo", domingo.get(x));
             }
             lunes = new ArrayList<String>();
             martes = new ArrayList<String>();
@@ -364,6 +367,17 @@ public class CrearRutinas extends AppCompatActivity {
             viernes = new ArrayList<String>();
             sabado = new ArrayList<String>();
             domingo = new ArrayList<String>();
+
+            Date fechas = new Date();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(fechas);
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+
+
+            RutinaAcciones.anyadirFecha(day,month,year);
+
             Intent intent = new Intent(getContext(), MainActivity.class);
             startActivity(intent);
         }
@@ -389,6 +403,7 @@ public class CrearRutinas extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
+            //  return 7;
             return 7;
         }
 
