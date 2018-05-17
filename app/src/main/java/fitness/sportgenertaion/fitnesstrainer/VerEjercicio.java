@@ -27,49 +27,51 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 public class VerEjercicio extends AppCompatActivity
         implements ValueEventListener, ChildEventListener {
 
-    String ejercicio="Abdominales";
+    String ejercicio = "Abdominales";
     private Bitmap loadedImage;
     TextView tvTitulo;
     TextView tvDescripcion;
     ImageView ivImagen;
     String dia;
     FloatingActionButton fabEliminar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_ejercicio);
 
-        fabEliminar= findViewById(R.id.fabEliminar);
+        fabEliminar = findViewById(R.id.fabEliminar);
 
         //Recogemos el ejercico que nos pasan por el intent
         Bundle parametros = this.getIntent().getExtras();
-        if(parametros !=null){
-            ejercicio=parametros.getString("ejercicio");
-            dia=parametros.getString("dia");
+        if (parametros != null) {
+            ejercicio = parametros.getString("ejercicio");
+            dia = parametros.getString("dia");
+        }
+        // Si el parametro es null,
+        if (dia == null) {
+            // S'ha magara el boton fabEliminar
+            fabEliminar.setVisibility(View.INVISIBLE);
         }
 
-        if(dia==null){
-
-        fabEliminar.setVisibility(View.INVISIBLE);
-        }
-        FloatingActionButton fbExit= findViewById(R.id.fbExit);
+        // Boton para tirar para atras al menu principal
+        FloatingActionButton fbExit = findViewById(R.id.fbExit);
         fbExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new  Intent(VerEjercicio.this, MainActivity.class);
+                Intent intent = new Intent(VerEjercicio.this, MainActivity.class);
                 startActivity(intent);
 
             }
         });
 
-        ///Eliminar el exercici secceionat
-
+        // Eliminar el exercici secceionat
         fabEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dia!=null&&!dia.equals("")) {
-                    RutinaAcciones.BorrarEjercicios(dia,ejercicio);
-                    Intent intent = new  Intent(VerEjercicio.this, Dias.class);
+                if (dia != null && !dia.equals("")) {
+                    RutinaAcciones.BorrarEjercicios(dia, ejercicio);
+                    Intent intent = new Intent(VerEjercicio.this, Dias.class);
                     startActivity(intent);
 
                 }
@@ -78,9 +80,9 @@ public class VerEjercicio extends AppCompatActivity
         });
 
         //Inicializamos variables
-        tvTitulo=findViewById(R.id.tvTitulo);
-        tvDescripcion=findViewById(R.id.tvDescripcion);
-        ivImagen=(ImageView)findViewById(R.id.ivImagen);
+        tvTitulo = findViewById(R.id.tvTitulo);
+        tvDescripcion = findViewById(R.id.tvDescripcion);
+        ivImagen = (ImageView) findViewById(R.id.ivImagen);
 
 
         //Firebase
@@ -92,31 +94,27 @@ public class VerEjercicio extends AppCompatActivity
         dbPrediccio.addChildEventListener(this);
 
 
-
     }
 
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
 
-       // Toast.makeText(VerEjercicio.this, "entra aqui.",
-               // Toast.LENGTH_SHORT).show();
+        // Toast.makeText(VerEjercicio.this, "entra aqui.",
+        // Toast.LENGTH_SHORT).show();
         tvTitulo.setText(dataSnapshot.getKey());
         tvDescripcion.setText(dataSnapshot.child("/descripcion").getValue().toString());
 //Carrear la imatge
         new DownLoadImageTask(ivImagen).execute(dataSnapshot.child("/foto").getValue().toString());
 
 
-
-
-
     }
 
     //Aquest metode es per carregaar una imatge desde url
-    private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
+    private class DownLoadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView imageView;
 
-        public DownLoadImageTask(ImageView imageView){
+        public DownLoadImageTask(ImageView imageView) {
             this.imageView = imageView;
         }
 
@@ -126,17 +124,17 @@ public class VerEjercicio extends AppCompatActivity
          */
 
         //Aquesta classe es
-        protected Bitmap doInBackground(String...urls){
+        protected Bitmap doInBackground(String... urls) {
             String urlOfImage = urls[0];
             Bitmap logo = null;
-            try{
+            try {
                 InputStream is = new URL(urlOfImage).openStream();
                 /*
                     decodeStream(InputStream is)
                         Decode an input stream into a bitmap.
                  */
                 logo = BitmapFactory.decodeStream(is);
-            }catch(Exception e){ // Catch the download exception
+            } catch (Exception e) { // Catch the download exception
                 e.printStackTrace();
             }
             return logo;
@@ -146,13 +144,10 @@ public class VerEjercicio extends AppCompatActivity
             onPostExecute(Result result)
                 Runs on the UI thread after doInBackground(Params...).
          */
-        protected void onPostExecute(Bitmap result){
+        protected void onPostExecute(Bitmap result) {
             imageView.setImageBitmap(result);
         }
     }
-
-
-
 
 
     @Override
@@ -174,7 +169,6 @@ public class VerEjercicio extends AppCompatActivity
     public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
     }
-
 
 
     @Override

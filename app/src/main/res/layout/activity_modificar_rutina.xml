@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fitness.sportgenertaion.fitnesstrainer.ModificarRutina">
+
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="0dp"
@@ -68,7 +69,8 @@
             android:id="@+id/bGuargar"
             android:layout_width="113dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="200dp"
+            android:layout_marginLeft="230dp"
+            android:background="#FF6859"
             android:fontFamily="@font/comfortaa"
             android:text="@string/b_guardar3"
             android:visibility="visible" />

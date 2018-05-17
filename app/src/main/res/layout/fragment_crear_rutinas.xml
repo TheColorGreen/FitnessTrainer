@@ -83,7 +83,8 @@
                 android:id="@+id/bGuargar"
                 android:layout_width="121dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="230dp"
+                android:background="#FF6859"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/b_guardar3"
                 android:visibility="visible" />

@@ -32,10 +32,9 @@ public class DateAcciones {
 
         long diferencia = (hoy.getTime() - fecha.getTime()) / MILLSECS_PER_DAY;
 
-        int resultado= (int)diferencia;
-       return resultado;
+        int resultado = (int) diferencia;
+        return resultado;
     }
-
 
 
     public String diaSemana() throws ParseException {
