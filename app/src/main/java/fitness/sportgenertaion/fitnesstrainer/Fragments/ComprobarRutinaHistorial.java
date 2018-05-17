@@ -20,12 +20,15 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.DateAcciones;
+import fitness.sportgenertaion.fitnesstrainer.Classes.Historial;
+import fitness.sportgenertaion.fitnesstrainer.Classes.HistorialAcciones;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
@@ -65,11 +68,9 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
                 startActivity(in);
             }
         });
-        fechas = new Date();
         cal = Calendar.getInstance();
-        cal.setTime(fechas);
         year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH);
+        month = cal.get(Calendar.MONTH );
         day = cal.get(Calendar.DAY_OF_MONTH);
 
 
@@ -77,8 +78,7 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
                 .getReference()
                 .child("users" + "/" + IdUsuario.getIdUsuario() + "/FechaRutina");
 
-        dbUltimaModificacion.addListenerForSingleValueEvent(this);
-        dbUltimaModificacion.addValueEventListener(new ValueEventListener() {
+        dbUltimaModificacion.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot element : snapshot.getChildren()) {
@@ -95,16 +95,23 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
 
                 try {
-                    compararRutina();
+                    anyadirHistorial();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
+
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+
+        dbUltimaModificacion.onDisconnect().cancel();
+
         return rootView;
 
 
@@ -147,18 +154,67 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
         int diferenciaActual;
 
         diferenciaActual = fechaActual.diasHastaLunes();
-
         if (fechaRutina.CompararFechas() - diferenciaActual != 0) {
-           // anyadirHistorial();
+            resetearRutina();
+
 
         }
-        anyadirHistorial();
+        else{
+            getFragmentManager().beginTransaction().remove(this).commit();
 
-        //Toast.makeText(getContext(), fechaRutina.CompararFechas() - diferenciaActual + "", Toast.LENGTH_LONG).show();
+        }
+
+
 
     }
 
-    public void anyadirHistorial() {
+    public void anyadirHistorial() throws ParseException {
+        final String[] diasSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
+
+        for (int dia = 0; dia < 7; dia++) {
+            final int dias = dia;
+            dbUltimaModificacion = FirebaseDatabase.getInstance()
+                    .getReference()
+                    .child("users/" + IdUsuario.getIdUsuario() + "/Rutina/" + diasSemana[dia]);
+
+            dbUltimaModificacion.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+
+                    int contador = 0;
+                    for (DataSnapshot element : snapshot.getChildren()) {
+                        String dia = anyoRutina + "-" + mesRutina + "-" +diaRutina ;
+
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Calendar calendar = Calendar.getInstance();
+
+                        try {
+                            Date fecha = sdf.parse(dia);
+
+                            calendar.setTime(fecha);
+                            calendar.add(Calendar.DAY_OF_YEAR, contador);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        String dia2 = calendar.get(Calendar.DAY_OF_MONTH) + "-" + calendar.get(Calendar.MONTH+1) + "-" + calendar.get(Calendar.YEAR);
+                        HistorialAcciones.anyadir(dia2, element.getKey().toString(), Boolean.parseBoolean(element.getValue().toString()));
+                        contador++;
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+
+        compararRutina();
 
 
     }
@@ -172,13 +228,12 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
                     .getReference()
                     .child("users" + "/" + IdUsuario.getIdUsuario() + "/Rutina/" + diasSemana[dia]);
 
-            dbUltimaModificacion.addValueEventListener(new ValueEventListener() {
+            dbUltimaModificacion.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     for (DataSnapshot element : snapshot.getChildren()) {
 
                         RutinaAcciones.anyadir(diasSemana[dias], element.getKey().toString());
-
                     }
 
 
@@ -188,8 +243,36 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
+
             });
+
         }
+
+        Date fechas = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fechas);
+        int year;
+        int month;
+        int day;
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH) + 1;
+        day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DateAcciones fecha = new DateAcciones(day, month, year);
+
+
+        try {
+            cal.add(Calendar.DAY_OF_YEAR, -fecha.diasHastaLunes());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH);
+        day = cal.get(Calendar.DAY_OF_MONTH);
+        RutinaAcciones.anyadirFecha(day, month + 1, year);
+        getFragmentManager().beginTransaction().remove(this).commit();
+
     }
 
     @Override

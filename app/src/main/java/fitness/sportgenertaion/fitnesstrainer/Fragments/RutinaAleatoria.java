@@ -142,8 +142,7 @@ public class RutinaAleatoria extends Fragment implements ValueEventListener, Chi
         day=cal.get(Calendar.DAY_OF_MONTH);
         RutinaAcciones.anyadirFecha(day,month+1,year);
 
-       Intent intent = new Intent(getContext(), Dias.class);
-        intent.putExtra( "idUsuario",idUsuario);
+         Intent intent = new Intent(getContext(), Dias.class);
         startActivity(intent);
     }
 

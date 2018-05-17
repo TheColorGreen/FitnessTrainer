@@ -14,6 +14,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
+import fitness.sportgenertaion.fitnesstrainer.Fragments.ComprobarRutinaHistorial;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.HistorialRutina;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.RutinaAleatoria;
 
@@ -62,6 +63,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
 
 
+        ComprobarRutinaHistorial fragment = new ComprobarRutinaHistorial();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
+
         btCrearRutina = findViewById(R.id.bCreaRutina);
         btHistorial = findViewById(R.id.bHistorialRutina);
         btMiRutina = findViewById(R.id.bRutina);
@@ -79,8 +84,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent;
         if (v == btHistorial) {
-          HistorialRutina historialRutina = new HistorialRutina();
-           getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, historialRutina).commit();
+            HistorialRutina historialRutina = new HistorialRutina();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, historialRutina).commit();
+
 
 
         } else if (v == btCrearRutina) {
