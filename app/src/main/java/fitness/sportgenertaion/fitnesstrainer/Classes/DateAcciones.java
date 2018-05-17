@@ -51,5 +51,24 @@ public class DateAcciones {
 
     }
 
+    public int diasHastaLunes() throws ParseException {
 
+        String diaSemana= diaSemana();
+        int diferencia = 0;
+
+        if (diaSemana.equals("TUESDAY")) {
+            diferencia = 1;
+        } else if (diaSemana.equals("WEDNESDAY")) {
+            diferencia = 2;
+        } else if (diaSemana.equals("THURSDAY")) {
+            diferencia = 3;
+        } else if (diaSemana.equals("FRIDAY")) {
+            diferencia = 4;
+        } else if (diaSemana.equals("SATURDAY")) {
+            diferencia = 5;
+        } else if (diaSemana.equals("SUNDAY")) {
+            diferencia = 6;
+        }
+        return diferencia;
+    }
 }

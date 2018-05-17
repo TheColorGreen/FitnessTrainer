@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,6 +30,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import fitness.sportgenertaion.fitnesstrainer.Classes.DateAcciones;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
@@ -117,15 +119,28 @@ public class RutinaAleatoria extends Fragment implements ValueEventListener, Chi
         }
 
 
+
         Date fechas = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(fechas);
         int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
+        int month = cal.get(Calendar.MONTH)+1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
+        DateAcciones fecha = new DateAcciones(day,month,year);
 
-        RutinaAcciones.anyadirFecha(day,month,year);
+
+
+        try {
+            cal.add(Calendar.DAY_OF_YEAR, -fecha.diasHastaLunes());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        year=cal.get(Calendar.YEAR);
+        month=cal.get(Calendar.MONTH);
+        day=cal.get(Calendar.DAY_OF_MONTH);
+        RutinaAcciones.anyadirFecha(day,month+1,year);
 
        Intent intent = new Intent(getContext(), Dias.class);
         intent.putExtra( "idUsuario",idUsuario);

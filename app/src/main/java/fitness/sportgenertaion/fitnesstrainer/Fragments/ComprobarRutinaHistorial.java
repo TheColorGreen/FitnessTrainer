@@ -1,6 +1,8 @@
 package fitness.sportgenertaion.fitnesstrainer.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -14,14 +16,20 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.DateAcciones;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
+import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
+import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
+import fitness.sportgenertaion.fitnesstrainer.Dias;
 import fitness.sportgenertaion.fitnesstrainer.MainActivity;
 import fitness.sportgenertaion.fitnesstrainer.R;
 
@@ -64,13 +72,39 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
 
+
         dbUltimaModificacion = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("users/" + IdUsuario.getIdUsuario() + "/FechaRutina");
-        dbUltimaModificacion.addValueEventListener(this);
-        dbUltimaModificacion.addChildEventListener(this);
+                .child("users" + "/" + IdUsuario.getIdUsuario() + "/FechaRutina");
+
+        dbUltimaModificacion.addListenerForSingleValueEvent(this);
+        dbUltimaModificacion.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot element : snapshot.getChildren()) {
+
+                    if (element.getKey().toString().equals("dia")) {
+                        diaRutina = Integer.valueOf(element.getValue().toString());
+                    } else if (element.getKey().toString().equals("mes")) {
+                        mesRutina = Integer.valueOf(element.getValue().toString());
+                    } else {
+                        anyoRutina = Integer.valueOf(element.getValue().toString());
+                    }
+
+                }
 
 
+                try {
+                    compararRutina();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         return rootView;
 
 
@@ -99,51 +133,63 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
 
-        for (DataSnapshot element : dataSnapshot.getChildren()) {
-            diaRutina = Integer.parseInt(element.child("dia").getValue().toString());
-            mesRutina = Integer.parseInt(element.child("mes").getValue().toString());
-            anyoRutina = Integer.parseInt(element.child("anyo").getValue().toString());
-
-        }
-        compararRutina();
-
 
     }
 
-    public int diasHastaLunes(String diaSemana) {
-        int diferencia = 0;
 
-        if (diaSemana.equals("TUESDAY")) {
-            diferencia = 1;
-        } else if (diaSemana.equals("WEDNESDAY")) {
-            diferencia = 2;
-        } else if (diaSemana.equals("THURSDAY")) {
-            diferencia = 3;
-        } else if (diaSemana.equals("FRIDAY")) {
-            diferencia = 4;
-        } else if (diaSemana.equals("SATURDAY")) {
-            diferencia = 5;
-        } else if (diaSemana.equals("SUNDAY")) {
-            diferencia = 6;
-        }
-        return diferencia;
-    }
-
-    public void compararRutina(){
+    public void compararRutina() throws ParseException {
 
         DateAcciones fechaRutina = new DateAcciones(diaRutina, mesRutina, anyoRutina);
+        DateAcciones fechaActual = new DateAcciones(day, month + 1, year);
 
-        String diaSemana="MONDAY";
-        int diferencia = 0;
-        try {
-            diaSemana = fechaRutina.diaSemana();
-        } catch (ParseException e) {
-            e.printStackTrace();
+        String diaSemanaActual = "MONDAY";
+
+        int diferenciaActual;
+
+        diferenciaActual = fechaActual.diasHastaLunes();
+
+        if (fechaRutina.CompararFechas() - diferenciaActual != 0) {
+           // anyadirHistorial();
+
         }
-        cal.add(Calendar.DAY_OF_YEAR, -2);
+        anyadirHistorial();
 
-        Toast.makeText(getContext(),cal.get(Calendar.MONTH)+"/"+cal.get(Calendar.DAY_OF_MONTH),Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), fechaRutina.CompararFechas() - diferenciaActual + "", Toast.LENGTH_LONG).show();
 
+    }
+
+    public void anyadirHistorial() {
+
+
+    }
+
+    public void resetearRutina() {
+        final String[] diasSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
+
+        for (int dia = 0; dia < 7; dia++) {
+            final int dias = dia;
+            dbUltimaModificacion = FirebaseDatabase.getInstance()
+                    .getReference()
+                    .child("users" + "/" + IdUsuario.getIdUsuario() + "/Rutina/" + diasSemana[dia]);
+
+            dbUltimaModificacion.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    for (DataSnapshot element : snapshot.getChildren()) {
+
+                        RutinaAcciones.anyadir(diasSemana[dias], element.getKey().toString());
+
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
     @Override
