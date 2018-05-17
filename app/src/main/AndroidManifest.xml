@@ -34,6 +34,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".ModificarRutina" />
+        <activity android:name=".MostrarDia"></activity>
     </application>
 
 </manifest>

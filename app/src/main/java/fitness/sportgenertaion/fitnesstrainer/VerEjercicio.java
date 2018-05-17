@@ -33,19 +33,24 @@ public class VerEjercicio extends AppCompatActivity
     TextView tvDescripcion;
     ImageView ivImagen;
     String dia;
-
+    FloatingActionButton fabEliminar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_ejercicio);
 
-
+        fabEliminar= findViewById(R.id.fabEliminar);
 
         //Recogemos el ejercico que nos pasan por el intent
         Bundle parametros = this.getIntent().getExtras();
         if(parametros !=null){
             ejercicio=parametros.getString("ejercicio");
             dia=parametros.getString("dia");
+        }
+
+        if(dia==null){
+
+        fabEliminar.setVisibility(View.INVISIBLE);
         }
         FloatingActionButton fbExit= findViewById(R.id.fbExit);
         fbExit.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +63,7 @@ public class VerEjercicio extends AppCompatActivity
         });
 
         ///Eliminar el exercici secceionat
-        FloatingActionButton fabEliminar= findViewById(R.id.fabEliminar);
+
         fabEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
