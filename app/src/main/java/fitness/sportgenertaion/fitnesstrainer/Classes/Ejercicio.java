@@ -6,6 +6,7 @@ package fitness.sportgenertaion.fitnesstrainer.Classes;
 
 
 public class Ejercicio {
+    // Variables
     private String nombre;
     private String descripcion;
     private String foto;
