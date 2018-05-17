@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MostrarDia">
+    tools:context=".MostrarDia"
+    tools:layout_editor_absoluteY="81dp">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -26,5 +27,6 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_atras" />
+        app:srcCompat="@drawable/ic_atras"
+        tools:ignore="VectorDrawableCompat" />
 </android.support.constraint.ConstraintLayout>

@@ -25,6 +25,8 @@ public class HistorialRutina extends Fragment {
         //calendarView.getDate();
         //calendarView.setMinDate(calendarView.getDate());
 
+
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override public void onSelectedDayChange(
                     CalendarView view,
@@ -54,6 +56,9 @@ public class HistorialRutina extends Fragment {
                 startActivity(in);
             }
         });
+
+
+
 
 
 
