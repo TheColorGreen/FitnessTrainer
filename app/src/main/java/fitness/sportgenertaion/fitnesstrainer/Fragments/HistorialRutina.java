@@ -33,10 +33,9 @@ public class HistorialRutina extends Fragment {
                     int          year,
                     int          month,
                     int          dayOfMonth ) {
-                Toast.makeText(getContext(),
-                        ""+dayOfMonth+ " / " + month + " / " + year, Toast.LENGTH_SHORT).show();
+                ;
                 // Guarda la fecha seleccionada en un String
-                fecha = dayOfMonth+ "/" + month + "/" + year;
+                fecha = dayOfMonth+ "-" + month + "-" + year;
 
                 Intent intent = new Intent(getActivity(), MostrarDia.class);
                 // Envia la fecha

@@ -14,4 +14,11 @@ public class HistorialAcciones {
                 .child("users/" + IdUsuario.getIdUsuario() + "/Historial"+"/" + dia+"/" + ejercicio );
         dbRutina.setValue(echo);
     }
+
+    public static void BorrarDia(String dia) {
+        DatabaseReference dbRutina = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("users/" + IdUsuario.getIdUsuario() + "/Historial" + "/" + dia );
+        dbRutina.removeValue();
+    }
 }

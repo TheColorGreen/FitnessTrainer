@@ -170,37 +170,43 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
     public void anyadirHistorial() throws ParseException {
         final String[] diasSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
-
+         int contador = 0;
         for (int dia = 0; dia < 7; dia++) {
+
             final int dias = dia;
             dbUltimaModificacion = FirebaseDatabase.getInstance()
                     .getReference()
                     .child("users/" + IdUsuario.getIdUsuario() + "/Rutina/" + diasSemana[dia]);
 
+            final int finalContador = contador;
+
+            String dia2 = anyoRutina + "-" + mesRutina + "-" +diaRutina ;
+
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            final Calendar calendar = Calendar.getInstance();
+
+            try {
+                Date fecha = sdf.parse(dia2);
+
+                calendar.setTime(fecha);
+                calendar.add(Calendar.DAY_OF_YEAR, finalContador);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            HistorialAcciones.BorrarDia(dia2);
             dbUltimaModificacion.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
 
-                    int contador = 0;
+
                     for (DataSnapshot element : snapshot.getChildren()) {
-                        String dia = anyoRutina + "-" + mesRutina + "-" +diaRutina ;
 
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        Calendar calendar = Calendar.getInstance();
-
-                        try {
-                            Date fecha = sdf.parse(dia);
-
-                            calendar.setTime(fecha);
-                            calendar.add(Calendar.DAY_OF_YEAR, contador);
-
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        String dia2 = calendar.get(Calendar.DAY_OF_MONTH) + "-" + calendar.get(Calendar.MONTH+1) + "-" + calendar.get(Calendar.YEAR);
+                        int mes =calendar.get(Calendar.MONTH);
+                        String dia2 = calendar.get(Calendar.DAY_OF_MONTH) + "-" + String.valueOf(mes) + "-" + calendar.get(Calendar.YEAR);
                         HistorialAcciones.anyadir(dia2, element.getKey().toString(), Boolean.parseBoolean(element.getValue().toString()));
-                        contador++;
+
                     }
 
 
@@ -211,8 +217,8 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
                 }
             });
+            contador++;
         }
-
 
         compararRutina();
 
