@@ -16,8 +16,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,42 +45,51 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvTitolRepeticiones"
-                    android:layout_width="291dp"
+                    android:layout_width="310dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/tv_repeticiones"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/tvRepeticiones"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textAlignment="center" />
+                    android:textAlignment="textStart" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvDescripcion2"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/ivImagen"
-                android:layout_marginTop="31dp"
-                android:fontFamily="@font/comfortaa"
-                android:text="@string/tv_descripcion2"
-                android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" /><TextView
-                android:id="@+id/tvDescripcion"
-                android:layout_width="match_parent"
-                android:layout_height="66dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/tvDescripcion2"
-                android:layout_marginTop="41dp"
-                android:fontFamily="@font/comfortaa" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvDescripcion2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Descripcion"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large" />
+
+                <TextView
+                    android:id="@+id/tvDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="339dp"
+                    android:text="TextView" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
