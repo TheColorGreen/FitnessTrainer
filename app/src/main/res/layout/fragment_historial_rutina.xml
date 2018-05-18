@@ -21,14 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="458dp" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fbExit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:clickable="true"
-            android:src="@drawable/ic_atras" />
-    </LinearLayout>
+        </LinearLayout>
 
 </FrameLayout>
