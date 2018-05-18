@@ -10,67 +10,76 @@
     tools:layout_editor_absoluteY="25dp">
 
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvTitulo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ivImagen"
-            android:layout_width="match_parent"
-            android:layout_height="165dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tvTitulo"
-            android:layout_marginTop="46dp"
-            app:srcCompat="@android:color/background_light" />
+            <TextView
+                android:id="@+id/tvTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
 
-        <TextView
-            android:id="@+id/tvDescripcion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/tvDescripcion2"
-            android:layout_marginTop="41dp"
-            android:fontFamily="@font/comfortaa" />
+            <ImageView
+                android:id="@+id/ivImagen"
+                android:layout_width="match_parent"
+                android:layout_height="164dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvTitulo"
+                android:layout_marginTop="46dp"
+                app:srcCompat="@android:color/background_light" />
 
-        <TextView
-            android:id="@+id/tvDescripcion2"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivImagen"
-            android:layout_marginTop="31dp"
-            android:fontFamily="@font/comfortaa"
-            android:text="@string/tv_descripcion2"
-            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:orientation="horizontal">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fbExit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="end|bottom"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"
-            app:layout_anchor="@+id/container"
-            app:srcCompat="@drawable/ic_atras" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvTitolRepeticiones"
+                    android:layout_width="291dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/tv_repeticiones"
+                    android:textAlignment="textEnd" />
+
+                <TextView
+                    android:id="@+id/tvRepeticiones"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAlignment="center" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDescripcion2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/ivImagen"
+                android:layout_marginTop="31dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/tv_descripcion2"
+                android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" /><TextView
+                android:id="@+id/tvDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/tvDescripcion2"
+                android:layout_marginTop="41dp"
+                android:fontFamily="@font/comfortaa" />
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

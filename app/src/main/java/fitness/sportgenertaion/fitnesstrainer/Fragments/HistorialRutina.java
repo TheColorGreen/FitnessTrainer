@@ -15,16 +15,19 @@ import fitness.sportgenertaion.fitnesstrainer.MostrarDia;
 import fitness.sportgenertaion.fitnesstrainer.R;
 
 
-public class HistorialRutina extends Fragment {
+public class HistorialRutina extends Fragment   {
+
     String fecha;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_historial_rutina, container, false);
         CalendarView calendarView = rootView.findViewById(R.id.calendarView);
         //calendarView.getDate();
-        //calendarView.setMinDate(calendarView.getDate());
-
+        //calendarView.setMinDate(calendarView.getDate());calendarView.setMaxDate(calendarView.getDate());
+        // Mostra la data maxima, la de hoy
+        calendarView.setMaxDate(calendarView.getDate());
 
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
