@@ -54,15 +54,7 @@ public class Dias extends AppCompatActivity {
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        FloatingActionButton fbExit = findViewById(R.id.fbExit);
-        fbExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Dias.this, MainActivity.class);
-                startActivity(intent);
 
-            }
-        });
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -157,7 +149,7 @@ public class Dias extends AppCompatActivity {
 
             } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
                 dia = "Martes";
-                dia2 = "Martes";
+
             } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
                 dia = "Miercoles";
 
@@ -298,4 +290,5 @@ public class Dias extends AppCompatActivity {
 
 
     }
+
 }

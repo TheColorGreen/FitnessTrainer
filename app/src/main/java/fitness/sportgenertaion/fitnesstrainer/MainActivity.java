@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import fitness.sportgenertaion.fitnesstrainer.Classes.Actualizar;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.ComprobarRutinaHistorial;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.HistorialRutina;
@@ -28,6 +29,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btHistorial;
     Dias dias;
     Typeface typeface;
+    int presiones = 0;
+    HistorialRutina historialRutina;
+
+    RutinaAleatoria rutinaAleatoria;
 
     @Override
     protected void onStart() {
@@ -62,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
         IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
 
-
-        ComprobarRutinaHistorial fragment = new ComprobarRutinaHistorial();
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
-
+        if (Actualizar.getActualizado() == false) {
+            Actualizar.setActualizado(true);
+            ComprobarRutinaHistorial fragment = new ComprobarRutinaHistorial();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
+        }
         btCrearRutina = findViewById(R.id.bCreaRutina);
         btHistorial = findViewById(R.id.bHistorialRutina);
         btMiRutina = findViewById(R.id.bRutina);
@@ -84,9 +89,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent;
         if (v == btHistorial) {
-            HistorialRutina historialRutina = new HistorialRutina();
+            historialRutina = new HistorialRutina();
             getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, historialRutina).commit();
-
 
 
         } else if (v == btCrearRutina) {
@@ -94,9 +98,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if (v == btRutinaAleatoria) {
 
-            RutinaAleatoria fragment = new RutinaAleatoria();
+            rutinaAleatoria = new RutinaAleatoria();
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, rutinaAleatoria).commit();
 
         } else {
             intent = new Intent(this, Dias.class);
@@ -105,4 +109,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (rutinaAleatoria != null || historialRutina != null) {
+            getSupportFragmentManager().beginTransaction().
+                    remove(getSupportFragmentManager().findFragmentById(R.id.flFrame)).commit();
+            rutinaAleatoria=null;
+            historialRutina=null;
+
+        } else {
+            System.exit(0);
+
+
+        }
+    }
 }

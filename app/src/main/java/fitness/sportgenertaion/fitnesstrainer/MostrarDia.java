@@ -50,15 +50,6 @@ public class MostrarDia extends AppCompatActivity {
 
 
 
-        FloatingActionButton fbExit = findViewById(R.id.fbExit);
-        fbExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MostrarDia.this, MainActivity.class);
-                startActivity(intent);
-
-            }
-        });
 
 
         dbDiaHistorial = FirebaseDatabase.getInstance()

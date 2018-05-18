@@ -60,14 +60,7 @@ public class RutinaAleatoria extends Fragment implements ValueEventListener, Chi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_rutina_aleatoria, container, false);
         idUsuario= IdUsuario.getIdUsuario();
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fbExit);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(getActivity(), MainActivity.class);
-                startActivity(in);
-            }
-        });
+
         llistaEjercicios = new ArrayList<String>();
 
         dbEjercicios = FirebaseDatabase.getInstance()

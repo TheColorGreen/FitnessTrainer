@@ -24,12 +24,12 @@ import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
  */
 
 public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener{
-    public List<Ejercicio> llistaEjercicios;
+    public List<Rutina> llistaEjercicios;
     Context context;
 
 
 
-    public ModificarAdapter(Context context, List<Ejercicio> llistaEjercicios) {
+    public ModificarAdapter(Context context, List<Rutina> llistaEjercicios) {
 
         this.llistaEjercicios = llistaEjercicios;
         this.context = context;
@@ -60,7 +60,7 @@ public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.View
             int posicio = getAdapterPosition();
             Intent intent = new Intent(context, VerEjercicio.class);
 
-            intent.putExtra("ejercicio", llistaEjercicios.get(posicio).getNombre());
+            intent.putExtra("ejercicio", llistaEjercicios.get(posicio).getEjercicio());
             context.startActivity(intent);
 
         }
@@ -78,9 +78,9 @@ public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.View
     // Mètode de la classe RecyclerView (que és abstracta)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Ejercicio ejercicio = llistaEjercicios.get(position);
-        Ejercicio item = llistaEjercicios.get(position);
-        holder.tvEjercicio.setText(item.getNombre());
+        final Rutina ejercicio = llistaEjercicios.get(position);
+        Rutina item = llistaEjercicios.get(position);
+        holder.tvEjercicio.setText(item.getEjercicio());
 
         //in some cases, it will prevent unwanted situations
         // holder.cAnyadir.setOnCheckedChangeListener(null);
@@ -100,10 +100,10 @@ public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.View
 
                 if (ejercicio.isSelected()) {
 
-                    ModificarRutina.RutinaTemporal(ejercicio.getNombre());
+                    ModificarRutina.RutinaTemporal(ejercicio.getEjercicio());
                 } else {
 
-                    ModificarRutina.BorrarRutinaTemporal(ejercicio.getNombre());
+                    ModificarRutina.BorrarRutinaTemporal(ejercicio.getEjercicio());
                 }
             }
         });

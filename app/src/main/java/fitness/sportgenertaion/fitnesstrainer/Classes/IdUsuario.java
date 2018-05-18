@@ -5,15 +5,15 @@ package fitness.sportgenertaion.fitnesstrainer.Classes;
  */
 
 public  class IdUsuario {
-    public static String idUsuario;
+        public static String idUsuario;
 
-   public static void setIdUsuario(String idUsuarios){
-        idUsuario=idUsuarios;
+        public static void setIdUsuario(String idUsuarios){
+            idUsuario=idUsuarios;
+
+        }
+        public static String getIdUsuario(){
+            return idUsuario;
+        }
+
 
     }
-   public static String getIdUsuario(){
-        return idUsuario;
-    }
-
-
-}

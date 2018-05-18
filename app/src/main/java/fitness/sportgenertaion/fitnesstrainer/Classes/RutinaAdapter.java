@@ -11,7 +11,10 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.ParseException;
+import java.util.Calendar;
 import java.util.List;
 
 import fitness.sportgenertaion.fitnesstrainer.R;
@@ -26,6 +29,7 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
     Context context;
     String dia;
     String idUsuario;
+    String[] diasSemanas= {"Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"};
 
 
     public RutinaAdapter(Context context, List<Rutina> llistaRutina, String dia,String idUsuario) {
@@ -90,7 +94,38 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
          holder.cAnyadir.setOnCheckedChangeListener(null);
 
         //if true, your checkbox will be selected, else unselected
-       if(rutina.getEcho()==true) {
+
+Calendar cal = Calendar.getInstance();
+       int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH )+1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DateAcciones fecha= new DateAcciones(day,month,year);
+        String diaSemana="Monday";
+        try {
+             diaSemana=fecha.diaSemana();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int diaDeLaSemana = 0;
+
+        for(int a =0;a<7;a++){
+            if(diasSemanas[a].equals(dia)){
+                diaDeLaSemana=a;
+            }
+        }
+
+        try {
+
+            if(fecha.diasHastaLunes() > diaDeLaSemana){
+                holder.cAnyadir.setEnabled(false);
+
+
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if(rutina.getEcho()==true) {
            holder.cAnyadir.setChecked(true);
        }
 
@@ -106,9 +141,10 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
                 if (rutina.isSelected()) {
 
                     RutinaAcciones.PonerCheck(dia,rutina.getEjercicio());
-                } else {
 
+                } else {
                    RutinaAcciones.anyadir(dia,rutina.getEjercicio());
+
                 }
             }
         });

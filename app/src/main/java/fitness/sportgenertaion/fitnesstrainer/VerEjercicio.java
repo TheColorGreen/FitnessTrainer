@@ -35,6 +35,8 @@ public class VerEjercicio extends AppCompatActivity
     String dia;
     FloatingActionButton fabEliminar;
 
+    TextView tvRepeticiones;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,16 +56,8 @@ public class VerEjercicio extends AppCompatActivity
             fabEliminar.setVisibility(View.INVISIBLE);
         }
 
-        // Boton para tirar para atras al menu principal
-        FloatingActionButton fbExit = findViewById(R.id.fbExit);
-        fbExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(VerEjercicio.this, MainActivity.class);
-                startActivity(intent);
 
-            }
-        });
+
 
         // Eliminar el exercici secceionat
         fabEliminar.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +77,7 @@ public class VerEjercicio extends AppCompatActivity
         tvTitulo = findViewById(R.id.tvTitulo);
         tvDescripcion = findViewById(R.id.tvDescripcion);
         ivImagen = (ImageView) findViewById(R.id.ivImagen);
-
+tvRepeticiones=findViewById(R.id.tvRepeticiones);
 
         //Firebase
 
@@ -104,6 +98,7 @@ public class VerEjercicio extends AppCompatActivity
         // Toast.LENGTH_SHORT).show();
         tvTitulo.setText(dataSnapshot.getKey());
         tvDescripcion.setText(dataSnapshot.child("/descripcion").getValue().toString());
+        tvRepeticiones.setText(dataSnapshot.child("/repeticiones").getValue().toString());
 //Carrear la imatge
         new DownLoadImageTask(ivImagen).execute(dataSnapshot.child("/foto").getValue().toString());
 

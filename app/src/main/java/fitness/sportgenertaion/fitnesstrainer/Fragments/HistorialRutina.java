@@ -49,15 +49,7 @@ public class HistorialRutina extends Fragment   {
         });
 
         // Boton para tirar para atras al menu principal
-        FloatingActionButton fab =  rootView.findViewById(R.id.fbExit);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // LLama a otra activity
-                Intent in = new Intent(getActivity(), MainActivity.class);
-                startActivity(in);
-            }
-        });
+
 
 
 

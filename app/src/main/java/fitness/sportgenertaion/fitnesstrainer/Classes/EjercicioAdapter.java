@@ -23,12 +23,12 @@ import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
  */
 
 public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener {
-    public List<Ejercicio> llistaEjercicios;
+    public List<Rutina> llistaEjercicios;
     Context context;
     String dia;
 
 
-    public EjercicioAdapter(Context context, List<Ejercicio> llistaEjercicios, String dia) {
+    public EjercicioAdapter(Context context, List<Rutina> llistaEjercicios, String dia) {
 
         this.llistaEjercicios = llistaEjercicios;
         this.context = context;
@@ -60,7 +60,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
             int posicio = getAdapterPosition();
             Intent intent = new Intent(context, VerEjercicio.class);
 
-            intent.putExtra("ejercicio", llistaEjercicios.get(posicio).getNombre());
+            intent.putExtra("ejercicio", llistaEjercicios.get(posicio).getEjercicio());
             context.startActivity(intent);
 
         }
@@ -78,9 +78,9 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
     // Mètode de la classe RecyclerView (que és abstracta)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Ejercicio ejercicio = llistaEjercicios.get(position);
-        Ejercicio item = llistaEjercicios.get(position);
-        holder.tvEjercicio.setText(item.getNombre());
+        final Rutina ejercicio = llistaEjercicios.get(position);
+        Rutina item = llistaEjercicios.get(position);
+        holder.tvEjercicio.setText(item.getEjercicio());
 
         //in some cases, it will prevent unwanted situations
         // holder.cAnyadir.setOnCheckedChangeListener(null);
@@ -100,10 +100,10 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
 
                     if (ejercicio.isSelected()) {
 
-                        CrearRutinas.RutinaTemporal(dia,ejercicio.getNombre());
+                        CrearRutinas.RutinaTemporal(dia,ejercicio.getEjercicio());
                     } else {
 
-                        CrearRutinas.BorrarRutinaTemporal(dia,ejercicio.getNombre());
+                        CrearRutinas.BorrarRutinaTemporal(dia,ejercicio.getEjercicio());
                     }
                 }
             });

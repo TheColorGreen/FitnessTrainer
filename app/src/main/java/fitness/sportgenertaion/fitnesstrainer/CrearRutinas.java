@@ -46,6 +46,7 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.DateAcciones;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
+import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
 public class CrearRutinas extends AppCompatActivity {
@@ -79,15 +80,7 @@ public class CrearRutinas extends AppCompatActivity {
         });
         Bundle parametros = this.getIntent().getExtras();
         idUsuario = IdUsuario.getIdUsuario();
-        FloatingActionButton fbExit = findViewById(R.id.fbExit);
-        fbExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CrearRutinas.this, MainActivity.class);
-                startActivity(intent);
 
-            }
-        });
 
 
     }
@@ -181,7 +174,7 @@ public class CrearRutinas extends AppCompatActivity {
         Spinner spNivel;
         Button bguardar;
         private RecyclerView rvEjercicios;
-        private List<Ejercicio> llistaEjercicios = new ArrayList<Ejercicio>();
+        private List<Rutina> llistaEjercicios = new ArrayList<Rutina>();
         private EjercicioAdapter ejercicioAdapter;
 
         /**
@@ -290,8 +283,7 @@ public class CrearRutinas extends AppCompatActivity {
             for (DataSnapshot element : dataSnapshot.getChildren()) {
                 if ((element.child("dificultad").getValue().toString().equals(this.nivel) && (element.child("musculos").getValue().toString().equals(this.grupoMuscular))) || (this.nivel.equals("5") && this.grupoMuscular.equals("5")) || (this.grupoMuscular.equals("5") && element.child("dificultad").getValue().toString().equals(this.nivel)) || this.nivel.equals("5") && element.child("musculos").getValue().toString().equals(this.grupoMuscular)) {
 
-                    Ejercicio ejercicio = new Ejercicio(element.getKey().toString(), element.child("descripcion").getValue().toString(), element.child("foto").getValue().toString(), Integer.valueOf(element.child("dificultad").getValue().toString()), Integer.valueOf(element.child("musculos").getValue().toString()));
-
+                    Rutina ejercicio = new Rutina(Boolean.parseBoolean(element.getValue().toString()), element.getKey().toString());
                     llistaEjercicios.add(ejercicio);
                 }
             }

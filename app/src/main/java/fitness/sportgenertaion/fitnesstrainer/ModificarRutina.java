@@ -46,7 +46,7 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
     Spinner spNivel;
     Button bguardar;
     private RecyclerView rvEjercicios;
-    private List<Ejercicio> llistaEjercicios = new ArrayList<Ejercicio>();
+    private List<Rutina> llistaEjercicios = new ArrayList<Rutina>();
     private ModificarAdapter modificarAdapter;
     private List<String> llistaEjerciciosPuestos = new ArrayList<String>();
 
@@ -135,7 +135,7 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
                     }
                 }
                 if (comprovacion) {
-                    Ejercicio ejercicio = new Ejercicio(element.getKey().toString(), element.child("descripcion").getValue().toString(), element.child("foto").getValue().toString(), Integer.valueOf(element.child("dificultad").getValue().toString()), Integer.valueOf(element.child("musculos").getValue().toString()));
+                    Rutina ejercicio = new Rutina(Boolean.parseBoolean(element.getValue().toString()), element.getKey().toString());
 
                     llistaEjercicios.add(ejercicio);
                 }
