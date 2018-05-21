@@ -25,9 +25,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fitness.sportgenertaion.fitnesstrainer.Classes.ActualizarHistorial;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
@@ -192,6 +194,11 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
 
         ejercicios = new ArrayList<String>();
 
+        try {
+            ActualizarHistorial.anyadirHistorial();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Intent intent = new Intent(this, Dias.class);
         intent.putExtra("idUsuario", idUsuario);
         startActivity(intent);

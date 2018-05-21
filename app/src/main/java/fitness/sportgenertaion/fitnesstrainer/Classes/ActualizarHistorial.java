@@ -40,7 +40,9 @@ public class ActualizarHistorial {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         String diaHoy=cal.get(Calendar.DAY_OF_MONTH)+"-"+cal.get(Calendar.MONTH)+"-"+cal.get(Calendar.YEAR);
+                        HistorialAcciones.BorrarDia(diaHoy);
                         for (DataSnapshot element : snapshot.getChildren()) {
+
                             HistorialAcciones.anyadir(diaHoy, element.getKey().toString(),Boolean.parseBoolean(element.getValue().toString()));
 
                         }
