@@ -273,9 +273,9 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 //Llamamos al método postDelayed
         handler.postDelayed(new Runnable() {
             public void run() {
-                cerrarFragment();
+                cerrarFragment();//Cierra el fragment
             }
-        }, 3000);
+        }, 3000);//Tarda 3 segundos
 
     }
 
