@@ -35,7 +35,8 @@
 
         <activity android:name=".ModificarRutina" />
         <activity android:name=".MostrarDia" />
-        <activity android:name=".RutinasHechas"></activity>
+        <activity android:name=".RutinasHechas" />
+
     </application>
 
 </manifest>
