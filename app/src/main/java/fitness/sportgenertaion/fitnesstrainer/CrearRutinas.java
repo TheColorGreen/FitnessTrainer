@@ -42,6 +42,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import fitness.sportgenertaion.fitnesstrainer.Classes.ActualizarHistorial;
 import fitness.sportgenertaion.fitnesstrainer.Classes.DateAcciones;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
@@ -383,8 +384,15 @@ public class CrearRutinas extends AppCompatActivity {
             month=cal.get(Calendar.MONTH);
             day=cal.get(Calendar.DAY_OF_MONTH);
             RutinaAcciones.anyadirFecha(day,month+1,year);
+            try {
+                ActualizarHistorial.anyadirHistorial();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             Intent intent = new Intent(getContext(), MainActivity.class);
             startActivity(intent);
+
+
         }
     }
 

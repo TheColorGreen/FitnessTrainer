@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
+import fitness.sportgenertaion.fitnesstrainer.Classes.Actualizar;
 import fitness.sportgenertaion.fitnesstrainer.Classes.DateAcciones;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Historial;
 import fitness.sportgenertaion.fitnesstrainer.Classes.HistorialAcciones;
@@ -149,13 +150,12 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
         int diferenciaActual;
 
         diferenciaActual = fechaActual.diasHastaLunes();
-        if (fechaRutina.CompararFechas() - diferenciaActual != 0) {
+        if (fechaRutina.CompararFechas() - diferenciaActual != 0 ) {
             resetearRutina();
 
 
         } else {
-            Intent intent = new Intent(getContext(), MainActivity.class);
-            startActivity(intent);
+            getFragmentManager().beginTransaction().remove(this).commit();
 
         }
 
