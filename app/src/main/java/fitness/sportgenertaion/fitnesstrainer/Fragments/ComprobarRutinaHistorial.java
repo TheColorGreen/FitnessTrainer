@@ -141,14 +141,8 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
 
         } else {
-            Handler handler = new Handler();
 
-//Llamamos al método postDelayed
-            handler.postDelayed(new Runnable() {
-                public void run() {
                   cerrarFragment();
-                }
-            }, 3000);
 
 
         }
@@ -268,14 +262,8 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
         RutinaAcciones.anyadirFecha(day, month + 1, year);
-        Handler handler = new Handler();
 
-//Llamamos al método postDelayed
-        handler.postDelayed(new Runnable() {
-            public void run() {
                 cerrarFragment();//Cierra el fragment
-            }
-        }, 3000);//Tarda 3 segundos
 
     }
 
