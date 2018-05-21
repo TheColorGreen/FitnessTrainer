@@ -135,7 +135,11 @@ Calendar cal = Calendar.getInstance();
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //set your object's last status
-
+                try {
+                    ActualizarHistorial.anyadirHistorial();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 rutina.setSelected(isChecked);
 
                 if (rutina.isSelected()) {

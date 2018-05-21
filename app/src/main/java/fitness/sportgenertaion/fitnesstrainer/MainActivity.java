@@ -141,12 +141,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        if (rutinaAleatoria != null || historialRutina != null||fragment!=null) {
+        if (rutinaAleatoria != null || historialRutina != null) {
             getSupportFragmentManager().beginTransaction().
                     remove(getSupportFragmentManager().findFragmentById(R.id.flFrame)).commit();
             rutinaAleatoria=null;
             historialRutina=null;
-            fragment=null;
+           // fragment=null;
 
         } else {
             System.exit(0);

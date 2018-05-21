@@ -16,14 +16,14 @@ import java.util.Date;
  */
 
 public class ActualizarHistorial {
-
-    public void anyadirHistorial() throws ParseException {
+    static Calendar cal = Calendar.getInstance();
+    public static void anyadirHistorial() throws ParseException {
         final String[] diasSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
 
         int month;
         int day;
         int year;
-        Calendar cal = Calendar.getInstance();
+
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH) + 1;
         day = cal.get(Calendar.DAY_OF_MONTH);
@@ -35,24 +35,13 @@ public class ActualizarHistorial {
                         .getReference()
                         .child("users/" + IdUsuario.getIdUsuario() + "/Rutina/" + diasSemana[dia]);
 
-                String dia2 = anyoRutina + "-" + mesRutina + "-" + diaRutina;
 
-
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                final Date fechaHistorial = sdf.parse(dia2);
-
-                final Calendar calendar = Calendar.getInstance();
-
-
-                calendar.setTime(fechaHistorial);
-                calendar.add(Calendar.DAY_OF_YEAR, dia);
-                dia2 = calendar.get(Calendar.DAY_OF_MONTH) +"-"+ calendar.get(Calendar.MONTH)+"-" + calendar.get(Calendar.YEAR) ;
-                final String finalDia = dia2;
                 dbUltimaModificacion.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
+                        String diaHoy=cal.get(Calendar.DAY_OF_MONTH)+"-"+cal.get(Calendar.MONTH)+"-"+cal.get(Calendar.YEAR);
                         for (DataSnapshot element : snapshot.getChildren()) {
-                            HistorialAcciones.anyadir(finalDia, element.getKey().toString(),Boolean.parseBoolean(element.getValue().toString()));
+                            HistorialAcciones.anyadir(diaHoy, element.getKey().toString(),Boolean.parseBoolean(element.getValue().toString()));
 
                         }
                     }
@@ -66,7 +55,6 @@ public class ActualizarHistorial {
         }
 
 
-        compararRutina();
 
 
     }
