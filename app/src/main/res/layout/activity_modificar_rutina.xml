@@ -27,7 +27,9 @@
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/tv_nivel" />
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/tv_nivel"
+                android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/spNivel"
@@ -46,7 +48,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="grupo muscular" />
+                android:fontFamily="@font/comfortaa"
+                android:text="grupo muscular"
+                android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/spMusculo"

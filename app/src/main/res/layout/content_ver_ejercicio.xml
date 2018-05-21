@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
+                android:fontFamily="@font/comfortaa"
                 android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
 
             <ImageView
@@ -57,18 +58,22 @@
 
                 <TextView
                     android:id="@+id/tvTitolRepeticiones"
-                    android:layout_width="310dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:fontFamily="@font/comfortaa"
                     android:text="@string/tv_repeticiones"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/tvRepeticiones"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textAlignment="textStart" />
+                    android:fontFamily="@font/comfortaa"
+                    android:textAlignment="textStart"
+                    android:textSize="24sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -80,6 +85,7 @@
                     android:id="@+id/tvDescripcion2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/comfortaa"
                     android:text="Descripcion"
                     android:textAppearance="@android:style/TextAppearance.Material.Large" />
 
@@ -87,7 +93,7 @@
                     android:id="@+id/tvDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="339dp"
-                    android:text="TextView" />
+                    android:fontFamily="@font/comfortaa" />
             </LinearLayout>
 
         </LinearLayout>

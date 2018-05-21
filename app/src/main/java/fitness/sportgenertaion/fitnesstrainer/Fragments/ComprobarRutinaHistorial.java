@@ -1,39 +1,27 @@
 package fitness.sportgenertaion.fitnesstrainer.Fragments;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.DateAcciones;
-import fitness.sportgenertaion.fitnesstrainer.Classes.Historial;
 import fitness.sportgenertaion.fitnesstrainer.Classes.HistorialAcciones;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
-import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
-import fitness.sportgenertaion.fitnesstrainer.Dias;
-import fitness.sportgenertaion.fitnesstrainer.MainActivity;
 import fitness.sportgenertaion.fitnesstrainer.R;
 
 
@@ -58,7 +46,7 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_rutina_aleatoria, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_comprobar_rutina_historial, container, false);
         idUsuario = IdUsuario.getIdUsuario();
 
         cal = Calendar.getInstance();

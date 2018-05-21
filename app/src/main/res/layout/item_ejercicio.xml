@@ -17,7 +17,10 @@
             android:id="@+id/tv_nom"
             android:layout_width="300dp"
             android:layout_height="49dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:fontFamily="@font/comfortaa"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
         <CheckBox
             android:id="@+id/cPoner"

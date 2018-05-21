@@ -16,7 +16,9 @@
             android:id="@+id/tv_nom"
             android:layout_width="300dp"
             android:layout_height="49dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:fontFamily="@font/comfortaa"
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/ivMarcador"
