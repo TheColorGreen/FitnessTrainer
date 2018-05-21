@@ -164,105 +164,59 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
     public void anyadirHistorial() throws ParseException {
         final String[] diasSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
-        int contador = 0;
+
+        int month;
+        int day;
+        int year;
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH) + 1;
+        day = cal.get(Calendar.DAY_OF_MONTH);
+        final DateAcciones fecha = new DateAcciones(day, month, year);
+
         for (int dia = 0; dia < 7; dia++) {
+            if( dia==fecha.diasHastaLunes()){
+                dbUltimaModificacion = FirebaseDatabase.getInstance()
+                        .getReference()
+                        .child("users/" + IdUsuario.getIdUsuario() + "/Rutina/" + diasSemana[dia]);
 
-            final int dias = dia;
-            dbUltimaModificacion = FirebaseDatabase.getInstance()
-                    .getReference()
-                    .child("users/" + IdUsuario.getIdUsuario() + "/Rutina/" + diasSemana[dia]);
-
-            final int finalContador = contador;
-
-            final String dia2 = anyoRutina + "-" + mesRutina + "-" + diaRutina;
+                String dia2 = anyoRutina + "-" + mesRutina + "-" + diaRutina;
 
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            final Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                final Date fechaHistorial = sdf.parse(dia2);
 
-            try {
-                Date fecha = sdf.parse(dia2);
-
-
-                calendar.setTime(fecha);
-                calendar.add(Calendar.DAY_OF_YEAR, finalContador);
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+                final Calendar calendar = Calendar.getInstance();
 
 
-            dbUltimaModificacion.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-
-                    String dia3 = calendar.get(Calendar.DAY_OF_MONTH) + "-" + calendar.get(Calendar.MONTH) + "-" + calendar.get(Calendar.YEAR);
-                    int month;
-                    int day;
-                    int year;
-                    year = cal.get(Calendar.YEAR);
-                    month = cal.get(Calendar.MONTH) + 1;
-                    day = cal.get(Calendar.DAY_OF_MONTH);
-                    DateAcciones fecha = new DateAcciones(day, month, year);
-
-                    try {
-                        if (finalContador >= fecha.diasHastaLunes() || comprovarNulo(dia3)) {
-                            HistorialAcciones.BorrarDia(dia3);
-                            for (DataSnapshot element : snapshot.getChildren()) {
-
-
-                                HistorialAcciones.anyadir(dia3, element.getKey().toString(), Boolean.parseBoolean(element.getValue().toString()));
-
-                            }
+                calendar.setTime(fechaHistorial);
+                calendar.add(Calendar.DAY_OF_YEAR, dia);
+                dia2 = calendar.get(Calendar.DAY_OF_MONTH) +"-"+ calendar.get(Calendar.MONTH)+"-" + calendar.get(Calendar.YEAR) ;
+                final String finalDia = dia2;
+                dbUltimaModificacion.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        for (DataSnapshot element : snapshot.getChildren()) {
+                            HistorialAcciones.anyadir(finalDia, element.getKey().toString(),Boolean.parseBoolean(element.getValue().toString()));
 
                         }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
                     }
-                }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                }
-            });
-            contador++;
-
+                    }
+                });
+            }
         }
+
 
         compararRutina();
 
 
     }
 
-    public boolean comprovarNulo(String fecha) {
-        DatabaseReference dbUltimaModificacion2;
-        dbUltimaModificacion2 = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("users/" + IdUsuario.getIdUsuario() + "/Historial/" + fecha);
 
 
-        dbUltimaModificacion2.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                if (snapshot.getChildrenCount() == 0) {
-                    nulo = true;
-                    Toast.makeText(getContext(),nulo+"",Toast.LENGTH_LONG).show();
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getContext(),nulo+"",Toast.LENGTH_LONG).show();
-            }
-        });
-        Toast.makeText(getContext(),nulo+"",Toast.LENGTH_LONG).show();
-
-        return nulo;
-
-
-    }
 
 
     public void resetearRutina() {
