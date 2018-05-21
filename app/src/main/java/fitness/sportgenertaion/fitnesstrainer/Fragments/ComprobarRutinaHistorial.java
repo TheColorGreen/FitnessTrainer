@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -155,13 +156,24 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
 
         } else {
-            getFragmentManager().beginTransaction().remove(this).commit();
+            Handler handler = new Handler();
+
+//Llamamos al método postDelayed
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                  cerrarFragment();
+                }
+            }, 3000);
+
 
         }
 
 
     }
 
+    public void cerrarFragment(){
+        getFragmentManager().beginTransaction().remove(this).commit();
+    }
     public void anyadirHistorial() throws ParseException {
         final String[] diasSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
 
@@ -271,7 +283,14 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
         RutinaAcciones.anyadirFecha(day, month + 1, year);
-        getFragmentManager().beginTransaction().remove(this).commit();
+        Handler handler = new Handler();
+
+//Llamamos al método postDelayed
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                cerrarFragment();
+            }
+        }, 3000);
 
     }
 
