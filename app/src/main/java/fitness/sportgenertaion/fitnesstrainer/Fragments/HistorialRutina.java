@@ -36,7 +36,7 @@ public class HistorialRutina extends Fragment   {
                     int          year,
                     int          month,
                     int          dayOfMonth ) {
-                ;
+
                 // Guarda la fecha seleccionada en un String
                 fecha = dayOfMonth+ "-" + month + "-" + year;
 

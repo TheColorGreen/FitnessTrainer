@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Typeface typeface;
     int presiones = 0;
     HistorialRutina historialRutina;
-
+    ComprobarRutinaHistorial fragment;
     RutinaAleatoria rutinaAleatoria;
 
     @Override
@@ -75,11 +75,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
 //        Toast.makeText(getApplicationContext(),FirebaseAuth.getInstance().getCurrentUser().toString(),Toast.LENGTH_LONG).show();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if(user!=null) {
             IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
             if (Actualizar.getActualizado() == false) {
                 Actualizar.setActualizado(true);
-                ComprobarRutinaHistorial fragment = new ComprobarRutinaHistorial();
+               fragment = new ComprobarRutinaHistorial();
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
             }
         }
@@ -140,11 +141,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        if (rutinaAleatoria != null || historialRutina != null) {
+        if (rutinaAleatoria != null || historialRutina != null||fragment!=null) {
             getSupportFragmentManager().beginTransaction().
                     remove(getSupportFragmentManager().findFragmentById(R.id.flFrame)).commit();
             rutinaAleatoria=null;
             historialRutina=null;
+            fragment=null;
 
         } else {
             System.exit(0);
