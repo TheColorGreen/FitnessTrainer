@@ -6,9 +6,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,17 +27,24 @@ import java.net.URL;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
 public class VerEjercicio extends AppCompatActivity
-        implements ValueEventListener, ChildEventListener {
+        implements ValueEventListener, ChildEventListener,View.OnClickListener {
 
     String ejercicio = "Abdominales";
     private Bitmap loadedImage;
     TextView tvTitulo;
     TextView tvDescripcion;
     ImageView ivImagen;
+    Button bCronometro;
     String dia;
+    int repeticiones=0;
+    int series=0;
+    int tiempo=0;
+    int ronda=1;
+    Boolean cronometroIniciado=true;
     FloatingActionButton fabEliminar;
 
     TextView tvRepeticiones;
+    TextView tvSeries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +83,13 @@ public class VerEjercicio extends AppCompatActivity
         });
 
         //Inicializamos variables
+        tvSeries=findViewById(R.id.tvSeries);
+        bCronometro=findViewById(R.id.bCronometro);
         tvTitulo = findViewById(R.id.tvTitulo);
         tvDescripcion = findViewById(R.id.tvDescripcion);
         ivImagen = (ImageView) findViewById(R.id.ivImagen);
-tvRepeticiones=findViewById(R.id.tvRepeticiones);
-
+        tvRepeticiones=findViewById(R.id.tvRepeticiones);
+bCronometro.setOnClickListener(this);
         //Firebase
 
         DatabaseReference dbPrediccio = FirebaseDatabase.getInstance()
@@ -96,13 +107,50 @@ tvRepeticiones=findViewById(R.id.tvRepeticiones);
 
         // Toast.makeText(VerEjercicio.this, "entra aqui.",
         // Toast.LENGTH_SHORT).show();
+
+        repeticiones= Integer.valueOf(dataSnapshot.child("/repeticiones").getValue().toString());
+        series= Integer.valueOf(dataSnapshot.child("/series").getValue().toString());
+        tiempo= Integer.valueOf(dataSnapshot.child("/tiempo").getValue().toString());
+
         tvTitulo.setText(dataSnapshot.getKey());
         tvDescripcion.setText(dataSnapshot.child("/descripcion").getValue().toString());
-        tvRepeticiones.setText(dataSnapshot.child("/repeticiones").getValue().toString());
-//Carrear la imatge
-        new DownLoadImageTask(ivImagen).execute(dataSnapshot.child("/foto").getValue().toString());
+        tvRepeticiones.setText(String.valueOf(repeticiones));
+        tvSeries.setText(String.valueOf(series));
 
 
+        //Carrear la imatge
+         new DownLoadImageTask(ivImagen).execute(dataSnapshot.child("/foto").getValue().toString());
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        int segundos=tiempo;
+        if(cronometroIniciado==true && series>0) {
+            new CountDownTimer(tiempo * 1000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    cronometroIniciado = false;
+                    bCronometro.setText("00:" + millisUntilFinished / 1000);
+                }
+
+                public void onFinish() {
+                    cronometroIniciado = true;
+                    ronda++;
+
+
+                    series--;
+                    if(series>0){
+                        bCronometro.setText("Iniciar Ronda: " + ronda);
+                    }
+                    else{
+                        bCronometro.setText("Ejercicio acabado");
+                    }
+                    tvSeries.setText(String.valueOf(series));
+                }
+            }.start();
+        }
     }
 
     //Aquest metode es per carregaar una imatge desde url
