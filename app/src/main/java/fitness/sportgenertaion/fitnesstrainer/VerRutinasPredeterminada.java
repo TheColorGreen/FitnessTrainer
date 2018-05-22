@@ -36,6 +36,7 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAdapter;
+import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaPredefinida;
 import fitness.sportgenertaion.fitnesstrainer.Classes.VerRutinasPredeterminadasAdapter;
 
 public class VerRutinasPredeterminada extends AppCompatActivity {
@@ -114,8 +115,8 @@ public class VerRutinasPredeterminada extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         RecyclerView rvEjercicios;
-        List<Rutina> llistaRutina = new ArrayList<Rutina>();
-        VerRutinasPredeterminada rutinaAdapter;
+        List<RutinaPredefinida> llistaRutina = new ArrayList<RutinaPredefinida>();
+        VerRutinasPredeterminadasAdapter rutinaAdapter;
         ArrayList<String> llistaEjerciciosPuestos = new ArrayList<String>();
         public PlaceholderFragment() {
         }
