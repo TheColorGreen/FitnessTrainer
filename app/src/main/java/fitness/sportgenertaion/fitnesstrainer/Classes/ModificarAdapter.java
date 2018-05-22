@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import fitness.sportgenertaion.fitnesstrainer.CrearRutinas;
 import fitness.sportgenertaion.fitnesstrainer.ModificarRutina;
 import fitness.sportgenertaion.fitnesstrainer.R;
 import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
@@ -23,10 +22,9 @@ import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
  * Created by Carlos on 15/05/2018.
  */
 
-public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener{
+public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener {
     public List<Rutina> llistaEjercicios;
     Context context;
-
 
 
     public ModificarAdapter(Context context, List<Rutina> llistaEjercicios) {
@@ -35,6 +33,7 @@ public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.View
         this.context = context;
 
     }
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
@@ -90,7 +89,6 @@ public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.View
         holder.cAnyadir.setChecked(ejercicio.isSelected());
 
 
-
         holder.cAnyadir.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -115,7 +113,7 @@ public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.View
 
 
     @Override
-    public int getItemCount () {
+    public int getItemCount() {
         return llistaEjercicios.size();
     }
 }

@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -29,15 +28,15 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
     Context context;
     String dia;
     String idUsuario;
-    String[] diasSemanas= {"Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"};
+    String[] diasSemanas = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
 
 
-    public RutinaAdapter(Context context, List<Rutina> llistaRutina, String dia,String idUsuario) {
+    public RutinaAdapter(Context context, List<Rutina> llistaRutina, String dia, String idUsuario) {
 
         this.llistaRutina = llistaRutina;
         this.context = context;
         this.dia = dia;
-        this.idUsuario=idUsuario;
+        this.idUsuario = idUsuario;
     }
 
     @Override
@@ -89,35 +88,34 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
         holder.tvEjercicio.setText(item.getEjercicio());
 
 
-
         //in some cases, it will prevent unwanted situations
-         holder.cAnyadir.setOnCheckedChangeListener(null);
+        holder.cAnyadir.setOnCheckedChangeListener(null);
 
         //if true, your checkbox will be selected, else unselected
 
-Calendar cal = Calendar.getInstance();
-       int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH )+1;
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        DateAcciones fecha= new DateAcciones(day,month,year);
-        String diaSemana="Monday";
+        DateAcciones fecha = new DateAcciones(day, month, year);
+        String diaSemana = "Monday";
         try {
-             diaSemana=fecha.diaSemana();
+            diaSemana = fecha.diaSemana();
         } catch (ParseException e) {
             e.printStackTrace();
         }
         int diaDeLaSemana = 0;
 
-        for(int a =0;a<7;a++){
-            if(diasSemanas[a].equals(dia)){
-                diaDeLaSemana=a;
+        for (int a = 0; a < 7; a++) {
+            if (diasSemanas[a].equals(dia)) {
+                diaDeLaSemana = a;
             }
         }
 
         try {
 
-            if(fecha.diasHastaLunes() > diaDeLaSemana){
+            if (fecha.diasHastaLunes() > diaDeLaSemana) {
                 holder.cAnyadir.setEnabled(false);
 
 
@@ -125,10 +123,9 @@ Calendar cal = Calendar.getInstance();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if(rutina.getEcho()==true) {
-           holder.cAnyadir.setChecked(true);
-       }
-
+        if (rutina.getEcho() == true) {
+            holder.cAnyadir.setChecked(true);
+        }
 
 
         holder.cAnyadir.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -144,10 +141,10 @@ Calendar cal = Calendar.getInstance();
 
                 if (rutina.isSelected()) {
 
-                    RutinaAcciones.PonerCheck(dia,rutina.getEjercicio());
+                    RutinaAcciones.PonerCheck(dia, rutina.getEjercicio());
 
                 } else {
-                   RutinaAcciones.anyadir(dia,rutina.getEjercicio());
+                    RutinaAcciones.anyadir(dia, rutina.getEjercicio());
 
                 }
             }
@@ -160,7 +157,7 @@ Calendar cal = Calendar.getInstance();
 
 
     @Override
-    public int getItemCount () {
+    public int getItemCount() {
         return llistaRutina.size();
     }
 }

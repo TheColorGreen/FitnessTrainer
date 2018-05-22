@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.Actualizar;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
-import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaPredefinida;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.ComprobarRutinaHistorial;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.HistorialRutina;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.RutinaAleatoria;
@@ -76,17 +75,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        Toast.makeText(getApplicationContext(),FirebaseAuth.getInstance().getCurrentUser().toString(),Toast.LENGTH_LONG).show();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user!=null) {
+        if (user != null) {
             IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
             if (Actualizar.getActualizado() == false) {
                 Actualizar.setActualizado(true);
-               fragment = new ComprobarRutinaHistorial();
+                fragment = new ComprobarRutinaHistorial();
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
             }
         }
-
-
-
 
 
         btCrearRutina = findViewById(R.id.bCreaRutina);
@@ -99,14 +95,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btHistorial.setOnClickListener(this);
         btMiRutina.setOnClickListener(this);
         btRutinaAleatoria.setOnClickListener(this);
-        if(user==null){
+        if (user == null) {
             Handler handler = new Handler();
 
 //Llamamos al método postDelayed
             handler.postDelayed(new Runnable() {
                 public void run() {
                     Intent i = getBaseContext().getPackageManager()
-                            .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+                            .getLaunchIntentForPackage(getBaseContext().getPackageName());
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                 }
@@ -132,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             //rutinaAleatoria = new RutinaAleatoria();
 
-       //     getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, rutinaAleatoria).commit();
+            //     getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, rutinaAleatoria).commit();
 
         } else {
             intent = new Intent(this, Dias.class);
@@ -146,9 +142,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (rutinaAleatoria != null || historialRutina != null) {
             getSupportFragmentManager().beginTransaction().
                     remove(getSupportFragmentManager().findFragmentById(R.id.flFrame)).commit();
-            rutinaAleatoria=null;
-            historialRutina=null;
-           // fragment=null;
+            rutinaAleatoria = null;
+            historialRutina = null;
+            // fragment=null;
 
         } else {
             System.exit(0);

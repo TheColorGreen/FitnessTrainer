@@ -1,7 +1,6 @@
 package fitness.sportgenertaion.fitnesstrainer.Fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +33,7 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
     static int year;
     static int month;
     static int day;
-    static boolean nulo ;
+    static boolean nulo;
     static int anyoRutina;
     static int mesRutina;
     static int diaRutina;
@@ -48,7 +47,7 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_comprobar_rutina_historial, container, false);
-        nulo=false;
+        nulo = false;
         idUsuario = IdUsuario.getIdUsuario();
 
         cal = Calendar.getInstance();
@@ -136,13 +135,13 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
         int diferenciaActual;
 
         diferenciaActual = fechaActual.diasHastaLunes();
-        if (fechaRutina.CompararFechas() - diferenciaActual != 0 ) {
+        if (fechaRutina.CompararFechas() - diferenciaActual != 0) {
             resetearRutina();
 
 
         } else {
 
-                  cerrarFragment();
+            cerrarFragment();
 
 
         }
@@ -150,9 +149,10 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
     }
 
-    public void cerrarFragment(){
+    public void cerrarFragment() {
         getFragmentManager().beginTransaction().remove(this).commit();
     }
+
     public void anyadirHistorial() throws ParseException {
         final String[] diasSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
 
@@ -165,7 +165,7 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
         final DateAcciones fecha = new DateAcciones(day, month, year);
 
         for (int dia = 0; dia < 7; dia++) {
-            if( dia==fecha.diasHastaLunes()){
+            if (dia == fecha.diasHastaLunes()) {
                 dbUltimaModificacion = FirebaseDatabase.getInstance()
                         .getReference()
                         .child("users/" + IdUsuario.getIdUsuario() + "/Rutina/" + diasSemana[dia]);
@@ -181,13 +181,13 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
                 calendar.setTime(fechaHistorial);
                 calendar.add(Calendar.DAY_OF_YEAR, dia);
-                dia2 = calendar.get(Calendar.DAY_OF_MONTH) +"-"+ calendar.get(Calendar.MONTH)+"-" + calendar.get(Calendar.YEAR) ;
+                dia2 = calendar.get(Calendar.DAY_OF_MONTH) + "-" + calendar.get(Calendar.MONTH) + "-" + calendar.get(Calendar.YEAR);
                 final String finalDia = dia2;
                 dbUltimaModificacion.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         for (DataSnapshot element : snapshot.getChildren()) {
-                            HistorialAcciones.anyadir(finalDia, element.getKey().toString(),Boolean.parseBoolean(element.getValue().toString()));
+                            HistorialAcciones.anyadir(finalDia, element.getKey().toString(), Boolean.parseBoolean(element.getValue().toString()));
 
                         }
                     }
@@ -205,9 +205,6 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
 
     }
-
-
-
 
 
     public void resetearRutina() {
@@ -263,7 +260,7 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
         day = cal.get(Calendar.DAY_OF_MONTH);
         RutinaAcciones.anyadirFecha(day, month + 1, year);
 
-                cerrarFragment();//Cierra el fragment
+        cerrarFragment();//Cierra el fragment
 
     }
 

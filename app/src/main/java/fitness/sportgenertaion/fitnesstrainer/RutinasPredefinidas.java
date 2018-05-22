@@ -53,7 +53,6 @@ public class RutinasPredefinidas extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
 
 
-
                 llistaRutina.removeAll(llistaRutina);
                 for (DataSnapshot element : snapshot.getChildren()) {
                     Toast.makeText(getApplicationContext(), snapshot.getChildrenCount() + "", Toast.LENGTH_SHORT).show();

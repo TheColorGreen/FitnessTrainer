@@ -8,14 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
-import fitness.sportgenertaion.fitnesstrainer.MostrarDia;
 import fitness.sportgenertaion.fitnesstrainer.R;
 import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
 
@@ -24,7 +22,6 @@ public class MostrarDiaAdapter extends RecyclerView.Adapter<MostrarDiaAdapter.Vi
     public List<Rutina> llistaRutina;
     Context context;
     Boolean marcado;
-
 
 
     public MostrarDiaAdapter(Context context, List<Rutina> llistaRutina) {
@@ -83,10 +80,9 @@ public class MostrarDiaAdapter extends RecyclerView.Adapter<MostrarDiaAdapter.Vi
         Rutina item = llistaRutina.get(position);
         holder.tvEjercicio.setText(item.getEjercicio());
 
-        if(rutina.getEcho()==true) {
+        if (rutina.getEcho() == true) {
             holder.ivMarcado.setImageResource(R.drawable.pesas);
-        }
-        else{
+        } else {
             holder.ivMarcado.setImageResource(R.drawable.norealizado);
 
         }

@@ -8,17 +8,17 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 
 public class HistorialAcciones {
-    public static void anyadir(String dia, String ejercicio,boolean echo) {
+    public static void anyadir(String dia, String ejercicio, boolean echo) {
         DatabaseReference dbRutina = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("users/" + IdUsuario.getIdUsuario() + "/Historial"+"/" + dia+"/" + ejercicio );
+                .child("users/" + IdUsuario.getIdUsuario() + "/Historial" + "/" + dia + "/" + ejercicio);
         dbRutina.setValue(echo);
     }
 
     public static void BorrarDia(String dia) {
         DatabaseReference dbRutina = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("users/" + IdUsuario.getIdUsuario() + "/Historial" + "/" + dia );
+                .child("users/" + IdUsuario.getIdUsuario() + "/Historial" + "/" + dia);
         dbRutina.removeValue();
     }
 }

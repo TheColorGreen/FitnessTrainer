@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -27,12 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
-import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAdapter;
@@ -70,11 +66,9 @@ public class Dias extends AppCompatActivity {
         });
 
         Bundle parametros = this.getIntent().getExtras();
-        idUsuario= IdUsuario.getIdUsuario();
+        idUsuario = IdUsuario.getIdUsuario();
 
     }
-
-
 
 
     @Override
@@ -113,6 +107,7 @@ public class Dias extends AppCompatActivity {
         List<Rutina> llistaRutina = new ArrayList<Rutina>();
         RutinaAdapter rutinaAdapter;
         ArrayList<String> llistaEjerciciosPuestos = new ArrayList<String>();
+
         public PlaceholderFragment() {
         }
 
