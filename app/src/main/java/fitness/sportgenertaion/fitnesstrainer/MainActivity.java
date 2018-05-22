@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.Actualizar;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
+import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaPredefinida;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.ComprobarRutinaHistorial;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.HistorialRutina;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.RutinaAleatoria;
@@ -128,10 +128,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent = new Intent(this, CrearRutinas.class);
             startActivity(intent);
         } else if (v == btRutinaAleatoria) {
+            intent = new Intent(this, RutinasPredefinidas.class);
+            startActivity(intent);
+            //rutinaAleatoria = new RutinaAleatoria();
 
-            rutinaAleatoria = new RutinaAleatoria();
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, rutinaAleatoria).commit();
+       //     getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, rutinaAleatoria).commit();
 
         } else {
             intent = new Intent(this, Dias.class);
