@@ -27,6 +27,10 @@
             android:label="@string/title_activity_dias"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".VerRutinasPredeterminada"
+            android:label="@string/title_activity_dias"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".CrearRutinas"
             android:label="@string/title_activity_crear_rutinas"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -38,7 +42,8 @@
         <activity android:name=".ModificarRutina" />
         <activity android:name=".MostrarDia" />
         <activity android:name=".RutinasHechas" />
-        <activity android:name=".RutinasPredefinidas"></activity>
+        <activity android:name=".RutinasPredefinidas" />
+
     </application>
 
 </manifest>
