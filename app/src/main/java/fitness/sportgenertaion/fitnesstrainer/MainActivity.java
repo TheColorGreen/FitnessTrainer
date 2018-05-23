@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -16,8 +17,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Locale;
+
 import fitness.sportgenertaion.fitnesstrainer.Classes.Actualizar;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
+import fitness.sportgenertaion.fitnesstrainer.Classes.Idioma;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.ComprobarRutinaHistorial;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.HistorialRutina;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.RutinaAleatoria;
@@ -51,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Idioma.setIdioma(Locale.getDefault().getDisplayLanguage());
+
         //
         // typeface = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Regular.ttf");
         mAuth = FirebaseAuth.getInstance();
@@ -60,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
                 if (firebaseAuth.getCurrentUser() == null) {
-                    Log.d("Asd", "ghfdj");
                     Task<AuthResult> resultTask = mAuth.signInAnonymously();
                     resultTask.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override

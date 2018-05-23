@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.InputStream;
 import java.net.URL;
 
+import fitness.sportgenertaion.fitnesstrainer.Classes.Idioma;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
 public class VerEjercicio extends AppCompatActivity
@@ -95,7 +96,7 @@ bCronometro.setOnClickListener(this);
 
         DatabaseReference dbPrediccio = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("Ejercicios/" + ejercicio);
+                .child("Ejercicios-"+ Idioma.getIdioma()+"/" + ejercicio);
         dbPrediccio.addValueEventListener(this);
         dbPrediccio.addChildEventListener(this);
 

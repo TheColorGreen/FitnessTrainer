@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import fitness.sportgenertaion.fitnesstrainer.Classes.Idioma;
 import fitness.sportgenertaion.fitnesstrainer.Classes.ModificarAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaOpcionalAdapter;
@@ -42,7 +43,7 @@ public class RutinasPredefinidas extends AppCompatActivity implements ValueEvent
 
         dbRutinas = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("Ejercicios Predeterminados");
+                .child("Ejercicios Predeterminados-"+ Idioma.getIdioma());
         dbRutinas.addValueEventListener(this);
         dbRutinas.addChildEventListener(this);
 

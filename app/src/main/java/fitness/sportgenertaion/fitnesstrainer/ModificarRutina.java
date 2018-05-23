@@ -26,6 +26,7 @@ import java.util.List;
 
 import fitness.sportgenertaion.fitnesstrainer.Classes.ActualizarHistorial;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
+import fitness.sportgenertaion.fitnesstrainer.Classes.Idioma;
 import fitness.sportgenertaion.fitnesstrainer.Classes.ModificarAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
@@ -78,7 +79,7 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
         //Hago referencia a la base de datos
         dbPrediccio = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("Ejercicios");
+                .child("Ejercicios-"+ Idioma.getIdioma());
         dbPrediccio.addValueEventListener(this);
         dbPrediccio.addChildEventListener(this);
 

@@ -34,6 +34,7 @@ import java.util.List;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
+import fitness.sportgenertaion.fitnesstrainer.Classes.Idioma;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaPredefinida;
@@ -194,11 +195,11 @@ public class VerRutinasPredeterminada extends AppCompatActivity {
             rvEjercicios.addItemDecoration(new DividerItemDecoration(getContext(),
                     LinearLayoutManager.VERTICAL));
             rutinaAdapter = new VerRutinasPredeterminadasAdapter(getContext(), llistaRutina);
-            DatabaseReference rutina = FirebaseDatabase.getInstance()
+            DatabaseReference dbRutina = FirebaseDatabase.getInstance()
                     .getReference()
-                    .child("Ejercicios Predeterminados/" +rutinas+"/"+ dia);
-            rutina.addValueEventListener(this);
-            rutina.addChildEventListener(this);
+                    .child("Ejercicios Predeterminados-"+ Idioma.getIdioma()+"/" +rutinas+"/"+ dia);
+            dbRutina.addValueEventListener(this);
+           dbRutina.addChildEventListener(this);
             return rootView;
         }
 

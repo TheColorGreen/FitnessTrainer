@@ -37,6 +37,7 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.ActualizarHistorial;
 import fitness.sportgenertaion.fitnesstrainer.Classes.DateAcciones;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
+import fitness.sportgenertaion.fitnesstrainer.Classes.Idioma;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
@@ -212,7 +213,7 @@ public class CrearRutinas extends AppCompatActivity {
             //Hago referencia a la base de datos
             dbPrediccio = FirebaseDatabase.getInstance()
                     .getReference()
-                    .child("Ejercicios");
+                    .child("Ejercicios-"+ Idioma.getIdioma());
             dbPrediccio.addValueEventListener(this);
             dbPrediccio.addChildEventListener(this);
 
