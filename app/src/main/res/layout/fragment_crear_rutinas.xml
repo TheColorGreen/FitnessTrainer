@@ -61,7 +61,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="333dp"
+            android:layout_height="448dp"
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
@@ -73,21 +73,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/bGuargar"
-                android:layout_width="121dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="230dp"
-                android:background="#FF6859"
-                android:fontFamily="@font/comfortaa"
-                android:text="@string/b_guardar3"
-                android:visibility="visible" />
-        </LinearLayout>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

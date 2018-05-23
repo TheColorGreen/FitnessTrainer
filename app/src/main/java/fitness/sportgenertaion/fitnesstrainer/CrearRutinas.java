@@ -41,7 +41,7 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.Idioma;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
-public class CrearRutinas extends AppCompatActivity {
+public class CrearRutinas extends AppCompatActivity implements View.OnClickListener {
     static String idUsuario;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -54,7 +54,7 @@ public class CrearRutinas extends AppCompatActivity {
     static ArrayList<String> viernes = new ArrayList<String>();
     static ArrayList<String> sabado = new ArrayList<String>();
     static ArrayList<String> domingo = new ArrayList<String>();
-
+Button bGuardar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +63,8 @@ public class CrearRutinas extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout = findViewById(R.id.tabs);
-
+        bGuardar=findViewById(R.id.bGuargar);
+        bGuardar.setOnClickListener(this);
         tabLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -151,11 +152,74 @@ public class CrearRutinas extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View view) {
+        RutinaAcciones.eliminarRutina();
+        for (int x = 0; x < lunes.size(); x++) {
+            RutinaAcciones.anyadir("Lunes", lunes.get(x));
+        }
+        for (int x = 0; x < martes.size(); x++) {
+            RutinaAcciones.anyadir("Martes", martes.get(x));
+        }
+        for (int x = 0; x < miercoles.size(); x++) {
+            RutinaAcciones.anyadir("Miercoles", miercoles.get(x));
+        }
+        for (int x = 0; x < jueves.size(); x++) {
+            RutinaAcciones.anyadir("Jueves", jueves.get(x));
+        }
+        for (int x = 0; x < viernes.size(); x++) {
+            RutinaAcciones.anyadir("Viernes", viernes.get(x));
+        }
+        for (int x = 0; x < sabado.size(); x++) {
+            RutinaAcciones.anyadir("Sabado", sabado.get(x));
+        }
+        for (int x = 0; x < domingo.size(); x++) {
+            RutinaAcciones.anyadir("Domingo", domingo.get(x));
+        }
+        lunes = new ArrayList<String>();
+        martes = new ArrayList<String>();
+        miercoles = new ArrayList<String>();
+        jueves = new ArrayList<String>();
+        viernes = new ArrayList<String>();
+        sabado = new ArrayList<String>();
+        domingo = new ArrayList<String>();
+
+        Date fechas = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fechas);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DateAcciones fecha = new DateAcciones(day, month, year);
+
+
+        try {
+            cal.add(Calendar.DAY_OF_YEAR, -fecha.diasHastaLunes());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH);
+        day = cal.get(Calendar.DAY_OF_MONTH);
+        RutinaAcciones.anyadirFecha(day, month + 1, year);
+        try {
+            ActualizarHistorial.anyadirHistorial();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+
+    }
+
 
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment implements ValueEventListener, ChildEventListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
+    public static class PlaceholderFragment extends Fragment implements ValueEventListener, ChildEventListener, AdapterView.OnItemSelectedListener {
 
 
         DatabaseReference dbPrediccio;
@@ -163,7 +227,7 @@ public class CrearRutinas extends AppCompatActivity {
         String grupoMuscular = "5";
         Spinner spGrupoMuscular;
         Spinner spNivel;
-        Button bguardar;
+
         private RecyclerView rvEjercicios;
         private List<Rutina> llistaEjercicios = new ArrayList<Rutina>();
         private EjercicioAdapter ejercicioAdapter;
@@ -193,10 +257,9 @@ public class CrearRutinas extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_crear_rutinas, container, false);
-            bguardar = rootView.findViewById(R.id.bGuargar);
             spNivel = rootView.findViewById(R.id.spNivel);
             spGrupoMuscular = rootView.findViewById(R.id.spMusculo);
-            bguardar = rootView.findViewById(R.id.bGuargar);
+
             rvEjercicios = rootView.findViewById(R.id.rvEjercicios);
 
 
@@ -315,7 +378,7 @@ public class CrearRutinas extends AppCompatActivity {
                 this.grupoMuscular = "4";
             }
 
-            bguardar.setOnClickListener(this);
+
             dbPrediccio.addValueEventListener(this);
             dbPrediccio.addChildEventListener(this);
         }
@@ -325,68 +388,7 @@ public class CrearRutinas extends AppCompatActivity {
 
         }
 
-        @Override
-        public void onClick(View view) {
-            RutinaAcciones.eliminarRutina();
-            for (int x = 0; x < lunes.size(); x++) {
-                RutinaAcciones.anyadir("Lunes", lunes.get(x));
-            }
-            for (int x = 0; x < martes.size(); x++) {
-                RutinaAcciones.anyadir("Martes", martes.get(x));
-            }
-            for (int x = 0; x < miercoles.size(); x++) {
-                RutinaAcciones.anyadir("Miercoles", miercoles.get(x));
-            }
-            for (int x = 0; x < jueves.size(); x++) {
-                RutinaAcciones.anyadir("Jueves", jueves.get(x));
-            }
-            for (int x = 0; x < viernes.size(); x++) {
-                RutinaAcciones.anyadir("Viernes", viernes.get(x));
-            }
-            for (int x = 0; x < sabado.size(); x++) {
-                RutinaAcciones.anyadir("Sabado", sabado.get(x));
-            }
-            for (int x = 0; x < domingo.size(); x++) {
-                RutinaAcciones.anyadir("Domingo", domingo.get(x));
-            }
-            lunes = new ArrayList<String>();
-            martes = new ArrayList<String>();
-            miercoles = new ArrayList<String>();
-            jueves = new ArrayList<String>();
-            viernes = new ArrayList<String>();
-            sabado = new ArrayList<String>();
-            domingo = new ArrayList<String>();
 
-            Date fechas = new Date();
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(fechas);
-            int year = cal.get(Calendar.YEAR);
-            int month = cal.get(Calendar.MONTH) + 1;
-            int day = cal.get(Calendar.DAY_OF_MONTH);
-
-            DateAcciones fecha = new DateAcciones(day, month, year);
-
-
-            try {
-                cal.add(Calendar.DAY_OF_YEAR, -fecha.diasHastaLunes());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            year = cal.get(Calendar.YEAR);
-            month = cal.get(Calendar.MONTH);
-            day = cal.get(Calendar.DAY_OF_MONTH);
-            RutinaAcciones.anyadirFecha(day, month + 1, year);
-            try {
-                ActualizarHistorial.anyadirHistorial();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Intent intent = new Intent(getContext(), MainActivity.class);
-            startActivity(intent);
-
-
-        }
     }
 
     /**
