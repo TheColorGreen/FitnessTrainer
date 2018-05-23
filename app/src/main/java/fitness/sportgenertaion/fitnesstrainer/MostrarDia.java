@@ -50,7 +50,6 @@ public class MostrarDia extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
-                Toast.makeText(getApplicationContext(), fechaRecuperada, Toast.LENGTH_LONG).show();
 
                 llistaRutina.removeAll(llistaRutina);
                 for (DataSnapshot element : snapshot.getChildren()) {

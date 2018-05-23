@@ -2,6 +2,7 @@ package fitness.sportgenertaion.fitnesstrainer;
 
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -142,10 +143,11 @@ bCronometro.setOnClickListener(this);
 
                     series--;
                     if(series>0){
-                        bCronometro.setText("Iniciar Ronda: " + ronda);
+
+                        bCronometro.setText(getResources().getString(R.string.ronda) + ronda);
                     }
                     else{
-                        bCronometro.setText("Ejercicio acabado");
+                        bCronometro.setText(getResources().getString(R.string.ronda_acabada));
                     }
                     tvSeries.setText(String.valueOf(series));
                 }

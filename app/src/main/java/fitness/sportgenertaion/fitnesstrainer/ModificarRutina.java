@@ -1,6 +1,7 @@
 package fitness.sportgenertaion.fitnesstrainer;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -146,26 +147,31 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if (spNivel.getSelectedItem().toString().equals("Todos")) {
+        Resources res = getResources();
+        String[] musculos= res.getStringArray(R.array.musculos);
+        String[] dificultad= res.getStringArray(R.array.dificultad);
+
+        if (spNivel.getSelectedItem().toString().equals(dificultad[0])) {
             this.nivel = "5";
-        } else if (spNivel.getSelectedItem().toString().equals("Principiante")) {
+        } else if (spNivel.getSelectedItem().toString().equals(dificultad[1])) {
             this.nivel = "1";
-        } else if (spNivel.getSelectedItem().toString().equals("Entusiasta")) {
+        } else if (spNivel.getSelectedItem().toString().equals(dificultad[2])) {
             this.nivel = "2";
         } else {
             this.nivel = "3";
         }
 
-        if (spGrupoMuscular.getSelectedItem().toString().equals("Todos")) {
+        if (spGrupoMuscular.getSelectedItem().toString().equals(musculos[0])) {
             this.grupoMuscular = "5";
-        } else if (spGrupoMuscular.getSelectedItem().toString().equals("Espalda y Biceps")) {
+        } else if (spGrupoMuscular.getSelectedItem().toString().equals(musculos[1])) {
             this.grupoMuscular = "1";
-        } else if (spGrupoMuscular.getSelectedItem().toString().equals("Pecho y Triceps")) {
+        } else if (spGrupoMuscular.getSelectedItem().toString().equals(musculos[2])) {
             this.grupoMuscular = "2";
-        } else if (spGrupoMuscular.getSelectedItem().toString().equals("Abdominales")) {
+        } else if (spGrupoMuscular.getSelectedItem().toString().equals(musculos[3])) {
             this.grupoMuscular = "3";
         } else {
             this.grupoMuscular = "4";
+
         }
 
         bguardar.setOnClickListener(this);

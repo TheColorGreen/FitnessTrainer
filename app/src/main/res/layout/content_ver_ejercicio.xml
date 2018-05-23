@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/comfortaa"
-                    android:text="Series"
+                    android:text="@string/series"
                     android:textAlignment="center"
                     android:textSize="24sp" />
 
@@ -121,7 +121,7 @@
                     android:layout_height="101dp"
                     android:background="#ffffff"
                     android:fontFamily="@font/comfortaa"
-                    android:text="Iniciar"
+                    android:text="@string/iniciar"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="30sp"
@@ -132,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/comfortaa"
-                    android:text="Descripcion"
+                    android:text="@string/descripcion"
                     android:textAppearance="@android:style/TextAppearance.Material.Large"
                     tools:targetApi="lollipop" />
 

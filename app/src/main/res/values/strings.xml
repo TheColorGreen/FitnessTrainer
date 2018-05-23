@@ -1,51 +1,51 @@
 <resources>
     <string name="app_name">Fitness Trainer</string>
-    <string name="b_rutina">Rutina</string>
-    <string name="b_crea_rutina">Crear Rutina</string>
-    <string name="b_historial">Historial</string>
-    <string name="b_facil">Fácil</string>
-    <string name="b_moderado">Moderado</string>
-    <string name="b_desafiante">Desafiante</string>
-    <string name="b_guardar">Guardar</string>
-    <string name="b_organiza">Organizar</string>
-    <string name="b_organizarejercicios">Organizar</string>
-    <string name="tv_dia">Dia</string>
+    <string name="b_rutina">Routine</string>
+    <string name="b_crea_rutina">New Routine</string>
+    <string name="b_historial">Record</string>
+    <string name="b_facil">Easy</string>
+    <string name="b_moderado">Moderate</string>
+    <string name="b_desafiante">Challenging</string>
+    <string name="b_guardar">Save</string>
+    <string name="b_organiza">Organize</string>
+    <string name="b_organizarejercicios">Organize</string>
+    <string name="tv_dia">Day</string>
     <string name="tv_sport">Sport</string>
-    <string name="tv_exercici">Ejercicio</string>
+    <string name="tv_exercici">Exercise</string>
     <string name="b_guardar2">Siguiente</string>
-    <string name="b_guardar3">Guardar</string>
-    <string name="b_crear_rutina">Crear rutina</string>
-    <string name="b_crear_rutina_personalizada">Crear rutina personalizada</string>
-    <string name="tv_descripcion">Descripcion</string>
-    <string name="tv_nivel">Nivel</string>
+    <string name="b_guardar3">Save</string>
+    <string name="b_crear_rutina">New Routine</string>
+    <string name="b_crear_rutina_personalizada">New custom routine</string>
+    <string name="tv_descripcion">Description</string>
+    <string name="tv_nivel">Level</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_crear_rutina">Crear Rutina</string>
+    <string name="title_activity_crear_rutina">New Routine</string>
 
-    <string name="b_crear_rutina_random">Rutina Aleatoria </string>
-    <string name="navigation_drawer_open">Abierto </string>
-    <string name="navigation_drawer_close">Cerrado </string>
+    <string name="b_crear_rutina_random">Random Routine </string>
+    <string name="navigation_drawer_open">Open </string>
+    <string name="navigation_drawer_close">Close </string>
     <string-array name="musculos">
-        <item>Todos</item>
+        <item>All</item>
 
-        <item>Espalda y Biceps</item>
+        <item>Back and Biceps</item>
 
-        <item>Pecho y Triceps</item>
+        <item>Chest and Triceps</item>
 
-        <item>Abdominales</item>
+        <item>Abdominal</item>
 
-        <item>Piernas</item>
+        <item>Legs</item>
 
 
     </string-array>
     <string-array name="dificultad">
-        <item>Todos</item>
+        <item>All</item>
 
-        <item>Principiante</item>
+        <item>Beginner</item>
 
-        <item>Entusiasta</item>
+        <item>Enthusiastic</item>
 
-        <item>Experto</item>
+        <item>Expert</item>
 
 
     </string-array>
@@ -65,25 +65,30 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_dias">Dias</string>
-    <string name="title_activity_crear_rutinas">CrearRutinas</string>
-    <string name="tv_descripcion2">Descripción</string>
-    <string name="tv_grupo_muscular">Grupo muscular</string>
-    <string name="lunes">Lu</string>
-    <string name="martes">Ma</string>
-    <string name="miercoles">Mi</string>
-    <string name="jueves">Ju</string>
-    <string name="viernes">Vi</string>
-    <string name="sabado">Sá</string>
-    <string name="domingo">Do</string>
-    <string name="title_activity_pruebas">pruebas</string>
-    <string name="title_activity_main2">Prueba2</string>
+    <string name="title_activity_dias">Days</string>
+    <string name="title_activity_crear_rutinas">New Routine</string>
+    <string name="tv_descripcion2">Description</string>
+    <string name="tv_grupo_muscular">Muscle Group</string>
+    <string name="lunes">MO</string>
+    <string name="martes">TU</string>
+    <string name="miercoles">WE</string>
+    <string name="jueves">TH</string>
+    <string name="viernes">FR</string>
+    <string name="sabado">SA</string>
+    <string name="domingo">SU</string>
+    <string name="title_activity_pruebas">Tests</string>
+    <string name="title_activity_main2">Tests</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
-    <string name="tv_repeticiones">Repeticiones</string>
+    <string name="tv_repeticiones">Repetitions</string>
     <string name="title_activity_ver_rutinas_predeterminada">VerRutinasPredeterminada</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="descripcion">Description</string>
+    <string name="iniciar">Play</string>
+    <string name="series">Series</string>
+    <string name="ronda">Start Round </string>
+    <string name="ronda_acabada">Finished Exercise</string>
 </resources>
