@@ -21,7 +21,7 @@ import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
 /**
  * Created by Carlos on 15/05/2018.
  */
-
+//Adapter de modificar Rutina
 public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener {
     public List<Rutina> llistaEjercicios;
     Context context;
@@ -53,7 +53,7 @@ public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.View
             itemView.setOnClickListener(this);
         }
 
-
+//Truca a ver ejercicio per tal de que l'usuari sapigui quin exercici esta mirant
         @Override
         public void onClick(View view) {
             int posicio = getAdapterPosition();
@@ -81,10 +81,7 @@ public class ModificarAdapter extends RecyclerView.Adapter<ModificarAdapter.View
         Rutina item = llistaEjercicios.get(position);
         holder.tvEjercicio.setText(item.getEjercicio());
 
-        //in some cases, it will prevent unwanted situations
-        // holder.cAnyadir.setOnCheckedChangeListener(null);
 
-        //if true, your checkbox will be selected, else unselected
 
         holder.cAnyadir.setChecked(ejercicio.isSelected());
 

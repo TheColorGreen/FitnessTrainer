@@ -11,19 +11,19 @@ import java.util.Locale;
 /**
  * Created by Carlos on 16/05/2018.
  */
-
+//Serveix per mirar el dia de la semana, comprarar feches...
 public class DateAcciones {
     int dia;
     int mes;
     int anyo;
-
+//Constructor
     public DateAcciones(int dia, int mes, int anyo) {
         this.dia = dia;
         this.mes = mes;
         this.anyo = anyo;
 
     }
-
+//Mira els dies de diferencia que existeixen de la echa que haiguis ficat a la fecha en la que estem actualment
     public int CompararFechas() {
         final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; //Milisegundos al día
         java.util.Date hoy = new Date(); //Fecha de hoy
@@ -36,7 +36,7 @@ public class DateAcciones {
         return resultado;
     }
 
-
+//Et diu el dia de la semana de la fecha
     public String diaSemana() throws ParseException {
         String month = String.valueOf(mes);
         String day = String.valueOf(dia);
@@ -51,6 +51,7 @@ public class DateAcciones {
 
     }
 
+    //Te dice los dias que han pasado desde el ultimo dia
     public int diasHastaLunes() throws ParseException {
 
         String diaSemana= diaSemana();

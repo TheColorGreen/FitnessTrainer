@@ -3,7 +3,7 @@ package fitness.sportgenertaion.fitnesstrainer.Classes;
 /**
  * Created by Carlos on 27/04/2018.
  */
-
+//Reopresenta el Ejercicio de firebase, esta feta per accedir a nom, dificultad...
 public class Rutina {
 
     private boolean selected = false;

@@ -1,5 +1,5 @@
 package fitness.sportgenertaion.fitnesstrainer.Classes;
-
+//Representa les rutines predefinides al firebase
 public class RutinaPredefinida {
     String nombre;
 

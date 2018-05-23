@@ -6,7 +6,7 @@ import com.google.firebase.database.FirebaseDatabase;
 /**
  * Created by Carlos on 17/05/2018.
  */
-
+//Serveix per anyadir y eliminar exercicis y dies de l'historial
 public class HistorialAcciones {
     public static void anyadir(String dia, String ejercicio, boolean echo) {
         DatabaseReference dbRutina = FirebaseDatabase.getInstance()

@@ -22,6 +22,7 @@ import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
  * Created by Carlos on 03/05/2018.
  */
 
+//Adapter per la classe Crear Rutinas
 public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener {
     public List<Rutina> llistaEjercicios;
     Context context;
@@ -48,6 +49,8 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
         @SuppressLint("WrongViewCast")
         public ViewHolder(View itemView) {
             super(itemView);
+
+            //Inicialitzo el botto i el TextView
             tvEjercicio = itemView.findViewById(R.id.tv_nom);
             cAnyadir = itemView.findViewById(R.id.cPoner);
 
@@ -56,6 +59,8 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
 
 
         @Override
+
+        //Truco un intent per tal de que l'usuari visualitzi l'exercicsi que vol anyadir a la rutina
         public void onClick(View view) {
             int posicio = getAdapterPosition();
             Intent intent = new Intent(context, VerEjercicio.class);
@@ -82,40 +87,34 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.View
         Rutina item = llistaEjercicios.get(position);
         holder.tvEjercicio.setText(item.getEjercicio());
 
-        //in some cases, it will prevent unwanted situations
-        // holder.cAnyadir.setOnCheckedChangeListener(null);
-
-        //if true, your checkbox will be selected, else unselected
 
         holder.cAnyadir.setChecked(ejercicio.isSelected());
 
 
+        holder.cAnyadir.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //set your object's last status
 
-            holder.cAnyadir.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    //set your object's last status
-
-                    ejercicio.setSelected(isChecked);
-
-                    if (ejercicio.isSelected()) {
-
-                        CrearRutinas.RutinaTemporal(dia,ejercicio.getEjercicio());
-                    } else {
-
-                        CrearRutinas.BorrarRutinaTemporal(dia,ejercicio.getEjercicio());
-                    }
+                ejercicio.setSelected(isChecked);
+                //Entra cuan actives el checkbos
+                if (ejercicio.isSelected()) {//Fica el exercici en la rutina temporal perque quan li donis a guardar es guardi la rutina a la rutina real
+                    CrearRutinas.RutinaTemporal(dia, ejercicio.getEjercicio());
+                } else {
+                //Treu l'exercici de rutina temporal
+                    CrearRutinas.BorrarRutinaTemporal(dia, ejercicio.getEjercicio());
                 }
-            });
+            }
+        });
 
 
-        }
+    }
 
-        // Mètode de la classe RecyclerView (que és abstracta)
+    // Mètode de la classe RecyclerView (que és abstracta)
 
 
     @Override
-    public int getItemCount () {
+    public int getItemCount() {
         return llistaEjercicios.size();
     }
 }

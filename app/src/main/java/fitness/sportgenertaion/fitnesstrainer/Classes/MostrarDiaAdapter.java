@@ -17,18 +17,17 @@ import java.util.List;
 import fitness.sportgenertaion.fitnesstrainer.R;
 import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
 
-
+//Adapter de mostrar dia
 public class MostrarDiaAdapter extends RecyclerView.Adapter<MostrarDiaAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener {
     public List<Rutina> llistaRutina;
     Context context;
-    Boolean marcado;
 
 
     public MostrarDiaAdapter(Context context, List<Rutina> llistaRutina) {
 
         this.llistaRutina = llistaRutina;
         this.context = context;
-        this.marcado = marcado;
+
 
     }
 
@@ -47,11 +46,11 @@ public class MostrarDiaAdapter extends RecyclerView.Adapter<MostrarDiaAdapter.Vi
             super(itemView);
             tvEjercicio = itemView.findViewById(R.id.tv_nom);
             ivMarcado = itemView.findViewById(R.id.ivMarcador);
-
+//Fica el listener al checkbox
             itemView.setOnClickListener(this);
         }
 
-
+        //Truca a ver ejercicio per tal de que l'usuari sapigui quin exercici esta mirant
         @Override
         public void onClick(View view) {
             int posicio = getAdapterPosition();
@@ -79,7 +78,7 @@ public class MostrarDiaAdapter extends RecyclerView.Adapter<MostrarDiaAdapter.Vi
         final Rutina rutina = llistaRutina.get(position);
         Rutina item = llistaRutina.get(position);
         holder.tvEjercicio.setText(item.getEjercicio());
-
+//Si ha fet l'exercici se li fica una pesa y sino una x
         if (rutina.getEcho() == true) {
             holder.ivMarcado.setImageResource(R.drawable.pesas);
         } else {

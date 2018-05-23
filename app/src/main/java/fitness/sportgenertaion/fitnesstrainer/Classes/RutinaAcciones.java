@@ -7,6 +7,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by Carlos Zambudio on 10/05/2018.
  */
 
+//Serveix per poder anyadir ultima fecha de modificació de la rutina, borrar exercici, ficar-li el check...
 public class RutinaAcciones {
     public static void anyadir(String dia, String ejercicio) {
         DatabaseReference dbRutina = FirebaseDatabase.getInstance()

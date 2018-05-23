@@ -5,8 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@drawable/fondo_gris"
+    tools:context=".MainActivity"
+    >
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_weight="1"
+        android:background="@drawable/fondo_gris"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="@string/app_name">
+
+
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -18,6 +32,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="57dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="122dp"
@@ -27,7 +46,8 @@
                 android:id="@+id/bRutina"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/rutina"
+                android:layout_margin="5dp"
+                android:background="@drawable/ejercicios_final"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/b_rutina"
                 android:textSize="18sp" />
@@ -43,7 +63,8 @@
                 android:id="@+id/bCreaRutina"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/crearrutina"
+                android:layout_margin="5dp"
+                android:background="@drawable/crearrutina_final"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/b_crea_rutina"
                 android:textSize="18sp" />
@@ -58,7 +79,8 @@
                 android:id="@+id/bCrearRutinaAleatoria"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/rutinaaleatoria"
+                android:layout_margin="5dp"
+                android:background="@drawable/rutinaaleatoria_final"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/b_crear_rutina_random"
                 android:textAlignment="center"
@@ -73,8 +95,9 @@
             <Button
                 android:id="@+id/bHistorialRutina"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/historial"
+                android:layout_height="127dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/historial_final"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/b_historial"
                 android:textSize="18sp" />

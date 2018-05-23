@@ -55,7 +55,7 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
 
-
+//Mira l'ultim dia de modificacío de la rutina
         dbUltimaModificacion = FirebaseDatabase.getInstance()
                 .getReference()
                 .child("users" + "/" + IdUsuario.getIdUsuario() + "/FechaRutina");
@@ -77,6 +77,7 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
 
                 try {
+                    //truca a la funció anyadir historial
                     anyadirHistorial();
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -148,11 +149,12 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
 
     }
-
+//Funció que tanca el fragment
     public void cerrarFragment() {
         getFragmentManager().beginTransaction().remove(this).commit();
     }
 
+    //Funcio que anyadeix a l'historial el dia que som
     public void anyadirHistorial() throws ParseException {
         final String[] diasSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
 
@@ -206,7 +208,7 @@ public class ComprobarRutinaHistorial extends Fragment implements ValueEventList
 
     }
 
-
+//Cada dilluns reseteja els ticks de la rutina per tal de que no es guardin els ejercicis fets d'una semana a 'altre
     public void resetearRutina() {
         final String[] diasSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
 

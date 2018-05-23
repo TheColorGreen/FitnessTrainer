@@ -14,12 +14,12 @@ import java.util.Date;
 /**
  * Created by Carlos on 21/05/2018.
  */
-
+//Actualitza el Historial
 public class ActualizarHistorial {
     static Calendar cal = Calendar.getInstance();
     public static void anyadirHistorial() throws ParseException {
         final String[] diasSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
-
+//Agafa el dia en el que estem
         int month;
         int day;
         int year;
@@ -29,6 +29,7 @@ public class ActualizarHistorial {
         day = cal.get(Calendar.DAY_OF_MONTH);
         final DateAcciones fecha = new DateAcciones(day, month, year);
 
+        //Dels 7 dies de la setmana actualitza en el que ens trovem
         for (int dia = 0; dia < 7; dia++) {
             if( dia==fecha.diasHastaLunes()){
                DatabaseReference dbUltimaModificacion = FirebaseDatabase.getInstance()

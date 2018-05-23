@@ -17,6 +17,7 @@ import fitness.sportgenertaion.fitnesstrainer.R;
 import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
 import fitness.sportgenertaion.fitnesstrainer.VerRutinasPredeterminada;
 
+//Adapter de Rutina predetefinida
 public class RutinaOpcionalAdapter extends RecyclerView.Adapter<fitness.sportgenertaion.fitnesstrainer.Classes.RutinaOpcionalAdapter.ViewHolder>
             implements CompoundButton.OnCheckedChangeListener {
         public List<RutinaPredefinida> llistaRutina;
@@ -48,14 +49,13 @@ public class RutinaOpcionalAdapter extends RecyclerView.Adapter<fitness.sportgen
                 bMostraLesRutinesOpcionals.setOnClickListener(this);
             }
 
-
+//Truca a la rutina per tal de veure com es
             @Override
             public void onClick(View view) {
                 int posicio = getAdapterPosition();
                 Intent intent = new Intent(context, VerRutinasPredeterminada.class);
 
                 intent.putExtra("rutina", llistaRutina.get(posicio).getNombre());
-              //  intent.putExtra("dia", dia);
                 context.startActivity(intent);
 
             }
@@ -77,16 +77,9 @@ public class RutinaOpcionalAdapter extends RecyclerView.Adapter<fitness.sportgen
         public void onBindViewHolder(fitness.sportgenertaion.fitnesstrainer.Classes.RutinaOpcionalAdapter.ViewHolder holder, int position) {
             final RutinaPredefinida rutina = llistaRutina.get(position);
             RutinaPredefinida item = llistaRutina.get(position);
+
+            //Fica el nom de la rutina a el Boto
             holder.bMostraLesRutinesOpcionals.setText(item.getNombre());
-
-
-
-            //in some cases, it will prevent unwanted situations
-          //  holder.cAnyadir.setOnCheckedChangeListener(null);
-
-            //if true, your checkbox will be selected, else unselected
-
-
 
         }
 

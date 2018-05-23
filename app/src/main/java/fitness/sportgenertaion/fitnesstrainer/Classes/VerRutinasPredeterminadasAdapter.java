@@ -24,7 +24,6 @@ public class VerRutinasPredeterminadasAdapter extends RecyclerView.Adapter<fitne
     Context context;
 
 
-
     public VerRutinasPredeterminadasAdapter(Context context, List<RutinaPredefinida> llistaRutina) {
 
         this.llistaRutina = llistaRutina;
@@ -49,7 +48,7 @@ public class VerRutinasPredeterminadasAdapter extends RecyclerView.Adapter<fitne
             tvNomEjercici.setOnClickListener(this);
         }
 
-
+//Truca a ver ejercicio per tal de que l'usuari sapigui quin exercici esta mirant
         @Override
         public void onClick(View view) {
             int posicio = getAdapterPosition();
@@ -72,30 +71,21 @@ public class VerRutinasPredeterminadasAdapter extends RecyclerView.Adapter<fitne
     }
 
 
-
     // Mètode de la classe RecyclerView (que és abstracta)
     @Override
     public void onBindViewHolder(fitness.sportgenertaion.fitnesstrainer.Classes.VerRutinasPredeterminadasAdapter.ViewHolder holder, int position) {
         final RutinaPredefinida rutina = llistaRutina.get(position);
         RutinaPredefinida item = llistaRutina.get(position);
+
+        //Fica el nom del exercici al textview
         holder.tvNomEjercici.setText(item.getNombre());
-
-
-
-        //in some cases, it will prevent unwanted situations
-        //  holder.cAnyadir.setOnCheckedChangeListener(null);
-
-        //if true, your checkbox will be selected, else unselected
-
 
 
     }
 
-    // Mètode de la classe RecyclerView (que és abstracta)
-
 
     @Override
-    public int getItemCount () {
+    public int getItemCount() {
         return llistaRutina.size();
     }
 

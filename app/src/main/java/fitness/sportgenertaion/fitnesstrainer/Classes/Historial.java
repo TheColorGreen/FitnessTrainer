@@ -3,7 +3,7 @@ package fitness.sportgenertaion.fitnesstrainer.Classes;
 /**
  * Created by Carlos on 27/04/2018.
  */
-
+//Reopresenta el Historial de firebase
 public class Historial {
 
     boolean echo;

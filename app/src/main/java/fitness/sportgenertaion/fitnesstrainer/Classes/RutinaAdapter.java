@@ -22,7 +22,7 @@ import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
 /**
  * Created by Carlos on 11/05/2018.
  */
-
+//Adapter de Rutian
 public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener {
     public List<Rutina> llistaRutina;
     Context context;
@@ -58,7 +58,7 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
             itemView.setOnClickListener(this);
         }
 
-
+        //Truca a ver ejercicio per tal de que l'usuari sapigui quin exercici esta mirant
         @Override
         public void onClick(View view) {
             int posicio = getAdapterPosition();
@@ -85,14 +85,16 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Rutina rutina = llistaRutina.get(position);
         Rutina item = llistaRutina.get(position);
+
+        //Fica el nom de l'exercici al textview
         holder.tvEjercicio.setText(item.getEjercicio());
 
 
-        //in some cases, it will prevent unwanted situations
+       //Lisener al checkbox
         holder.cAnyadir.setOnCheckedChangeListener(null);
 
-        //if true, your checkbox will be selected, else unselected
 
+//Mira el dia d'abui
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH) + 1;
@@ -114,7 +116,7 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
         }
 
         try {
-
+//Si el dia d'abui es mes gran que el de la rutina no et deix modificar els checkbox
             if (fecha.diasHastaLunes() > diaDeLaSemana) {
                 holder.cAnyadir.setEnabled(false);
 
@@ -123,6 +125,7 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        //Si aquell ejercici esta marcat com a fet el reflexa al checkbox
         if (rutina.getEcho() == true) {
             holder.cAnyadir.setChecked(true);
         }
@@ -133,12 +136,13 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //set your object's last status
                 try {
+                    //Quan cambia el checbox actualitza el historial
                     ActualizarHistorial.anyadirHistorial();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 rutina.setSelected(isChecked);
-
+//Si esta seleccionat fica true a el ejercici al firebase sino fica false
                 if (rutina.isSelected()) {
 
                     RutinaAcciones.PonerCheck(dia, rutina.getEjercicio());

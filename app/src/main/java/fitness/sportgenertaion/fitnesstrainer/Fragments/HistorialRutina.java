@@ -22,7 +22,7 @@ public class HistorialRutina extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_historial_rutina, container, false);
         CalendarView calendarView = rootView.findViewById(R.id.calendarView);
         //calendarView.getDate();
-        //calendarView.setMinDate(calendarView.getDate());calendarView.setMaxDate(calendarView.getDate());
+
         // Mostra la data maxima, la de hoy
         calendarView.setMaxDate(calendarView.getDate());
 

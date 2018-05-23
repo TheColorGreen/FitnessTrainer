@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -24,7 +22,6 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Idioma;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.ComprobarRutinaHistorial;
 import fitness.sportgenertaion.fitnesstrainer.Fragments.HistorialRutina;
-import fitness.sportgenertaion.fitnesstrainer.Fragments.RutinaAleatoria;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
@@ -39,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int presiones = 0;
     HistorialRutina historialRutina;
     ComprobarRutinaHistorial fragment;
-    RutinaAleatoria rutinaAleatoria;
+
 
     @Override
     protected void onStart() {
@@ -144,10 +141,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        if (rutinaAleatoria != null || historialRutina != null) {
+        if ( historialRutina != null) {
             getSupportFragmentManager().beginTransaction().
                     remove(getSupportFragmentManager().findFragmentById(R.id.flFrame)).commit();
-            rutinaAleatoria = null;
+
             historialRutina = null;
             // fragment=null;
 
