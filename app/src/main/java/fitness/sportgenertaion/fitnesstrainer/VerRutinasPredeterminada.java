@@ -208,7 +208,7 @@ public class VerRutinasPredeterminada extends AppCompatActivity {
             llistaRutina.removeAll(llistaRutina);
             for (DataSnapshot element : dataSnapshot.getChildren()) {
 
-                Rutina rutina = new Rutina(Boolean.parseBoolean(element.getValue().toString()), element.getKey().toString());
+                RutinaPredefinida rutina = new RutinaPredefinida( element.getKey().toString());
                 llistaEjerciciosPuestos.add(element.getKey().toString());
                 llistaRutina.add(rutina);
 
