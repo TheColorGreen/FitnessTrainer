@@ -129,12 +129,14 @@ bCronometro.setOnClickListener(this);
     @Override
     public void onClick(View v) {
         int segundos=tiempo;
+
         if(cronometroIniciado==true && series>0) {
-            new CountDownTimer(tiempo * 1000, 1000) {
+           new CountDownTimer(tiempo * 1000, 1000) {
 
                 public void onTick(long millisUntilFinished) {
                     cronometroIniciado = false;
                     bCronometro.setText("00:" + millisUntilFinished / 1000);
+
                 }
 
                 public void onFinish() {
@@ -153,9 +155,24 @@ bCronometro.setOnClickListener(this);
                     tvSeries.setText(String.valueOf(series));
                 }
             }.start();
+
         }
+
     }
 
+
+
+    protected void onResume() {
+        super.onResume();
+        //handler.removeCallbacks(updateTimeTask);
+        //handler.postDelayed(updateTimeTask, 1000);
+    }//onResume
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //do stuff
+    }//onPause
     //Aquest metode es per carregaar una imatge desde url
     private class DownLoadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView imageView;
