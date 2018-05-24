@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,7 +98,7 @@ public class Dias extends AppCompatActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment implements ValueEventListener, ChildEventListener {
+    public static class PlaceholderFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -189,51 +190,31 @@ public class Dias extends AppCompatActivity {
             DatabaseReference rutina = FirebaseDatabase.getInstance()
                     .getReference()
                     .child("users" + "/" + idUsuario + "/Rutina/" + dia);
-            rutina.addValueEventListener(this);
-            rutina.addChildEventListener(this);
+            rutina.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    llistaRutina.removeAll(llistaRutina);
+                    for (DataSnapshot element : snapshot.getChildren()) {
+
+                        Rutina rutina = new Rutina(Boolean.parseBoolean(element.getValue().toString()), element.getKey().toString());
+                        llistaEjerciciosPuestos.add(element.getKey().toString());
+                        llistaRutina.add(rutina);
+
+                    }
+                    rvEjercicios.setAdapter(rutinaAdapter);
+                    rvEjercicios.scrollToPosition(llistaRutina.size() - 1);
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
             return rootView;
         }
 
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
 
-            llistaRutina.removeAll(llistaRutina);
-            for (DataSnapshot element : dataSnapshot.getChildren()) {
-
-                Rutina rutina = new Rutina(Boolean.parseBoolean(element.getValue().toString()), element.getKey().toString());
-                llistaEjerciciosPuestos.add(element.getKey().toString());
-                llistaRutina.add(rutina);
-
-            }
-            rvEjercicios.setAdapter(rutinaAdapter);
-            rvEjercicios.scrollToPosition(llistaRutina.size() - 1);
-        }
-
-        @Override
-        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-        }
-
-        @Override
-        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
     }
 
     /**

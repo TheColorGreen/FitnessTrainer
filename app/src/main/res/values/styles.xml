@@ -2,7 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/iniciodos</item>
+        <item name="android:windowBackground">@drawable/iniciados2</item>
     </style>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 

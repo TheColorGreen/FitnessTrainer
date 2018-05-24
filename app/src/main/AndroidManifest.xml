@@ -3,8 +3,7 @@
     package="fitness.sportgenertaion.fitnesstrainer">
 
     <application
-        android:allowBackup="true"
-        android:hardwareAccelerated="false"
+
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -41,7 +40,6 @@
 
         <activity android:name=".ModificarRutina" />
         <activity android:name=".MostrarDia" />
-        <activity android:name=".RutinasHechas" />
         <activity android:name=".RutinasPredefinidas" />
 
     </application>
