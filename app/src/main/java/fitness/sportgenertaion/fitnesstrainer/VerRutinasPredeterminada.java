@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -28,36 +29,48 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import fitness.sportgenertaion.fitnesstrainer.Classes.ActualizarHistorial;
+import fitness.sportgenertaion.fitnesstrainer.Classes.DateAcciones;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Ejercicio;
 import fitness.sportgenertaion.fitnesstrainer.Classes.EjercicioAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Idioma;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
+import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaPredefinida;
 import fitness.sportgenertaion.fitnesstrainer.Classes.VerRutinasPredeterminadasAdapter;
 
-public class VerRutinasPredeterminada extends AppCompatActivity {
+public class VerRutinasPredeterminada extends AppCompatActivity implements View.OnClickListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private TabLayout tabLayout;
     private ViewPager mViewPager;
     static String idUsuario;
     public static String dia;
-    static String rutinas=" ";
+    static String rutinas = " ";
+    static ArrayList<String> lunes = new ArrayList<String>();
+    static ArrayList<String> martes = new ArrayList<String>();
+    static ArrayList<String> miercoles = new ArrayList<String>();
+    static ArrayList<String> jueves = new ArrayList<String>();
+    static ArrayList<String> viernes = new ArrayList<String>();
+    static ArrayList<String> sabado = new ArrayList<String>();
+    static ArrayList<String> domingo = new ArrayList<String>();
+    String[] diasDeLaSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
+    Button bGuardar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dias);
+        setContentView(R.layout.activity_ver_rutinas_predeterminada);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+
         Bundle parametros = this.getIntent().getExtras();
         if (parametros != null) {
             rutinas = parametros.getString("rutina");
@@ -76,11 +89,11 @@ public class VerRutinasPredeterminada extends AppCompatActivity {
             }
         });
 
-        idUsuario= IdUsuario.getIdUsuario();
+        idUsuario = IdUsuario.getIdUsuario();
 
+        bGuardar = findViewById(R.id.bGuargarRutina);
+        bGuardar.setOnClickListener(this);
     }
-
-
 
 
     @Override
@@ -97,12 +110,37 @@ public class VerRutinasPredeterminada extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        RutinaAcciones.eliminarRutina();
+        for (int dia = 0; dia < 7; dia++) {
+            DatabaseReference dbEjerciciosPredeterminados = FirebaseDatabase.getInstance()
+                    .getReference()
+                    .child("Ejercicios Predeterminados-" + Idioma.getIdioma() + "/" + rutinas + "/" + diasDeLaSemana[dia]);
+            final int finalDia = dia;
+            dbEjerciciosPredeterminados.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    for (DataSnapshot element : snapshot.getChildren()) {
+                        RutinaAcciones.anyadir(diasDeLaSemana[finalDia], element.getKey().toString());
+
+                    }
+                  DateAcciones.ActualizarFechaRutina();
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent);
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+
+        }
     }
 
 
@@ -118,7 +156,7 @@ public class VerRutinasPredeterminada extends AppCompatActivity {
         RecyclerView rvEjercicios;
         List<RutinaPredefinida> llistaRutina = new ArrayList<RutinaPredefinida>();
         VerRutinasPredeterminadasAdapter rutinaAdapter;
-        ArrayList<String> llistaEjerciciosPuestos = new ArrayList<String>();
+
         public PlaceholderFragment() {
         }
 
@@ -178,28 +216,20 @@ public class VerRutinasPredeterminada extends AppCompatActivity {
             }
 
             dia2 = dia;
-            FloatingActionButton fab = rootView.findViewById(R.id.fab);
+
             final String finalDia = dia2;
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getContext(), ModificarRutina.class);
 
-                    startActivity(intent);
-
-                }
-            });
 
             rvEjercicios.setLayoutManager(new LinearLayoutManager(getContext()));
             //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
             rvEjercicios.addItemDecoration(new DividerItemDecoration(getContext(),
                     LinearLayoutManager.VERTICAL));
             rutinaAdapter = new VerRutinasPredeterminadasAdapter(getContext(), llistaRutina);
-            DatabaseReference dbRutina = FirebaseDatabase.getInstance()
+            DatabaseReference dbEjerciciosPredeterminados = FirebaseDatabase.getInstance()
                     .getReference()
-                    .child("Ejercicios Predeterminados-"+ Idioma.getIdioma()+"/" +rutinas+"/"+ dia);
-            dbRutina.addValueEventListener(this);
-           dbRutina.addChildEventListener(this);
+                    .child("Ejercicios Predeterminados-" + Idioma.getIdioma() + "/" + rutinas + "/" + dia);
+            dbEjerciciosPredeterminados.addValueEventListener(this);
+            dbEjerciciosPredeterminados.addChildEventListener(this);
             return rootView;
         }
 
@@ -209,10 +239,12 @@ public class VerRutinasPredeterminada extends AppCompatActivity {
             llistaRutina.removeAll(llistaRutina);
             for (DataSnapshot element : dataSnapshot.getChildren()) {
 
-                RutinaPredefinida rutina = new RutinaPredefinida( element.getKey().toString());
-                llistaEjerciciosPuestos.add(element.getKey().toString());
-                llistaRutina.add(rutina);
+                RutinaPredefinida rutina = new RutinaPredefinida(element.getKey().toString());
 
+                llistaRutina.add(rutina);
+                if (dia.equals("Lunes")) {
+                    lunes.add(element.getKey());
+                }
             }
             rvEjercicios.setAdapter(rutinaAdapter);
             rvEjercicios.scrollToPosition(llistaRutina.size() - 1);

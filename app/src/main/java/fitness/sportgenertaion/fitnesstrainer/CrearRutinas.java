@@ -184,31 +184,7 @@ Button bGuardar;
         sabado = new ArrayList<String>();
         domingo = new ArrayList<String>();
 
-        Date fechas = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(fechas);
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-
-        DateAcciones fecha = new DateAcciones(day, month, year);
-
-
-        try {
-            cal.add(Calendar.DAY_OF_YEAR, -fecha.diasHastaLunes());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH);
-        day = cal.get(Calendar.DAY_OF_MONTH);
-        RutinaAcciones.anyadirFecha(day, month + 1, year);
-        try {
-            ActualizarHistorial.anyadirHistorial();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        DateAcciones.ActualizarFechaRutina();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 

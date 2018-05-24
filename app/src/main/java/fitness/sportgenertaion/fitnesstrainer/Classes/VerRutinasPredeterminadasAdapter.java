@@ -19,7 +19,7 @@ import fitness.sportgenertaion.fitnesstrainer.VerEjercicio;
 import fitness.sportgenertaion.fitnesstrainer.VerRutinasPredeterminada;
 
 public class VerRutinasPredeterminadasAdapter extends RecyclerView.Adapter<fitness.sportgenertaion.fitnesstrainer.Classes.VerRutinasPredeterminadasAdapter.ViewHolder>
-        implements CompoundButton.OnCheckedChangeListener {
+        {
     public List<RutinaPredefinida> llistaRutina;
     Context context;
 
@@ -31,10 +31,7 @@ public class VerRutinasPredeterminadasAdapter extends RecyclerView.Adapter<fitne
 
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnClickListener {
         public TextView tvNomEjercici;
