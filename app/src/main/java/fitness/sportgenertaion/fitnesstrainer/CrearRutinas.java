@@ -77,6 +77,7 @@ Button bGuardar;
 
     }
 
+    //Anyadeix l'exercici al array del dia que toca. Es per quan l'usuari marca el check
     public static void RutinaTemporal(String dia, String ejercicio) {
         if (dia.equals("Lunes")) {
             lunes.add(ejercicio);
@@ -94,7 +95,7 @@ Button bGuardar;
             domingo.add(ejercicio);
         }
     }
-
+//Borra l'exercici de la rutina temporal, es per quan l'usuari desmarca el checkbox
     public static void BorrarRutinaTemporal(String dia, String ejercicio) {
         if (dia.equals("Lunes")) {
             for (int x = 0; x < lunes.size(); x++) {
@@ -151,7 +152,7 @@ Button bGuardar;
         }
 
     }
-
+//Guarda la rutina creada a la teva rutina
     @Override
     public void onClick(View view) {
         RutinaAcciones.eliminarRutina();
@@ -184,6 +185,7 @@ Button bGuardar;
         sabado = new ArrayList<String>();
         domingo = new ArrayList<String>();
 
+        //Actualitrza la fecha del ultim dia modificat de rutina
         DateAcciones.ActualizarFechaRutina();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -195,6 +197,8 @@ Button bGuardar;
     /**
      * A placeholder fragment containing a simple view.
      */
+
+
     public static class PlaceholderFragment extends Fragment implements ValueEventListener, ChildEventListener, AdapterView.OnItemSelectedListener {
 
 
@@ -390,7 +394,7 @@ Button bGuardar;
             //  return 7;
             return 7;
         }
-
+//
         @Override
         public CharSequence getPageTitle(int position) {
 
