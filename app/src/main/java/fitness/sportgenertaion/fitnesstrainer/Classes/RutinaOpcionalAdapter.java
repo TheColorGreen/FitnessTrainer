@@ -36,99 +36,102 @@ import fitness.sportgenertaion.fitnesstrainer.VerRutinasPredeterminada;
 
 //Adapter de Rutina predetefinida
 public class RutinaOpcionalAdapter extends RecyclerView.Adapter<fitness.sportgenertaion.fitnesstrainer.Classes.RutinaOpcionalAdapter.ViewHolder>
-            implements CompoundButton.OnCheckedChangeListener {
-        public List<RutinaPredefinida> llistaRutina;
-        Context context;
-static String url=" ";
+        implements CompoundButton.OnCheckedChangeListener {
+    public List<RutinaPredefinida> llistaRutina;
+    Context context;
+    static String url = " ";
 
 
-        public RutinaOpcionalAdapter(Context context, List<RutinaPredefinida> llistaRutina) {
+    public RutinaOpcionalAdapter(Context context, List<RutinaPredefinida> llistaRutina) {
 
-            this.llistaRutina = llistaRutina;
-            this.context = context;
+        this.llistaRutina = llistaRutina;
+        this.context = context;
 
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnClickListener {
+        public Button bMostraLesRutinesOpcionals;
+
+
+        @SuppressLint("WrongViewCast")
+        public ViewHolder(View itemView) {
+            super(itemView);
+            bMostraLesRutinesOpcionals = itemView.findViewById(R.id.bMostraLesRutinesOpcionals);
+
+            bMostraLesRutinesOpcionals.setOnClickListener(this);
         }
 
+        //Truca a la rutina per tal de veure com es
         @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        public void onClick(View view) {
+            int posicio = getAdapterPosition();
+            Intent intent = new Intent(context, VerRutinasPredeterminada.class);
+
+            intent.putExtra("rutina", llistaRutina.get(posicio).getNombre());
+            context.startActivity(intent);
 
         }
+    }
 
-        public class ViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnClickListener {
-            public Button bMostraLesRutinesOpcionals;
+    // Mètode de la classe RecyclerView (que és abstracta)
+    @Override
+    public fitness.sportgenertaion.fitnesstrainer.Classes.RutinaOpcionalAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_rutinas_opcionales, parent, false);
+
+        return new fitness.sportgenertaion.fitnesstrainer.Classes.RutinaOpcionalAdapter.ViewHolder(view);
+    }
 
 
-            @SuppressLint("WrongViewCast")
-            public ViewHolder(View itemView) {
-                super(itemView);
-                bMostraLesRutinesOpcionals = itemView.findViewById(R.id.bMostraLesRutinesOpcionals);
+    // Mètode de la classe RecyclerView (que és abstracta)
+    @Override
+    public void onBindViewHolder(final fitness.sportgenertaion.fitnesstrainer.Classes.RutinaOpcionalAdapter.ViewHolder holder, int position) {
+        final RutinaPredefinida rutina = llistaRutina.get(position);
+        RutinaPredefinida item = llistaRutina.get(position);
 
-                bMostraLesRutinesOpcionals.setOnClickListener(this);
-            }
+        //Fica el nom de la rutina a el Boto
+        holder.bMostraLesRutinesOpcionals.setText(item.getNombre());
 
-//Truca a la rutina per tal de veure com es
+        //Hagafo la url de la foto que estigui en aquella rutina y la fico de backgroun al boto
+        DatabaseReference dbFoto = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("Ejercicios Predeterminados-" + Idioma.getIdioma() + "/" + rutina.getNombre());
+        dbFoto.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                int posicio = getAdapterPosition();
-                Intent intent = new Intent(context, VerRutinasPredeterminada.class);
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot element : snapshot.getChildren()) {
 
-                intent.putExtra("rutina", llistaRutina.get(posicio).getNombre());
-                context.startActivity(intent);
+                    url = snapshot.child("/foto").getValue().toString();
+
+                }
+
+                new DownLoadImageTask(holder.bMostraLesRutinesOpcionals).execute(url);
 
             }
-        }
 
-        // Mètode de la classe RecyclerView (que és abstracta)
-        @Override
-        public fitness.sportgenertaion.fitnesstrainer.Classes.RutinaOpcionalAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_rutinas_opcionales, parent, false);
-
-            return new fitness.sportgenertaion.fitnesstrainer.Classes.RutinaOpcionalAdapter.ViewHolder(view);
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
 
+    }
 
-        // Mètode de la classe RecyclerView (que és abstracta)
-        @Override
-        public void onBindViewHolder(final fitness.sportgenertaion.fitnesstrainer.Classes.RutinaOpcionalAdapter.ViewHolder holder, int position) {
-            final RutinaPredefinida rutina = llistaRutina.get(position);
-            RutinaPredefinida item = llistaRutina.get(position);
-
-            //Fica el nom de la rutina a el Boto
-            holder.bMostraLesRutinesOpcionals.setText(item.getNombre());
-
-            DatabaseReference dbFoto= FirebaseDatabase.getInstance()
-                    .getReference()
-                    .child("Ejercicios Predeterminados-"+ Idioma.getIdioma()+"/"+rutina.getNombre());
-            dbFoto.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-                    for (DataSnapshot element : snapshot.getChildren()) {
-
-                        url= snapshot.child("/foto").getValue().toString();
-
-                    }
-
-                    new DownLoadImageTask(holder.bMostraLesRutinesOpcionals).execute(url);
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                }
-            });
+    // Mètode de la classe RecyclerView (que és abstracta)
 
 
-        }
+    @Override
+    public int getItemCount() {
+        return llistaRutina.size();
+    }
 
-        // Mètode de la classe RecyclerView (que és abstracta)
 
-
-        @Override
-        public int getItemCount () {
-            return llistaRutina.size();
-        }
+        //Classe que serveix per hagafar una imatje de url i ficarla com a background del botto
 
     private class DownLoadImageTask extends AsyncTask<String, Void, Bitmap> {
         Button button;
@@ -169,4 +172,4 @@ static String url=" ";
         }
     }
 
-    }
+}

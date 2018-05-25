@@ -31,11 +31,11 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.ModificarAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
-public class ModificarRutina extends AppCompatActivity implements ValueEventListener, ChildEventListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class ModificarRutina extends AppCompatActivity implements ValueEventListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
     static String idUsuario;
     static String dia = "Lunes";
     static ArrayList<String> ejercicios = new ArrayList<String>();
-    DatabaseReference dbPrediccio;
+    DatabaseReference dbEjercicios;
     String nivel = "5";
     String grupoMuscular = "5";
     Spinner spGrupoMuscular;
@@ -62,7 +62,6 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
         bguardar = findViewById(R.id.bGuargar);
         spNivel = findViewById(R.id.spNivel);
         spGrupoMuscular = findViewById(R.id.spMusculo);
-        bguardar = findViewById(R.id.bGuargar);
         rvEjercicios = findViewById(R.id.rvEjercicios);
 
 
@@ -77,11 +76,11 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
         spNivel.setAdapter(adapterNivel);
 
         //Hago referencia a la base de datos
-        dbPrediccio = FirebaseDatabase.getInstance()
+        dbEjercicios = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("Ejercicios-"+ Idioma.getIdioma());
-        dbPrediccio.addValueEventListener(this);
-        dbPrediccio.addChildEventListener(this);
+                .child("Ejercicios-" + Idioma.getIdioma());
+        dbEjercicios.addValueEventListener(this);
+
 
         rvEjercicios.setLayoutManager(new LinearLayoutManager(this));
         //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
@@ -90,8 +89,8 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
 
         //rvPrediccions.setAdapter(prediccioAdapter);
         modificarAdapter = new ModificarAdapter(this, llistaEjercicios);
-
-
+        //Lisener del botto
+        bguardar.setOnClickListener(this);
         //hago el listenner del spinner
         spGrupoMuscular.setOnItemSelectedListener(this);
         spNivel.setOnItemSelectedListener(this);
@@ -99,30 +98,13 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
     }
 
 
-    @Override
-    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-    }
-
-    @Override
-    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-    }
-
-    @Override
-    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-    }
-
-    @Override
-    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-    }
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         llistaEjercicios.removeAll(llistaEjercicios);
         for (DataSnapshot element : dataSnapshot.getChildren()) {
+            //Comprovo que tenen el mateix nivell i grup muscular que el usuari a seleccionat a traves dels spinners
             if ((element.child("dificultad").getValue().toString().equals(this.nivel) && (element.child("musculos").getValue().toString().equals(this.grupoMuscular))) || (this.nivel.equals("5") && this.grupoMuscular.equals("5")) || (this.grupoMuscular.equals("5") && element.child("dificultad").getValue().toString().equals(this.nivel)) || this.nivel.equals("5") && element.child("musculos").getValue().toString().equals(this.grupoMuscular)) {
                 Boolean comprovacion = true;
                 for (int x = 0; x < llistaEjerciciosPuestos.size(); x++) {
@@ -148,9 +130,10 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        //Mira la dificultad y nivel para despues pasarselo al ondatachange y que asi solo te salgan los ejercicios de ese nivel i dificultad
         Resources res = getResources();
-        String[] musculos= res.getStringArray(R.array.musculos);
-        String[] dificultad= res.getStringArray(R.array.dificultad);
+        String[] musculos = res.getStringArray(R.array.musculos);
+        String[] dificultad = res.getStringArray(R.array.dificultad);
 
         if (spNivel.getSelectedItem().toString().equals(dificultad[0])) {
             this.nivel = "5";
@@ -174,10 +157,10 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
             this.grupoMuscular = "4";
 
         }
+//Truco al firebase
 
-        bguardar.setOnClickListener(this);
-        dbPrediccio.addValueEventListener(this);
-        dbPrediccio.addChildEventListener(this);
+        dbEjercicios.addValueEventListener(this);
+
     }
 
     @Override
@@ -185,8 +168,10 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
 
     }
 
+    //Guardo els ejercicis anyadits y crido a la classe dias
     @Override
     public void onClick(View view) {
+
         for (int x = 0; x < ejercicios.size(); x++) {
             RutinaAcciones.anyadir(dia, ejercicios.get(x));
         }
@@ -199,14 +184,14 @@ public class ModificarRutina extends AppCompatActivity implements ValueEventList
             e.printStackTrace();
         }
         Intent intent = new Intent(this, Dias.class);
-        intent.putExtra("idUsuario", idUsuario);
         startActivity(intent);
     }
-
+//Creo la rutina temporal estatica perque es pugi cridar desde el adapter.
     public static void RutinaTemporal(String ejercicio) {
         ejercicios.add(ejercicio);
     }
 
+    //Borro ejercici de la rutina temporal
     public static void BorrarRutinaTemporal(String ejercicio) {
 
         for (int x = 0; x < ejercicios.size(); x++) {

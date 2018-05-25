@@ -29,7 +29,7 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.Idioma;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAcciones;
 
 public class VerEjercicio extends AppCompatActivity
-        implements ValueEventListener, ChildEventListener,View.OnClickListener {
+        implements ValueEventListener,View.OnClickListener {
 
     String ejercicio = "Abdominales";
     private Bitmap loadedImage;
@@ -98,12 +98,12 @@ bCronometro.setOnClickListener(this);
                 .getReference()
                 .child("Ejercicios-"+ Idioma.getIdioma()+"/" + ejercicio);
         dbPrediccio.addValueEventListener(this);
-        dbPrediccio.addChildEventListener(this);
+
 
 
     }
 
-
+//Reculls les dades donades y les imprims per pantalla
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -125,7 +125,7 @@ bCronometro.setOnClickListener(this);
 
 
     }
-
+//Aixo es el cronometre
     @Override
     public void onClick(View v) {
         int segundos=tiempo;
@@ -162,17 +162,6 @@ bCronometro.setOnClickListener(this);
 
 
 
-    protected void onResume() {
-        super.onResume();
-        //handler.removeCallbacks(updateTimeTask);
-        //handler.postDelayed(updateTimeTask, 1000);
-    }//onResume
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //do stuff
-    }//onPause
     //Aquest metode es per carregaar una imatge desde url
     private class DownLoadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView imageView;
@@ -213,25 +202,7 @@ bCronometro.setOnClickListener(this);
     }
 
 
-    @Override
-    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-    }
-
-    @Override
-    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-    }
-
-    @Override
-    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-    }
-
-    @Override
-    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-    }
 
 
     @Override

@@ -33,7 +33,7 @@ import java.util.List;
 import fitness.sportgenertaion.fitnesstrainer.Classes.IdUsuario;
 import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaAdapter;
-
+//Es la activity de la teva rutina
 public class Dias extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -49,8 +49,7 @@ public class Dias extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -137,7 +136,8 @@ public class Dias extends AppCompatActivity {
 
 
             String dia2 = "Lunes";
-            ///Cada fragment hara cosas distintas aqui
+
+            //Miro hen quin fragment esta per saber quin dia tinc que mostrar de la sebarutina
 
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
                 dia = "Lunes";
@@ -168,6 +168,7 @@ public class Dias extends AppCompatActivity {
             }
 
             dia2 = dia;
+            //Floating button per anyadir nous exercicis
             FloatingActionButton fab = rootView.findViewById(R.id.fab);
             final String finalDia = dia2;
             fab.setOnClickListener(new View.OnClickListener() {
@@ -183,13 +184,16 @@ public class Dias extends AppCompatActivity {
             });
 
             rvEjercicios.setLayoutManager(new LinearLayoutManager(getContext()));
-            //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
             rvEjercicios.addItemDecoration(new DividerItemDecoration(getContext(),
                     LinearLayoutManager.VERTICAL));
+            //Iniciaitzo variables
             rutinaAdapter = new RutinaAdapter(getContext(), llistaRutina, dia, idUsuario);
+
             DatabaseReference rutina = FirebaseDatabase.getInstance()
                     .getReference()
                     .child("users" + "/" + idUsuario + "/Rutina/" + dia);
+
+            //Faic un forsingle value listener perque nomes ehem carregui una vegada. Aixo ho faic per reduir carrega
             rutina.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
@@ -221,6 +225,7 @@ public class Dias extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 
@@ -244,7 +249,7 @@ public class Dias extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-
+//El que surt adal que t'indica en quin dia estas
             switch (position) {
                 case 0:
                     return getString(R.string.lunes);

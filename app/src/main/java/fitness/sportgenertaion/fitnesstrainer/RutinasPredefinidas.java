@@ -25,7 +25,8 @@ import fitness.sportgenertaion.fitnesstrainer.Classes.Rutina;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaOpcionalAdapter;
 import fitness.sportgenertaion.fitnesstrainer.Classes.RutinaPredefinida;
 
-public class RutinasPredefinidas extends AppCompatActivity implements ValueEventListener, ChildEventListener {
+//Et surten les rutines predefinides del firebase
+public class RutinasPredefinidas extends AppCompatActivity implements ValueEventListener {
 
 
 
@@ -40,12 +41,12 @@ public class RutinasPredefinidas extends AppCompatActivity implements ValueEvent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rutinas_predefinidas);
 
-
+//Inicialitzo i creo els listeners de la base de dades
         dbRutinas = FirebaseDatabase.getInstance()
                 .getReference()
                 .child("Ejercicios Predeterminados-"+ Idioma.getIdioma());
         dbRutinas.addValueEventListener(this);
-        dbRutinas.addChildEventListener(this);
+
 
         rvEjercicios=findViewById(R.id.rvMostraRutinasPredeterminadas);
         rvEjercicios.setLayoutManager(new LinearLayoutManager(this));
@@ -57,28 +58,11 @@ public class RutinasPredefinidas extends AppCompatActivity implements ValueEvent
         modificarAdapter = new RutinaOpcionalAdapter(this, llistaEjercicios);
     }
 
-    @Override
-    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-    }
-
-    @Override
-    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-    }
-
-    @Override
-    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-    }
-
-    @Override
-    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-    }
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
+        //Guardo les rutines predefinides y les envio al lisener
         llistaEjercicios.removeAll(llistaEjercicios);
         for (DataSnapshot element : dataSnapshot.getChildren()) {
 

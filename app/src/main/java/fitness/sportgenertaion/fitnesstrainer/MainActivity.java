@@ -51,11 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//Define el idioma
         Idioma.setIdioma(Locale.getDefault().getDisplayLanguage());
 
-        //
-        // typeface = Typeface.createFromAsset(getAssets(),"fonts/Comfortaa-Regular.ttf");
         mAuth = FirebaseAuth.getInstance();
         authListener = new FirebaseAuth.AuthStateListener() {
 
@@ -76,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
 //        Toast.makeText(getApplicationContext(),FirebaseAuth.getInstance().getCurrentUser().toString(),Toast.LENGTH_LONG).show();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+//Si user no es null guardo l'id de l'usuari i llanço faic el fragment de comprobar rutinahistorial
         if (user != null) {
             IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
             if (Actualizar.getActualizado() == false) {
@@ -92,11 +90,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btMiRutina = findViewById(R.id.bRutina);
         btRutinaAleatoria = findViewById(R.id.bCrearRutinaAleatoria);
 
-//Faic que cuan clickis a un botto vaigi a l'activity/classe
+//Faic que quan clickis a un botto vaigi a l'activity/classe
         btCrearRutina.setOnClickListener(this);
         btHistorial.setOnClickListener(this);
         btMiRutina.setOnClickListener(this);
         btRutinaAleatoria.setOnClickListener(this);
+
+        //En cas de que per algun error no haigui hagafat l'usuari reinicio la app
         if (user == null) {
             Handler handler = new Handler();
 
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                 }
-            }, 600); // 2 segundos de "delay"
+            }, 600); //
 
         }
 
@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         Intent intent;
+        //A quina activity o fragment anira
         if (v == btHistorial) {
             historialRutina = new HistorialRutina();
             getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, historialRutina).commit();
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
+//Al donar-li enrere tanca els fragments o la aplicació
     @Override
     public void onBackPressed() {
         if ( historialRutina != null) {
@@ -146,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     remove(getSupportFragmentManager().findFragmentById(R.id.flFrame)).commit();
 
             historialRutina = null;
-            // fragment=null;
+
 
         } else {
             System.exit(0);

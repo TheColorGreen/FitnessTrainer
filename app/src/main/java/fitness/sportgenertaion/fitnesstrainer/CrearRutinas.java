@@ -199,7 +199,7 @@ Button bGuardar;
      */
 
 
-    public static class PlaceholderFragment extends Fragment implements ValueEventListener, ChildEventListener, AdapterView.OnItemSelectedListener {
+    public static class PlaceholderFragment extends Fragment implements ValueEventListener, AdapterView.OnItemSelectedListener {
 
 
         DatabaseReference dbPrediccio;
@@ -243,7 +243,7 @@ Button bGuardar;
             rvEjercicios = rootView.findViewById(R.id.rvEjercicios);
 
 
-            //Hago que en los spinners salgan los arrays
+            //Hago que en los spinners salgan los arrays de las opciones que tienes a elegir
             ArrayAdapter<CharSequence> adapterMusculos = ArrayAdapter.createFromResource(getContext(), R.array.musculos, android.R.layout.simple_spinner_item);
             adapterMusculos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spGrupoMuscular.setAdapter(adapterMusculos);
@@ -258,12 +258,13 @@ Button bGuardar;
                     .getReference()
                     .child("Ejercicios-"+ Idioma.getIdioma());
             dbPrediccio.addValueEventListener(this);
-            dbPrediccio.addChildEventListener(this);
+
 
             rvEjercicios.setLayoutManager(new LinearLayoutManager(getContext()));
-            //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
             rvEjercicios.addItemDecoration(new DividerItemDecoration(getContext(),
                     LinearLayoutManager.VERTICAL));
+
+            //Depende de en que fragment estes determina el dia en el qual estas, eso se hace para llamar a la base de datos
             String dias = "Lunes";
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
                 dias = "Lunes";
@@ -291,30 +292,14 @@ Button bGuardar;
             return rootView;
         }
 
-        @Override
-        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-        }
-
-        @Override
-        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-        }
-
-        @Override
-        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-        }
 
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             llistaEjercicios.removeAll(llistaEjercicios);
+
             for (DataSnapshot element : dataSnapshot.getChildren()) {
+                //Si coinciden la dificultad i el nivel entra
                 if ((element.child("dificultad").getValue().toString().equals(this.nivel) && (element.child("musculos").getValue().toString().equals(this.grupoMuscular))) || (this.nivel.equals("5") && this.grupoMuscular.equals("5")) || (this.grupoMuscular.equals("5") && element.child("dificultad").getValue().toString().equals(this.nivel)) || this.nivel.equals("5") && element.child("musculos").getValue().toString().equals(this.grupoMuscular)) {
 
                     Rutina ejercicio = new Rutina(Boolean.parseBoolean(element.getValue().toString()), element.getKey().toString());
@@ -332,6 +317,8 @@ Button bGuardar;
 
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            //Mira la dificultad y nivel para despues pasarselo al ondatachange y que asi solo te salgan los ejercicios de ese nivel i dificultad
             Resources res = getResources();
             String[] musculos= res.getStringArray(R.array.musculos);
             String[] dificultad= res.getStringArray(R.array.dificultad);
@@ -358,9 +345,9 @@ Button bGuardar;
                 this.grupoMuscular = "4";
             }
 
-
+//LLama al firebase
             dbPrediccio.addValueEventListener(this);
-            dbPrediccio.addChildEventListener(this);
+
         }
 
         @Override
@@ -397,22 +384,22 @@ Button bGuardar;
 //
         @Override
         public CharSequence getPageTitle(int position) {
-
+//Dice lo que te saldra arriba para saber en que dia estas
             switch (position) {
                 case 0:
-                    return "Lu";
+                    return getString(R.string.lunes);
                 case 1:
-                    return "Ma";
+                    return getString(R.string.martes);
                 case 2:
-                    return "Mi";
+                    return getString(R.string.miercoles);
                 case 3:
-                    return "Ju";
+                    return getString(R.string.jueves);
                 case 4:
-                    return "Vi";
+                    return getString(R.string.viernes);
                 case 5:
-                    return "Sá";
+                    return getString(R.string.sabado);
                 case 6:
-                    return "Do";
+                    return getString(R.string.domingo);
             }
             return null;
         }

@@ -31,13 +31,12 @@ public class MostrarDia extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_dia);
-
+//Hagafa la fecha que se li ha pasat desde el fragment historialRutina
         fechaRecuperada = getIntent().getExtras().getString("fecha");
 
         rvEjercicios = findViewById(R.id.rvDiaHistorial);
 
         rvEjercicios.setLayoutManager(new LinearLayoutManager(this));
-        //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
         rvEjercicios.addItemDecoration(new DividerItemDecoration(this,
                 LinearLayoutManager.VERTICAL));
         rutinaAdapter = new MostrarDiaAdapter(this, llistaRutina);
@@ -47,6 +46,7 @@ public class MostrarDia extends AppCompatActivity {
                 .getReference()
                 .child("users/" + IdUsuario.getIdUsuario() + "/Historial/" + fechaRecuperada);
         dbDiaHistorial.addListenerForSingleValueEvent(new ValueEventListener() {
+            //Comprova els ejercicis fets aquell dia i desprees en el adapter fica la imatje depenent de el que hagis fet
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
