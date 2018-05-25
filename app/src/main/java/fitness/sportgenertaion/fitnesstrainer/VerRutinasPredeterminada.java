@@ -115,6 +115,7 @@ public class VerRutinasPredeterminada extends AppCompatActivity implements View.
     }
 
     @Override
+    //Guardo la rutina predefinida com a rutina personal
     public void onClick(View v) {
         RutinaAcciones.eliminarRutina();
         for (int dia = 0; dia < 7; dia++) {
@@ -185,7 +186,7 @@ public class VerRutinasPredeterminada extends AppCompatActivity implements View.
 
 
             String dia2 = "Lunes";
-            ///Cada fragment hara cosas distintas aqui
+            ///Depenent el fragment en el que estugis dira el dia
 
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
                 dia = "Lunes";
@@ -221,7 +222,6 @@ public class VerRutinasPredeterminada extends AppCompatActivity implements View.
 
 
             rvEjercicios.setLayoutManager(new LinearLayoutManager(getContext()));
-            //rvPrediccions.setLayoutManager(new GridLayoutManager(this, 2));
             rvEjercicios.addItemDecoration(new DividerItemDecoration(getContext(),
                     LinearLayoutManager.VERTICAL));
             rutinaAdapter = new VerRutinasPredeterminadasAdapter(getContext(), llistaRutina);
@@ -242,9 +242,7 @@ public class VerRutinasPredeterminada extends AppCompatActivity implements View.
                 RutinaPredefinida rutina = new RutinaPredefinida(element.getKey().toString());
 
                 llistaRutina.add(rutina);
-                if (dia.equals("Lunes")) {
-                    lunes.add(element.getKey());
-                }
+
             }
             rvEjercicios.setAdapter(rutinaAdapter);
             rvEjercicios.scrollToPosition(llistaRutina.size() - 1);
