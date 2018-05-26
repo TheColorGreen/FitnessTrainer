@@ -72,7 +72,7 @@ public class DateAcciones {
         }
         return diferencia;
     }
-
+//Anyadeix la ultima fecha de modificació de la rutina y actualitza l'historial
     public static void ActualizarFechaRutina(){
         Date fechas = new Date();
         Calendar cal = Calendar.getInstance();

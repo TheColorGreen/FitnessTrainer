@@ -65,6 +65,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     resultTask.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
+                            IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
+                            Actualizar.setActualizado(true);
+                            fragment = new ComprobarRutinaHistorial();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
                         }
                     });
 
@@ -96,21 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btMiRutina.setOnClickListener(this);
         btRutinaAleatoria.setOnClickListener(this);
 
-        //En cas de que per algun error no haigui hagafat l'usuari reinicio la app
-        if (user == null) {
-            Handler handler = new Handler();
 
-//Llamamos al método postDelayed
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    Intent i = getBaseContext().getPackageManager()
-                            .getLaunchIntentForPackage(getBaseContext().getPackageName());
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-                }
-            }, 600); //
-
-        }
 
     }
 
