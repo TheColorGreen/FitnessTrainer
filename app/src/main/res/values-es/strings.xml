@@ -22,7 +22,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_crear_rutina">Crear Rutina</string>
 
-    <string name="b_crear_rutina_random">Rutina Predeterminada </string>
+    <string name="b_crear_rutina_random">Otras rutinas</string>
     <string name="navigation_drawer_open">Abierto </string>
     <string name="navigation_drawer_close">Cerrado </string>
     <string-array name="musculos">
