@@ -66,9 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             IdUsuario.setIdUsuario(mAuth.getCurrentUser().getUid());
-                            Actualizar.setActualizado(true);
-                            fragment = new ComprobarRutinaHistorial();
-                            getSupportFragmentManager().beginTransaction().replace(R.id.flFrame, fragment).commit();
                         }
                     });
 
